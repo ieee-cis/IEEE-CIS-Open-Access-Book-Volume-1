@@ -1,4 +1,9 @@
 \documentclass[ruled,graybox]{svmult}
+%\usepackage{mathptmx}        % selects Times Roman as basic font
+%\usepackage{helvet}          % selects Helvetica as sans-serif font
+%\usepackage{courier}         % selects Courier as typewriter font
+
+
 \usepackage{graphicx,color}
 \usepackage{amsmath, amssymb}
 %\usepackage[ruled]{algorithm}
@@ -18,16 +23,32 @@
 \backmatter
 
 
-\title{IEEE Computational Intelligence Society Open Access Book}
-\author{}
-
-
-
 \begin{document}
-\maketitle
 
+
+
+\frontmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\include{dedic}
+\include{cover}
+\include{foreword}
+\include{preface}
+%\include{acknow}
+
+\tableofcontents
+\listoffigures
+
+\mainmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \include{"Part 1 - Introduction/Introduction.tex"}
 \include{"Part 1 - Introduction/History and Definitions.tex"}
+\title{Na\"ive Bayes}
+\author{Leandro Minku}
+\institute{School of Computer Science, University of Birmingham, UK}
+\maketitle
+
+\title{Na\"ive Bayes}
+\author{Leandro Minku}
+\institute{School of Computer Science, University of Birmingham, UK}
+\maketitle
 
 \include{"Part 2 - Search-Based Optimization/Search-Based Optimization.tex"}
 \include{"Part 2 - Search-Based Optimization/Local Search/Local Search.tex"}
@@ -56,6 +77,11 @@
 \include{"Part 3 - Learning Systems/Unsupervised Learning/DBScan/DBScan.tex"}
 \include{"Part 3 - Learning Systems/Unsupervised Learning/Expectation-Maximization/Expectation-Maximization.tex"}
 \include{"Part 3 - Learning Systems/Unsupervised Learning/Evaluation/Evaluation.tex"}
+
+
+
+\backmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{biographies.tex}
 
 
 \end{document}
