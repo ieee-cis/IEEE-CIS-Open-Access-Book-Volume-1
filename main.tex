@@ -3,6 +3,7 @@
 %\usepackage{helvet}          % selects Helvetica as sans-serif font
 %\usepackage{courier}         % selects Courier as typewriter font
 
+\usepackage[document]{ragged2e}
 
 \usepackage{graphicx,color}
 \usepackage{amsmath, amssymb}
@@ -32,6 +33,7 @@
 \include{cover}
 \include{foreword}
 \include{preface}
+\include{biographies}
 %\include{acknow}
 
 \tableofcontents
@@ -40,15 +42,7 @@
 \mainmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \include{"Part 1 - Introduction/Introduction.tex"}
 \include{"Part 1 - Introduction/History and Definitions.tex"}
-\title{Na\"ive Bayes}
-\author{Leandro Minku}
-\institute{School of Computer Science, University of Birmingham, UK}
-\maketitle
 
-\title{Na\"ive Bayes}
-\author{Leandro Minku}
-\institute{School of Computer Science, University of Birmingham, UK}
-\maketitle
 
 \include{"Part 2 - Search-Based Optimization/Search-Based Optimization.tex"}
 \include{"Part 2 - Search-Based Optimization/Local Search/Local Search.tex"}
@@ -59,8 +53,11 @@
 
 \include{"Part 3 - Learning Systems/Learning Systems.tex"}
 
-\large{Part \ref{prt:learning-systems}-A}
-\large{Supervised Learning}
+\begin{flushright}
+\Large\textbf{\partname\ \thepart -(A)}\\
+\Large\textbf{Supervised Learning}
+\end{flushright}
+\addcontentsline{toc}{part}{\partname\ \thepart -(A) Supervised Learning}
 
 \include{"Part 3 - Learning Systems/Supervised Learning/k-Nearest Neighbors/k-Nearest Neighbors.tex"}
 \include{"Part 3 - Learning Systems/Supervised Learning/Multilayer Perceptron/Multilayer Perceptron.tex"}
@@ -68,9 +65,11 @@
 \include{"Part 3 - Learning Systems/Supervised Learning/Naive Bayes/Naive Bayes.tex"}
 \include{"Part 3 - Learning Systems/Supervised Learning/Evaluation/Evaluation.tex"}
 
-
-\large{Part \ref{prt:learning-systems}-B}
-\large{Unsupervised Learning}
+\begin{flushright}
+\Large\textbf{\partname\ \thepart -(B)}\\
+\Large\textbf{Unsupervised Learning}
+\end{flushright}
+\addcontentsline{toc}{part}{\partname\ \thepart -(B) Unsupervised Learning}
 
 \include{"Part 3 - Learning Systems/Unsupervised Learning/k-Means/k-Means.tex"}
 \include{"Part 3 - Learning Systems/Unsupervised Learning/Hierarchical Clustering/Hierarchical Clustering.tex"}
@@ -81,7 +80,7 @@
 
 
 \backmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\include{biographies.tex}
+
 
 
 \end{document}
