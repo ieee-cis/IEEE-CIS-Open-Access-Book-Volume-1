@@ -9,7 +9,14 @@ By submitting to this repository you agree with the terms and conditions of the 
 
 # Instructions for Adding Your Chapter
 
-1. The header of the chapter should have:
+Each chapter is within a folder, where Part 2 contains the search-based optimisation chapters and Part 3 contains the learning systems chapters.
+
+Please make alterations only the folder corresponding to your chapter, except for (1) below.
+
+1. When adding packages, add them to the file main.tex.
+
+
+2. The header of the chapter should have as in the current template:
 
 \title{Title}  
 \label{chp:label} % don't change the label currently inserted in your chapter .tex
@@ -17,13 +24,14 @@ By submitting to this repository you agree with the terms and conditions of the 
 \institute{} % add the institutions of the authors
 \maketitle
 
-2. The end of the chapter should have
+3. The end of the chapter should have the following, as in the current template:
 
 \bibliographystyle{unsrt}
 
 \bibliography{bibliography}
 
-3. Your bibliography should be within the file named bibliography.bib
+4. Your bibliography should be within the file named bibliography.bib
+
 
 # Compilation Instructions
 
