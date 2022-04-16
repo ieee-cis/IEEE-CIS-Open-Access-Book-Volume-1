@@ -32,6 +32,7 @@ Please make alterations only the folder corresponding to your chapter, except fo
 
 4. Your bibliography should be within the file named bibliography.bib
 
+5. Compile the book following the instructions below
 
 # Compilation Instructions
 
