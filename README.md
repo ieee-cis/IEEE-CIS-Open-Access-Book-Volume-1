@@ -20,6 +20,7 @@ By submitting to this repository you agree with the terms and conditions of the 
 2. The end of the chapter should have
 
 \bibliographystyle{unsrt}
+
 \bibliography{bibliography}
 
 3. Your bibliography should be within the file named bibliography.bib
