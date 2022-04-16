@@ -11,12 +11,17 @@ By submitting to this repository you agree with the terms and conditions of the 
 
 Each chapter is within a folder, where Part 2 contains the search-based optimisation chapters and Part 3 contains the learning systems chapters.
 
-Please make alterations only the folder corresponding to your chapter, except for (1) below.
-
-1. When adding packages, add them to the file main.tex.
+Please make alterations only the folder corresponding to your chapter, except for (3) below.
 
 
-2. The header of the chapter should have as in the current template:
+1. Add all your packages to the isolated chapter .tex file in the folder corresponding to your chapter.
+
+2. Compile the file corresponding to your isolated chapter. This will allow you to create a separate pdf file for your chapter.
+
+3. Add all your packages to the main.tex at the root folder of the book, if they are not already included there.
+
+
+4. The header of the chapter should have as in the current template:
 
 \title{Title}  
 \label{chp:label} % don't change the label currently inserted in your chapter .tex
@@ -24,15 +29,15 @@ Please make alterations only the folder corresponding to your chapter, except fo
 \institute{} % add the institutions of the authors
 \maketitle
 
-3. The end of the chapter should have the following, as in the current template:
+5. The end of the chapter should have the following, as in the current template:
 
 \bibliographystyle{unsrt}
 
 \bibliography{bibliography}
 
-4. Your bibliography should be within the file named bibliography.bib
+6. Your bibliography should be within the file named bibliography.bib
 
-5. Compile the book following the instructions below
+7. Compile the book following the instructions below. This will allow you to check whether your chapter is successfully included in the book.
 
 # Compilation Instructions
 
