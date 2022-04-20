@@ -23,8 +23,8 @@ Please make alterations only the folder corresponding to your chapter, except fo
 
 4. The header of the chapter should have as in the current template:
 
-`\title{Title}`  
-`\label{chp:label} % don't change the label currently inserted in your chapter .tex`
+``\title{Title}``  
+``\label{chp:label} % don't change the label currently inserted in your chapter .tex``
 `\author{} % add the list of authors`
 `\institute{} % add the institutions of the authors`
 `\maketitle`
