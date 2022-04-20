@@ -13,7 +13,7 @@ Each chapter is within a folder, where Part 2 contains the search-based optimisa
 
 Please make alterations only the folder corresponding to your chapter, except for (8) below.
 
-1. Add the text content of your chapter to the corresponding file ``<chapter>.tex'', in the folder corresponding to your chapter.
+1. Add the text content of your chapter to the corresponding file [chapter].tex, in the folder corresponding to your chapter.
 
 2. The header of "<chapter>.tex" should have the following as in the current template:
 
