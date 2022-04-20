@@ -23,17 +23,16 @@ Please make alterations only the folder corresponding to your chapter, except fo
 
 4. The header of the chapter should have as in the current template:
 
-\title{Title}  
+`\title{Title}  
 \label{chp:label} % don't change the label currently inserted in your chapter .tex
 \author{} % add the list of authors
 \institute{} % add the institutions of the authors
-\maketitle
+\maketitle`
 
 5. The end of the chapter should have the following, as in the current template:
 
-\bibliographystyle{unsrt}
-
-\bibliography{bibliography}
+`\bibliographystyle{unsrt}
+\bibliography{bibliography}`
 
 6. Your bibliography should be within the file named bibliography.bib
 
