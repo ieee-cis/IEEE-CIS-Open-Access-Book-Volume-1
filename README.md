@@ -33,8 +33,10 @@ Please make alterations only the folder corresponding to your chapter, except fo
 
 5. The end of the chapter should have the following, as in the current template:
 
-`\bibliographystyle{unsrt}`
-`\bibliography{bibliography}`
+```
+	\bibliographystyle{unsrt}
+	\bibliography{bibliography}
+```
 
 6. Your bibliography should be within the file named bibliography.bib
 
