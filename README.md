@@ -5,7 +5,7 @@ The first edition covers Search-Based Optimization and Learning Systems. The sec
 
 # License
 
-By submitting to this repository you agree with the terms and conditions of the license at [license.txt](license.txt).
+By submitting to this repository you agree with the terms and conditions of the open license at [license.txt](license.txt).
 
 # Instructions for Adding Your Chapter
 
