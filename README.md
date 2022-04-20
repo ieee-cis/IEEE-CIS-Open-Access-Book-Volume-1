@@ -15,7 +15,7 @@ Please make alterations only the folder corresponding to your chapter, except fo
 
 1. Add the text content of your chapter to the corresponding file [chapter].tex, in the folder corresponding to your chapter.
 
-2. The header of "<chapter>.tex" should have the following as in the current template:
+2. The header of [chapter].tex should have the following as in the current template:
 
 ```    
 	\title{Title}
@@ -25,9 +25,9 @@ Please make alterations only the folder corresponding to your chapter, except fo
 	\maketitle
 ```
 
-3. No package should be added to the "<chapter>.tex" file.
+3. No package should be added to the [chapter].tex file. No begin and end document should be added there either.
 
-4. The end of the chapter should have the following, as in the current template:
+4. The end of the [chapter].tex file should have the following, as in the current template:
 
 ```
 	\bibliographystyle{unsrt}
@@ -36,9 +36,9 @@ Please make alterations only the folder corresponding to your chapter, except fo
 
 5. Your bibliography should be within the file named bibliography.bib
 
-6. Add all your packages to the "<chapter> - Isolated.tex" file in the folder corresponding to your chapter.
+6. Add all your packages to the [chapter] - Isolated.tex file in the folder corresponding to your chapter.
 
-7. Compile the "<chapter> - Isolated.tex" file corresponding to your chapter with pdflatex and bibtex as you would normally do when creating a paper. This will allow you to create a separate pdf file for your chapter.
+7. Compile the [chapter] - Isolated.tex file corresponding to your chapter with pdflatex and bibtex as you would normally do when creating a paper. This will allow you to create a separate pdf file for your chapter.
 
 8. Add all your packages to the main.tex at the root folder of the book, if they are not already included there.
 
