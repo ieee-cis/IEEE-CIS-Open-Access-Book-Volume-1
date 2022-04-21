@@ -23,13 +23,13 @@ that far.
 In addition, local search techniques are non-exact, as they
 do not guarantee to find the optimal solution. In the cases in which
 the optimal solution is found, there is no way to prove that it is
-indeed optimal, unless a lower bound of equal value has been established
-with exact techniques.
+indeed optimal, unless it has been established
+with exact techniques that it is not possible to reach a value lower than that (i.e., it is a proven \emph{lower bound}).
 
 Local search is based on the simple idea of \emph{navigating} the
 search space by iteratively stepping from one state to one of its
 \emph{neighbors}. The neighborhood of a state is the set of states
-that can be obtained by applying an ``atomic local change'' to it. The
+that can be obtained by applying a ``local change'' to it. The
 definition of the neighborhood relation is dependent on the specific
 problem under consideration, although there are some common
 patterns that can be applied to search spaces with
@@ -239,7 +239,7 @@ we have $F(s_1) = 6$, as there are 6 pairs of queens attacking each
 other $\{(x_1,x_5), (x_1,x_6), (x_2,x_4), (x_3,x_8),  (x_4,x_6),  (x_7,x_8)\}$ 
 connected in the figures with red dotted lines.\footnote{Note that we count also the so-called \emph{X-ray} attacks, i.e. the ones between non consecutive queens in a row (or diagonal) of more than two of them, which by the chess rules would not attack each other.}
 
-In the case of optimization problems (which, without loss of
+In the case of an optimization problem (which, without loss of
 generality, is assumed to be a minimization one), $F$ typically merges
 together the distance to feasibility and the objective function $f$ of
 the problem.  Therefore, the cost function is typically defined as a
@@ -277,8 +277,8 @@ computationally expensive~\cite{KoCL11}.
 \subsection{Initial Solution Selection}
 
 An essential component of any local search procedure is the selection of
-the initial solution. Typical choices are the use of a random
-generation or a greedy construction. It is also possible to use any
+the initial solution. Typical choices are a random
+generation or the use of a greedy constructive heuristic. It is also possible to use any
 other search method to obtain the initial solution.
 
 For example, for the \textbf{Permutation} space for the $n$-queens, the
@@ -293,7 +293,7 @@ different aspects. In fact, on the one hand, a better initial state
 would in general require less local search iterations in order to reach
 high quality solutions. This saves computational time, which could be used
 to perform more steps or more independent runs. On the other hand,
-though, it is also possible that the greedy technique biases the
+though, it is also possible that the greedy heuristics biases the
 search toward some specific regions of the search space, so that it
 might become difficult to move away toward different areas.
 
@@ -344,7 +344,7 @@ advantage of not being machine dependent.
 
 Other options might regard specific qualities of the solution reached
 or the so-called \emph{stagnation} detection. That is, when no
-improvement is obtained for a give number of iterations, the search is
+improvement is obtained for a given number of iterations, the search is
 stopped.  This way, search trials that are exploring promising paths
 are let run longer than those that are stuck in regions without good
 solutions or where the search is trapped.  It is also possible to
@@ -355,27 +355,29 @@ therefore we will further discuss it in the following sections.
 \vspace{\parskip}
 
 Combining all the key elements presented so far, the pseudocode of a generic local search procedure is shown in
-Figure~\ref{fig:local-search-pseudocode}.
+Algorithm~\ref{alg:local-search-pseudocode}.
 
-\begin{figure}
-  \centering
-  \begin{tabbing}
-    \textbf{procedure} \emph{LocalSearch}(\= SearchSpace $\mathcal{S}$, Neighborhood $\mathcal{N}$, CostFunction $F$) \\ 
-    \hspace{4ex}\= $s \leftarrow InitialState(\mathcal{S})$\\
-     \> $s_{best} \leftarrow s$ \\
-    \> \textbf{while} ($\neg StopCriterion$)\\
-    \> \hspace{4ex}\= $m \leftarrow SelectMove(s,\mathcal{N})$ \\
-    \> \> $\Delta F \leftarrow F(s \oplus m) - F(s)$\\
-    \> \> \textbf{if} ($AcceptMove(m,\Delta F)$)\\
-    \> \> \hspace{4ex} \= $s \leftarrow s \oplus m$ \\
-    \> \> \> \textbf{if} ($F(s) < F(s_{best})$)\\
-    \> \> \> \hspace{4ex} $s_{best} \leftarrow s$ \\
-    \> \textbf{return} $s_{best}$ %\\
-  \end{tabbing}
-  
-  \caption{Local search procedure}
-\label{fig:local-search-pseudocode}
-\end{figure}
+\begin{algorithm}[ht!]
+    %\renewcommand{\baselinestretch}{0.8}
+    \caption{LocalSearch} \label{alg:local-search-pseudocode}   
+    Parameters: SearchSpace $\mathcal{S}$, Neighborhood $\mathcal{N}$, CostFunction $F$\\   
+    Output: $s_{best}$
+    \begin{algorithmic}[1]
+            \STATE $s \gets InitialState(\mathcal{S})$
+            \STATE $s_{best} \gets s$
+            \WHILE{\NOT{$StopCriterion$}}
+                \STATE $m \gets SelectMove(s,\mathcal{N})$
+                \STATE $\Delta F \gets F(s \oplus m) - F(s)$
+                \IF{$AcceptMove(m,\Delta F)$}
+                    \STATE $s \gets s \oplus m$
+            \IF{$F(s) < F(s_{best})$}
+                \STATE  $s_{best} \gets s$ \\
+            \ENDIF
+                \ENDIF
+            \ENDWHILE
+    \RETURN $s_{best}$
+    \end{algorithmic}
+\end{algorithm}
 
 The specific definitions of the subprocedures $InitialState$, $StopCriterion$, $SelectMove$, and $AcceptMove$ characterize the specific local search technique.
 
@@ -400,7 +402,7 @@ $s$, the element $s' = s \oplus m$ which has the best value of the
 cost function $F$.  The SD procedure accepts the move $m$ only if it
 an improving move, i.e., it decreases the value of the cost function. 
 Consequently, it naturally stops as soon as it reaches a
-local minimum, without the need to define any other specific stop criterion.
+local minimum. Therefore, assuming (as customary for combinatorial optimization) that the search space is finite and thus at least one local minimum exists, we don't need to define any other specific stop criterion.
 
 The exhaustive exploration of the neighborhood is obtained by
 enumerating the moves in a fixed order.  For example, the
@@ -476,10 +478,11 @@ from a local minimum, but is still trapped by a strict local minimum.
 
 In this case, we call these methods Non-Ascent techniques, rather than Descent
 ones (Steepest, First-Improving, and Random). Non-Ascent
-techniques have the ability to navigate through \emph{plataeux},
+techniques have the ability to navigate through \emph{plateaux},
 which are areas of the search space with equal cost, which are often
 present in the landscape of many problems.
 
+The navigation through \emph{plateaux} is often useful in reaching states from which the cost can be decreased again. On the other hand, in some cases such navigation might take a long time without producing any improvement.
 
 \section{Discussion}\label{sec:discussion}
 
@@ -490,7 +493,7 @@ issues of local search procedures.
 
 The main issue of local search techniques is the way they deal
 with the local minima of the cost function. Even if the search
-procedure employs some specific mechanism for escaping them (see next chapters),
+procedure employs some specific mechanism for escaping them (see, e.g., Chapter\label{chp:simulated-annealing}),
 a local minimum still behaves as a sort of \emph{attractor}.
 Intuitively, when a trajectory moves away from a local minimum and
 steps through a solution ``near'' to it, even though it is not allowed
@@ -512,7 +515,7 @@ search should be in some way \emph{intensified} around it.
 In conclusion, the search algorithm should be able to balance two
 sometimes conflicting objectives; it should diversify and intensify by
 moving outside the attraction area of already visited local minima,
-but not to far from it.  
+but not too far from it.  
 
 
 \subsection{Smart Neighborhood Exploration}
