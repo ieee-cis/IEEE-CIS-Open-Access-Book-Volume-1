@@ -18,7 +18,7 @@ Please make alterations only the folder corresponding to your chapter, except fo
 2. The paths to figures within your content should be the whole path from the main folder. For example, for the Naive Bayes chapter, one of the figures is included with the following command:
 
 ```
-	Part 3 - Learning Systems/Supervised Learning/Naive Bayes/figures/nb-mass-function.png
+	\includegraphics[scale=0.4]{"Part 3 - Learning Systems/Supervised Learning/Naive Bayes/figures/nb-mass-function.png"} 
 ```
 
 3. The header of [chapter].tex should have the following as in the current template:
