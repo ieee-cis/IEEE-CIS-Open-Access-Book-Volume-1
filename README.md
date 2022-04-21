@@ -48,7 +48,7 @@ Please make alterations only the folder corresponding to your chapter, except fo
 
 1. pdflatex main.tex
 2. Go to the folder with your chapter
-3. bibtex your chapter and return to the main folder
+3. bibtex your [chapter] file and return to the main folder
 4. pdflatex main.tex
 5. pdflatex main.tex
 
