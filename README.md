@@ -40,7 +40,7 @@ Please make alterations only the folder corresponding to your chapter, except fo
 	\bibliography{bibliography}
 ```
 
-6. Your bibliography should be within the file named bibliography.bib
+6. Your bibliography should be within the file named bibliography.bib within your chapter folder.
 
 7. Add all your packages to the [chapter] - Isolated.tex file in the folder corresponding to your chapter. Do not delete any other package that is already listed in that file.
 
