@@ -44,6 +44,12 @@ Please make alterations only the folder corresponding to your chapter, except fo
 
 7. Add all your packages to the [chapter] - Isolated.tex file in the folder corresponding to your chapter. Do not delete any other package that is already listed in that file.
 
+8. Go to the main folder of the book repository and run
+
+```
+pdflatex [path to your chapter folder]/[chapter]\ -\ Isolated\ Chapter.tex
+```
+
 8. Go to the folder corresponding to your chapter and run 
 
 ```
