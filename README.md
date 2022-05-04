@@ -11,7 +11,7 @@ By submitting to this repository you agree with the terms and conditions of the 
 
 Each chapter is within a folder, where Part 2 contains the search-based optimisation chapters and Part 3 contains the learning systems chapters.
 
-Please make alterations only the folder corresponding to your chapter, except for (10) below. Please do not add any .aux, .pdf, .log or other files resulting from the compilation process into the repository, as this causes conflicts. 
+Please make alterations only the folder corresponding to your chapter, except for (11) below. Please do not add any .aux, .pdf, .log or other files resulting from the compilation process into the repository, as this causes conflicts. 
 
 1. Add the text content of your chapter to the corresponding file [chapter].tex, in the folder corresponding to your chapter.
 
@@ -50,13 +50,13 @@ Please make alterations only the folder corresponding to your chapter, except fo
 pdflatex [path to your chapter folder]/[chapter]\ -\ Isolated\ Chapter.tex
 ```
 
-8. Go to the folder corresponding to your chapter and run 
+9. Go to the folder corresponding to your chapter and run 
 
 ```
 bibtex [chapter]
 ```
 
-9. Return to the main folder and run
+10. Return to the main folder and run
 
 ```
 pdflatex [path to your chapter folder]/[chapter]\ -\ Isolated.tex 
@@ -65,9 +65,9 @@ pdflatex [path to your chapter folder]/[chapter]\ -\ Isolated.tex
 
 This will allow you to create a separate pdf file for your chapter. The files need to be compiled from within the main folder of the book, so that the paths to the figures work.
 
-10. Add all your packages to the main.tex at the root folder of the book, if they are not already included there.
+11. Add all your packages to the main.tex at the root folder of the book, if they are not already included there.
 
-11. Compile the book following the instructions below from the main folder of the book. This will allow you to check whether your chapter is successfully included in the book.
+12. Compile the book following the instructions below from the main folder of the book. This will allow you to check whether your chapter is successfully included in the book.
 
 ```
 pdflatex main.tex
