@@ -11,7 +11,7 @@ By submitting to this repository you agree with the terms and conditions of the 
 
 Each chapter is within a folder, where Part 2 contains the search-based optimisation chapters and Part 3 contains the learning systems chapters.
 
-Please make alterations only the folder corresponding to your chapter, except for (10) below.
+Please make alterations only the folder corresponding to your chapter, except for (10) below. Please do not add any .aux, .pdf, .log or other files resulting from the compilation process into the repository, as this causes conflicts. 
 
 1. Add the text content of your chapter to the corresponding file [chapter].tex, in the folder corresponding to your chapter.
 
