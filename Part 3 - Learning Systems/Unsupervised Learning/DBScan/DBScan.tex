@@ -22,7 +22,7 @@ distinguish the outliers in the lower density regions.
 \begin{figure}[tbp]
 	\centering
 	\label{fig:example}
-	\includegraphics[width=\textwidth]{"Part 3 - Learning Systems/Unsupervised Learning/DBScan/figures/example_density.png"}
+	\includegraphics[width=\textwidth]{"figures/example_density.png"}
 	\caption{Samples for density illustration. Different colors represent different clusters of points}
 \end{figure}
 
@@ -65,7 +65,7 @@ are then classified into the following categories.
 
 \begin{figure}[tbp]
 	\centering
-	\includegraphics[width=\textwidth]{"Part 3 - Learning Systems/Unsupervised Learning/DBScan/figures/illustration of 
+	\includegraphics[width=\textwidth]{"figures/illustration of 
 		DBSCAN.png"}
 	\caption{In this example, the minPts parameter is 4, and the $\epsilon$ 
 		radius is indicated by the circles. Red point is a outlier point, which 
@@ -139,65 +139,60 @@ border points within the same cluster may be not density reachable from each oth
 density-reachable from $\mathbf{x}^{(k)}$ wrt. $\epsilon$ and $MinPts$. Density-connectivity is a symmetric relation. For instance, border points B and C become density-connected in Figure~\ref{fig:relation} via core points A, A' or other green core points. 
 \end{itemize}
 
-\begin{algorithm}[ht!]
-    \label{algo}
-    \CommentSty{\color{blue}}
-    \SetAlgoLined\DontPrintSemicolon
-    \SetKwFunction{DBSCAN}{DBSCAN}
-    \SetKwProg{beginAlgorithm}{Algorithm}{}{}
-    \beginAlgorithm{\DBSCAN{}}{
-	    \KwIn{$\mathcal{X} = 
-	    	\{\mathbf{x}^{(1)},\mathbf{x}^{(2)},\cdots,\mathbf{x}^{(N)}\} \in 
-	    	\mathbb{R}^{d}$   \tcp*{dataset}}
-	    \KwIn{$\epsilon$   \tcp*{radius distance of neighbour}}
-	    \KwIn{$MinPts$ \tcp*{minimal size of a cluster}}
-	    \nl $C \gets 0$   \tcp*{start with an empty cluster}
-	    \ForEach{unvisited point $\mathbf{x}$ in $\mathcal{X}$}{ 
-			\nl mark $\mathbf{x}$ as $Visited$ \;
-			\nl $N_{\epsilon}(\mathbf{x})$ $\gets$ regionQuery($\mathbf{x}$, $\epsilon$)  \tcp*{finding initial neighbourpoints of $\mathbf{x}$}
-			\uIf{$|N_{\epsilon}(\mathbf{x})|$ $<$ $MinPts$\tcp*{size of neighbourpoints of $\mathbf{x}$}} {
-				\nl mark $\mathbf{x}$ as $NOISE$ \;
-			}
-			\uElse{
-				\nl $C\gets C+1$  \tcp*{start a new cluster}\;
-				\nl expandCluster($\mathbf{x}$, NeighborPoints, C, $\epsilon$, $MinPts$) \;
-			}
-	    } 
-	}{}
-    
-    \setcounter{AlgoLine}{0}
-    \SetKwFunction{expandCluster}{expandCluster}
-    \SetKwProg{beginProc}{Procedure}{}{}
-    \beginProc{\expandCluster{}}{
-	    \KwIn{$\mathbf{x}$ \tcp*{current points}}
-	    \KwIn{$\mathbf{x'} \in N_{\epsilon}(\mathbf{x})$  \tcp*{neighbour points of current points $\mathbf{x}$}}
-	    \KwIn{$C$ \tcp*{current cluster}}
-	    \KwIn{$\epsilon$}
-	    \KwIn{$MinPts$}
-	    \nl add $\mathbf{x}$ to cluster $C$\;
-	    \ForEach{point $\mathbf{x}'$ in $N_{\epsilon}(\mathbf{x})$}{
-	    	\If{$\mathbf{x'}$ is not $visited$}{
-		    	\nl mark $\mathbf{x}'$  as $visited$\;
-		    	\nl $N_{\epsilon}(\mathbf{x'})$$\gets$ regionQuery($\mathbf{x}'$ , $\epsilon$)\;
-		    	\If{$|N_{\epsilon}(\mathbf{x'})|$ $\geq$ $MinPts$}{
-		    		\nl $N_{\epsilon}(\mathbf{x}) = N_{\epsilon}(\mathbf{x})$ $\cup$ $N_{\epsilon}(\mathbf{x'})$ \;
-		    	}
-	    	}
-	    	\If{$\mathbf{x'}$ is not a member of any cluster}{
-	    		\nl add $\mathbf{x'}$ to cluster $C$
-	    	}
-	    }
-	    \nl \KwRet\;
-    }
-    
-    \setcounter{AlgoLine}{0}
-    \SetKwFunction{regionQuery}{regionQuery}
-    \beginProc{\regionQuery{}}{
-	    \KwIn{$\mathbf{x}$ \tcp*{current point}}
-	    \KwIn{$\epsilon$ represent min distance of neighbour}
-	    \nl \KwRet all points within $\epsilon$ distance of $\mathbf{x}$\;
-    }
-    \caption{DBSCAN}
+\begin{algorithm}
+\caption{DBSCAN}\label{euclid}
+\begin{algorithmic}[1]
+\Procedure{DBSCAN}{$\mathcal{X}$, $\epsilon$, MinPts}
+\Statex
+\Comment {$\mathcal{X} = \{\mathbf{x}^{(1)},\mathbf{x}^{(2)},\cdots,\mathbf{x}^{(N)}\} \in \mathbb{R}^{d}$}
+\Statex
+\Comment {$\epsilon$: radius distance of neighbour}
+\Statex
+\Comment {$MinPts$: minimal size of a cluster}
+\State $C\gets 0$
+\ForAll {unvisited point $\mathbf{x}$ in $\mathcal{X}$}
+\State mark $\mathbf{x}$ as $Visited$
+\State $N_{\epsilon}(\mathbf{x})$ $\gets$ regionQuery($\mathbf{x}$, $\epsilon$)  \Comment{finding initial neighbourpoints of $\mathbf{x}$}
+\If {$|N_{\epsilon}(\mathbf{x})| < $MinPts}\Comment{size of neighbourpoints of $\mathbf{x}$}
+\State mark $\mathbf{x}$ as $NOISE$
+\Else
+    \State $C\gets C+1$  \Comment{start a new cluster}
+    \State expandCluster($\mathbf{x}$, NeighborPoints, C, $\epsilon$, $MinPts$)
+\EndIf
+\EndFor
+\EndProcedure
+\Statex
+\Procedure {expandCluster}{$\mathbf{x}, \mathbf{x'} \in N_{\epsilon}(\mathbf{x}), C, \epsilon, MinPts$}
+\Statex
+\Comment {$\mathbf{x}$: current points}
+\Statex
+\Comment {$\mathbf{x'} \in N_{\epsilon}(\mathbf{x})$: neighbour points of current points $\mathbf{x}$}
+\Statex
+\Comment {$C$: current cluster}
+\Statex
+\Comment {$\epsilon$}
+\Statex
+\Comment {$MinPts$: minimal size of a cluster}
+\State add $\mathbf{x}$ to cluster $C$
+\ForAll {point $\mathbf{x}'$ in $N_{\epsilon}(\mathbf{x})$}
+    \If {$\mathbf{x'}$ is not $visited$}
+        \State mark $\mathbf{x}'$  as $visited$
+        \State $N_{\epsilon}(\mathbf{x'})$$\gets$ regionQuery($\mathbf{x}'$ , $\epsilon$)
+    \EndIf
+    \If {$|N_{\epsilon}(\mathbf{x'})|$ $\geq$ $MinPts$}
+        \State $N_{\epsilon}(\mathbf{x}) = N_{\epsilon}(\mathbf{x})$ $\cup$ $N_{\epsilon}(\mathbf{x'})$
+    \EndIf
+\EndFor
+\EndProcedure
+\Statex
+\Procedure {regionQuery}{$\mathbf{x}, \epsilon$}
+    \Statex
+    \Comment {$\mathbf{x}$: current point}
+    \Statex
+    \Comment {$\epsilon$: represent min distance of neighbour}
+    \State Return all points within $\epsilon$ distance of $\mathbf{x}$
+\EndProcedure
+\end{algorithmic}
 \end{algorithm}
 
 Now, we have a formal notion of density. A cluster $C$ is defined to be a set of density-connected points wrt $\epsilon$ and $MinPts$, which is non-empty and satisfying the following two properties (i) Maximality: for any data point $\mathbf{x}^{(i)} \in C$ and $\mathbf{x}^{(j)}$ is density-reachable it wrt $\epsilon$ and $MinPts$, then $\mathbf{x}^{(j)} \in C$; (ii) any of two points in this cluster are density-connected. A toy 
@@ -236,7 +231,7 @@ that DBSCAN can accurately segment the different shapes of furniture.
 %source code regarding this example can be found as follows.
 \begin{figure}[h!]
 	\label{fig:scene}
-\includegraphics[width=\textwidth]{"Part 3 - Learning Systems/Unsupervised Learning/DBScan/figures/segment.png"}
+\includegraphics[width=\textwidth]{"figures/segment.png"}
 \caption{Object detection using DBSCAN. The first row shows the original 
 images, the second row shows the corresponding depth images, and the last row 
 shows the detection results using DBSCAN.}
@@ -270,7 +265,7 @@ from the number of dimensions $d$ of data set by taking $MinPts = 2 * d - 1$
 \begin{figure}
 	\centering
 	\label{fig:para}
-	\includegraphics[width=\textwidth]{"Part 3 - Learning Systems/Unsupervised Learning/DBScan/figures/para.png"}
+	\includegraphics[width=\textwidth]{"figures/para.png"}
 	\caption{An illustrative example is finding optimal $\epsilon$ given $k = 
 	4$; the knee point corresponds to $\epsilon = 13.0$. The clustering result 
 	shows the good performance with these two parameters.}
@@ -303,7 +298,7 @@ ratio for DBSCAN to tolerate well is between 1\% to 30\%
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{"Part 3 - Learning Systems/Unsupervised Learning/DBScan/figures/var-density.png"}
+	\includegraphics[width=\textwidth]{"figures/var-density.png"}
 	\caption{An illustrative example is DBSCAN dealing with varying density 
 	dataset. The colorful dots indicate the clusters identified by DBSCAN, 
 	while the dash lines indicate the groundtruth clusters.}
