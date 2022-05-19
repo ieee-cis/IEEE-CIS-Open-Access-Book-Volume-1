@@ -405,7 +405,7 @@ Na\"ive Bayes is a simple probabilistic learning approach that has demonstrated 
 
 \begin{center}
 \begin{tabular}{|c|c|c||c|}\hline
-$x_1$ (gender) & $x_2$ (smoker) & $x_3$ (paintype) & $y$ (heartdisease) \\ \hline
+$x_1$ (gender) & $x_2$ (smoker) & $x_3$ (paintype) & $y$ (heartDisease) \\ \hline
 $female$ & $smokes$ & $angina$ & $yes$ \\ \hline
 $male$ & $smokes$ & $angina$ & $yes$ \\ \hline
 $male$ & $doesnt$ & $angina$ & $no$ \\ \hline
@@ -418,9 +418,9 @@ $female$ & $doesnt$ & $angina$ & $yes$\\ \hline
 
 Create the frequency tables that compose the Na\"ive Bayes classifier for this training set using Laplace Smoothing with $\epsilon=1$. 
 
-\item \label{ex:prediction} Determine the prediction that Na\"ive Bayes would give to the instance ($\text{gender}=female$, $\text{smoker}=smokes$, $\text{paintype}=nonangina$, heartdisease=?) using Laplace Smoothing with $\epsilon=1$, given the training set from Exercise \ref{ex:frequency-tables}.
+\item \label{ex:prediction} Determine the prediction that Na\"ive Bayes would give to the instance ($\text{gender}=female$, $\text{smoker}=smokes$, $\text{paintype}=nonangina$, heartDisease=?) using Laplace Smoothing with $\epsilon=1$, given the training set from Exercise \ref{ex:frequency-tables}.
 
-\item \label{ex:laplace} Compute the probability $p(\text{heartdisease}=yes)$ based on the three different smoothed frequency tables that you have obtained in Exercise \ref{ex:prediction}, rather than based on the original frequency values of each class. Reflect about the results.
+\item \label{ex:laplace} Compute the probability $p(\text{heartDisease}=yes)$ based on the three different smoothed frequency tables that you have obtained in Exercise \ref{ex:prediction}, rather than based on the original frequency values of each class. Reflect about the results.
 
 \end{enumerate}
 
@@ -436,7 +436,7 @@ Create the frequency tables that compose the Na\"ive Bayes classifier for this t
 
 
 \begin{tabular}{|c|c|c|c|}\hline
-& heartdisease=$yes$ & heartdisease=$no$ & total \\ \hline
+& heartDisease=$yes$ & heartDisease=$no$ & total \\ \hline
 gender=$female$ & 3 & 2 & 5 \\ \hline
 gender=$male$ & 2 & 4 & 6 \\ \hline
 total & 5 & 6 & 11 \\ \hline
@@ -445,7 +445,7 @@ total & 5 & 6 & 11 \\ \hline
 \vspace{0.5cm}
 
 \begin{tabular}{|c|c|c|c|}\hline
-& heartdisease=$yes$ & heartdisease=$no$ & total \\ \hline
+& heartDisease=$yes$ & heartDisease=$no$ & total \\ \hline
 smoker=$smokes$ & 3 & 2 & 5 \\ \hline
 smoker=$doesnt$ & 2 & 4 & 6 \\ \hline
 total & 5 & 6 & 11 \\ \hline
@@ -454,7 +454,7 @@ total & 5 & 6 & 11 \\ \hline
 \vspace{0.5cm}
 
 \begin{tabular}{|c|c|c|c|}\hline
-& heartdisease=$yes$ & heartdisease=$no$ & total \\ \hline
+& heartDisease=$yes$ & heartDisease=$no$ & total \\ \hline
 paintype=$angina$& 4 & 2 & 6 \\ \hline
 paintype=$nonangina$& 1 & 2 & 3 \\ \hline
 paintype=$nopain$ & 1 & 3 & 4 \\ \hline
@@ -481,7 +481,7 @@ The $p(a|c)$ probabilities above are computed based on the frequency values from
 
 As $p(yes|female,smokes,nonangina) > p(no|female,smokes,nonangina)$, Na\"ive Bayes would predict \textit{yes}, the person has the disease. However, as $p(yes|female,smokes,nonangina)$ is very close to $p(no|female,smokes,$ $nonangina)$, we can consider that Na\"ve Bayes is not very certain on the class being \textit{yes}.
 
-\item We have three input variables. Two of them (gender and smoker) can assume two possible values ($female$/$male$ and $smokers$/$doesnt$). However, the other input variable (paintype) can assume three possible values ($angina$/$nonangina$/$nopain$). If we compute $p(\text{heartdisease}=yes)$ based on the first two smoothed tables, we get the value of $5/11 \approx 0.4545$. However, if we compute $p(\textit{heartdisease}=yes)$ based on the third smoothed table, we get the value $6/13 \approx 0.4615$. As we can see, these values are not the same, hindering the calculation of $p(yes)$.
+\item We have three input variables. Two of them (gender and smoker) can assume two possible values ($female$/$male$ and $smokers$/$doesnt$). However, the other input variable (paintype) can assume three possible values ($angina$/$nonangina$/$nopain$). If we compute $p(\text{heartDisease}=yes)$ based on the first two smoothed tables, we get the value of $5/11 \approx 0.4545$. However, if we compute $p(\textit{heartDisease}=yes)$ based on the third smoothed table, we get the value $6/13 \approx 0.4615$. As we can see, these values are not the same, hindering the calculation of $p(yes)$.
 
 \end{enumerate}
 
