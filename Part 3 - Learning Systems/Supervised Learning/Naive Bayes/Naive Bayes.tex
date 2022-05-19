@@ -21,8 +21,8 @@ In probabilistic learning, we consider that $(\mathbf{x},y)$ are random variable
 
 \begin{equation} \mathcal{T} = \{(\mathbf{a}^{(1)},c^{(1)}),(\mathbf{a}^{(2)},c^{(2)}),\cdots, (\mathbf{a}^{(N)},c^{(N)})\}, \label{eq:training-set} \end{equation}
 
-\noindent where $\mathbf{a}^{(i)},c^{(i)}$ represent the values of the input and output variables\footnote{In this chapter, we will use letters such as $\mathbf{a}^{(i)},c^{(i)}$ to represent the values of the input and output variables instead of using their corresponding indexed variable names $\mathbf{x}^{(i)},y^{(i)}$ in sample $i$. This will enable us to distinguish more explicitly between the variables and their values, which can be useful when discussing Na\"ive Bayes.}. 
-Supervised learning in then considered to be the problem of using the training set $\mathcal{T}$ to learn a model $f: \mathcal{X} \rightarrow \mathcal{Y}$ able to generalise to unseen examples from $p(\mathbf{x},y)$. %In probabilistic learning, this model is a probabilistic model. 
+\noindent where $\mathbf{a}^{(i)},c^{(i)}$ represent the values of the input and output variables\footnote{In this chapter, we will use letters such as $\mathbf{a}^{(i)},c^{(i)}$ to represent the values of the input and output variables instead of using their corresponding indexed variable names $\mathbf{x}^{(i)},y^{(i)}$ in sample $i$. This will enable us to distinguish more explicitly between the variables and their values, which can be useful when discussing Na\"ive Bayes.}. A given assignment of values $\mathbf{a}$ to the input variables $\mathbf{x}$ is also referred to as an \textit{event} \cite{RussellNorvig} in probabilistic learning.
+Supervised learning is then considered to be the problem of using the training set $\mathcal{T}$ to learn a model $f: \mathcal{X} \rightarrow \mathcal{Y}$ able to generalise to unseen examples from $p(\mathbf{x},y)$. %In probabilistic learning, this model is a probabilistic model. 
 %Learning occurs through the transformation of prior probability distributions (defined before observing data) into posterior probability distributions (after observing the training set) \cite{ProbabilisticLearningNature}.
 
 Based on the product rule from probability theory, the joint probability distribution $p(\mathbf{x},y)$ can be written as:
@@ -45,15 +45,15 @@ Such probabilities can be used to make inferences, i.e., to predict the class $c
 But how to compute these probabilities?
 For that, in supervised learning, we can rely on the fact that we have access to a training set $\mathcal{T}$. This training set can be used to create frequency tables that enable us to compute these probabilities. 
 
-Let's have a look at a simplified problem to illustrate how this works. Consider a problem where we have a single input variable $x_1$ representing whether a person eats healthy foods and a output variable $y$ corresponding to whether that person is developing cancer. The problem is to predict whether the person is developing cancer based on whether they eat healthy foods. In this problem, we will refer to $x_1$ as ``healthy'' and $y$ as ``cancer'', to facilitate reading. 
+Let's have a look at a simplified problem to illustrate how this works. Consider a problem where we have a single input variable $x_1$ representing whether a person eats healthy foods and a output variable $y$ corresponding to whether that person is developing cancer. The problem is to predict whether the person is developing cancer based on whether they eat healthy foods. In this problem, we will refer to $x_1$ as ``healthyFood'' and $y$ as ``cancer'', to facilitate reading. 
 
-Assume we have access to the training set corresponding to six people shown in Table \ref{tab:dataset-single-input}. We can compute the number of times that each different value of the input and output variables occur together as shown in the frequency table given in Table \ref{tab:frequency-single-input}. Then, let's say that we have received a new test instance corresponding to a person who does not eat healthy foods (i.e., $\text{healthy} = \textit{no}$) and wish to predict whether this person is developing cancer by applying the Bayes Theorem\footnote{We could potentially compute $p(\text{cancer}=\textit{yes}|\text{healthy} = \textit{no})$ and $p(\text{cancer}=\textit{no}|\text{healthy} = \textit{no})$ directly from the frequency tables without having to apply the Bayes Theorem. However, the intention of this example is to show that we can compute them by applying the Bayes Theorem, which will be useful to learn Na\"{i}ve Bayes in the next section.}. 
+Assume we have access to the training set corresponding to six people shown in Table \ref{tab:dataset-single-input}. We can compute the number of times that each different value of the input and output variables occur together as shown in the frequency table given in Table \ref{tab:frequency-single-input}. Then, let's say that we have received a new test instance corresponding to a person who does not eat healthy foods (i.e., $\text{healthyFood} = \textit{no}$) and wish to predict whether this person is developing cancer by applying the Bayes Theorem\footnote{We could potentially compute $p(\text{cancer}=\textit{yes}|\text{healthyFood} = \textit{no})$ and $p(\text{cancer}=\textit{no}|\text{healthyFood} = \textit{no})$ directly from the frequency tables without having to apply the Bayes Theorem. However, the intention of this example is to show that we can compute them by applying the Bayes Theorem, which will be useful to learn Na\"{i}ve Bayes in the next section.}. 
 
 \begin{table}[ht]
 \centering
 \caption{An Illustrative Dataset With A Single Input Variable} \label{tab:dataset-single-input}
-\begin{tabular}{|c|c|} \hline
-$x_1$ (healthy) & $y$ (cancer) \\ \hline
+\begin{tabular}{|c||c|} \hline
+$x_1$ (healthyFood) & $y$ (cancer) \\ \hline
 \textit{no} & \textit{yes} \\
 \textit{no} & \textit{yes} \\
 \textit{yes} & \textit{yes} \\
@@ -68,44 +68,44 @@ $x_1$ (healthy) & $y$ (cancer) \\ \hline
 \caption{An Illustrative Frequency Table For The Single Input Variable Dataset From Table \ref{tab:dataset-single-input}} \label{tab:frequency-single-input}
 \begin{tabular}{|l|c|c|c|} \hline
  & cancer = \textit{no} & cancer= \textit{yes} & total \\ \hline
-healthy = \textit{no} & 1 & 2 & 3 \\ \hline
-healthy = \textit{yes} & 2 & 1 & 3 \\ \hline
+healthyFood = \textit{no} & 1 & 2 & 3 \\ \hline
+healthyFood = \textit{yes} & 2 & 1 & 3 \\ \hline
 total & 3 & 3 & 6 \\ \hline
 \end{tabular}
 \end{table}
 
 From Eq.~\ref{eq:bayes-theorem}, we have that
 
-\[ p(\text{cancer}=\textit{yes}|\text{healthy} = \textit{no}) = 
-\frac{p(\text{cancer}=\textit{yes}) p(\text{healthy} = \textit{no}|\text{cancer}=\textit{yes})}{p(\text{healthy} = \textit{no})} \]
+\[ p(\text{cancer}=\textit{yes}|\text{healthyFood} = \textit{no}) = 
+\frac{p(\text{cancer}=\textit{yes}) p(\text{healthyFood} = \textit{no}|\text{cancer}=\textit{yes})}{p(\text{healthyFood} = \textit{no})} \]
 
 and
 
-\[p(\text{cancer}=\textit{no}|\text{healthy} = \textit{no}) =
-\frac{p(\text{cancer}=\textit{no}) p(\text{healthy} = \textit{no}|\text{cancer}=\textit{no})}{p(\text{healthy} = \textit{no})} .\]
+\[p(\text{cancer}=\textit{no}|\text{healthyFood} = \textit{no}) =
+\frac{p(\text{cancer}=\textit{no}) p(\text{healthyFood} = \textit{no}|\text{cancer}=\textit{no})}{p(\text{healthyFood} = \textit{no})} .\]
 
 \vspace{1cm}
 Based on the frequency table given in Table \ref{tab:frequency-single-input}, we have that
 
 \begin{itemize}
 \item $p(\text{cancer}=\textit{yes}) = 3/6$, as $3$ in $6$ people had cancer;
-\item $p(\text{healthy} = \textit{no}|\text{cancer}=\textit{yes}) = 2/3$, as $2$ in $3$ of the people with cancer did not eat healthy foods;
+\item $p(\text{healthyFood} = \textit{no}|\text{cancer}=\textit{yes}) = 2/3$, as $2$ in $3$ of the people with cancer did not eat healthy foods;
 \item $p(\text{cancer}=\textit{no}) = 3/6$, as $3$ in $6$ people did not have cancer;
-\item $p(\text{healthy} = \textit{no}|\text{cancer}=\textit{no}) = 1/3$, as $1$ in $3$ of the people with cancer ate healthy foods;
-\item $p(\text{healthy} = \textit{no}) = 3/6$, as $3$ in $6$ people did not eat healthy foods.
+\item $p(\text{healthyFood} = \textit{no}|\text{cancer}=\textit{no}) = 1/3$, as $1$ in $3$ of the people with cancer ate healthy foods;
+\item $p(\text{healthyFood} = \textit{no}) = 3/6$, as $3$ in $6$ people did not eat healthy foods.
 \end{itemize}
 
 \vspace{1cm}
 Therefore,
 
-\[p(\text{cancer}=\textit{yes}|\text{healthy} = \textit{no}) = \frac{3/6 \times 2/3}{3/6} \approx 0.67.\]
+\[p(\text{cancer}=\textit{yes}|\text{healthyFood} = \textit{no}) = \frac{3/6 \times 2/3}{3/6} \approx 0.67.\]
 
-\[p(\text{cancer}=\textit{no}|\text{healthy} = \textit{no}) = \frac{3/6 \times 1/3}{3/6} \approx 0.33.\]
+\[p(\text{cancer}=\textit{no}|\text{healthyFood} = \textit{no}) = \frac{3/6 \times 1/3}{3/6} \approx 0.33.\]
 
-As $p(\text{cancer}=\textit{yes}|\text{healthy} = \textit{no}) > p(\text{cancer}=\textit{no}|\text{healthy} = \textit{no})$, it would be reasonable to predict that the class is $\text{cancer} = \textit{yes}$.
+As $p(\text{cancer}=\textit{yes}|\text{healthyFood} = \textit{no}) > p(\text{cancer}=\textit{no}|\text{healthyFood} = \textit{no})$, it would be reasonable to predict that the class is $\text{cancer} = \textit{yes}$.
 
 
-It is worth noting that the denominator $p(\mathbf{a})$ of the Bayes Theorem ($p(\text{healthy} = \textit{no})$ in the example above) works as a normalisation factor to ensure that the probabilities of the test instance to belong to each different possible class sums to one, i.e.:
+It is worth noting that the denominator $p(\mathbf{a})$ of the Bayes Theorem ($p(\text{healthyFood} = \textit{no})$ in the example above) works as a normalisation factor to ensure that the probabilities of the test instance to belong to each different possible class sums to one, i.e.:
 
 \[ \sum_{c \in \mathcal{Y}} p(c|\mathbf{a}) = 1\]
 
@@ -118,7 +118,7 @@ If we set $\alpha = 1 / \beta$, then the Bayes Theorem becomes:
 
 \begin{equation}p(c|\mathbf{a}) = \alpha p(c) p(\mathbf{a}|c) . \label{eq:nb-alpha}\end{equation}
 
-In the next section, it will be useful to explicitly use $\alpha$ instead of $p(\mathbf{a})$, as the assumptions made by Na\"{i}ve Bayes will cause $p(\mathbf{a})$ not to work as a normalising factor anymore, potentially resulting in probabilities that would not sum to 1, i.e., in values that are not really probabilities.
+In the next section, it will be useful to explicitly use $\alpha$ instead of $p(\mathbf{a})$, as the assumptions made by Na\"{i}ve Bayes will cause $p(\mathbf{a})$ not to work as a normalising factor anymore, potentially resulting in probabilities that would not sum to 1 (i.e., in values that are not really probabilities).
 
 \section{Na\"{i}ve Bayes for Categorical Input Variables}
 \label{sec:nb-categorical}
@@ -127,14 +127,14 @@ The Bayes Theorem can be written as follows for $d$ input variables:
 
 \[p(c|\mathbf{a}) = \alpha p(c) p(\mathbf{a}|c)  = \alpha p(c) p(a_1,a_2,\cdots,a_d|c).\]
 
-As the probability $p(a_1,a_2,\cdots,a_d|c)$ corresponds to the probability of a given combination of values $a_1,a_2,\cdots,a_d$ for the input variables being observed together given a class $c$, each row of our frequency table would correspond to a different combination of values for the input variables. For example, consider a problem with two input variables, where the first input variable $x_1$ represents whether the person eats healthy foods and the second input variable $x_2$ represents whether this person is suffering from pain. Assume that we would like to predict whether a person is developing cancer (output variable $y$) based on these input variables. For a problem with the dataset shown in Table \ref{tab:dataset-2dim}, we could have the frequency table shown in Table \ref{tab:frequency-2dim}. For problems with large numbers of input variables and many possible values for such variables, the number of rows in this kind of frequency table would quickly become intractable. 
+As the probability $p(a_1,a_2,\cdots,a_d|c)$ corresponds to the probability of a given combination of values (event) $a_1,a_2,\cdots,a_d$ for the input variables being observed together given a class $c$, each row of our frequency table would correspond to a different combination of values for the input variables. For example, consider a problem with two input variables, where the first input variable $x_1$ represents whether the person eats healthy foods and the second input variable $x_2$ represents whether this person is suffering from pain. Assume that we would like to predict whether a person is developing cancer (output variable $y$) based on these input variables. For a problem with the dataset shown in Table \ref{tab:dataset-2dim}, we could have the frequency table shown in Table \ref{tab:frequency-2dim}. For problems with large numbers of input variables and many possible values for such variables, the number of rows in this kind of frequency table would quickly become intractable. 
 
 
 \begin{table}[ht]
 \centering
 \caption{An Illustrative Dataset With Two Input Variables} \label{tab:dataset-2dim}
-\begin{tabular}{|c|c|c|} \hline
-$x_1$ (healthy) & $x_2$ (pain) & $y$ (cancer) \\ \hline
+\begin{tabular}{|c|c||c|} \hline
+$x_1$ (healthyFood) & $x_2$ (pain) & $y$ (cancer) \\ \hline
 \textit{no} & \textit{yes} & \textit{yes} \\
 \textit{no} & \textit{yes} & \textit{yes} \\
 \textit{yes} & \textit{yes} & \textit{yes} \\
@@ -149,10 +149,10 @@ $x_1$ (healthy) & $x_2$ (pain) & $y$ (cancer) \\ \hline
 \caption{An Illustrative Frequency Table For The Two Input Variable Dataset From Table \ref{tab:dataset-2dim}} \label{tab:frequency-2dim}
 \begin{tabular}{|l|c|c|c|} \hline
  & cancer = \textit{no}  & cancer= \textit{yes} & total \\ \hline
-healthy = \textit{no} and pain = \textit{no} & 1 & 0 & 1 \\ \hline
-healthy = \textit{no} and pain = \textit{yes} & 0 & 2 & 2 \\ \hline
-healthy = \textit{yes} and pain = \textit{no} & 2 & 0 & 2 \\ \hline
-healthy = \textit{yes} and pain = \textit{yes} & 0 & 1 & 1 \\ \hline
+healthyFood = \textit{no} and pain = \textit{no} & 1 & 0 & 1 \\ \hline
+healthyFood = \textit{no} and pain = \textit{yes} & 0 & 2 & 2 \\ \hline
+healthyFood = \textit{yes} and pain = \textit{no} & 2 & 0 & 2 \\ \hline
+healthyFood = \textit{yes} and pain = \textit{yes} & 0 & 1 & 1 \\ \hline
 total & 3 & 3 & 6 \\ \hline
 \end{tabular}
 \end{table}
@@ -183,11 +183,11 @@ For example, let's consider again our problem of predicting whether a person is 
 \centering
 \caption{An Illustrative Frequency Table For The Two Input Variable Dataset From Table \ref{tab:dataset-2dim}} \label{tab:nb-frequency-2dim}
 \begin{subtable}[h]{0.49\textwidth}
-\caption{Frequency Table For $x_1$ (Healthy)}
+\caption{Frequency Table For $x_1$ (healthyFood)}
 \begin{tabular}{|l|c|c|c|} \hline
  & cancer = \textit{no} & cancer= \textit{yes} & total \\ \hline
-healthy = \textit{no} & 1 & 2 & 3 \\ \hline
-healthy = \textit{yes} & 2 & 1 & 3 \\ \hline
+healthyFood = \textit{no} & 1 & 2 & 3 \\ \hline
+healthyFood = \textit{yes} & 2 & 1 & 3 \\ \hline
 total & 3 & 3 & 6 \\ \hline
 \end{tabular}
 \end{subtable}
@@ -204,15 +204,15 @@ total & 3 & 3 & 6 \\ \hline
 \end{subtable}
 \end{table}
 
-Let's assume that we wish to predict whether a person who eats healthy foods ($\text{healthy} = \textit{yes}$) and is experiencing pain ($\text{pain} = \textit{yes}$) is developing cancer. We would need to compute the following:
+Let's assume that we wish to predict whether a person who eats healthy foods ($\text{healthyFood} = \textit{yes}$) and is experiencing pain ($\text{pain} = \textit{yes}$) is developing cancer. We would need to compute the following:
 
-\[p(\text{cancer} = \textit{yes}| \text{healthy} = \textit{yes}, \text{pain} = \textit{yes}) = \]
-\[\alpha p(\text{cancer} = \textit{yes}) \times p(\text{healthy} = \textit{yes} | \text{cancer} = \textit{yes}) \times p(\text{pain} = \textit{yes} | \text{cancer} = \textit{yes}) = \]
+\[p(\text{cancer} = \textit{yes}| \text{healthyFood} = \textit{yes}, \text{pain} = \textit{yes}) = \]
+\[\alpha p(\text{cancer} = \textit{yes}) \times p(\text{healthyFood} = \textit{yes} | \text{cancer} = \textit{yes}) \times p(\text{pain} = \textit{yes} | \text{cancer} = \textit{yes}) = \]
 \[ \alpha \times 3/6 \times 1/3 \times 3/3 = \alpha \times 1/6\]
 
 \vspace{0.5cm}
-\[p(\text{cancer} = \textit{no}| \text{healthy} = \textit{yes}, \text{pain} = \textit{yes}) = \]
-\[\alpha p(\text{cancer} = \textit{no}) \times p(\text{healthy} = \textit{yes} | \text{cancer} = \textit{no}) \times p(\text{pain} = \textit{yes} | \text{cancer} = \textit{no}) = \]
+\[p(\text{cancer} = \textit{no}| \text{healthyFood} = \textit{yes}, \text{pain} = \textit{yes}) = \]
+\[\alpha p(\text{cancer} = \textit{no}) \times p(\text{healthyFood} = \textit{yes} | \text{cancer} = \textit{no}) \times p(\text{pain} = \textit{yes} | \text{cancer} = \textit{no}) = \]
 \[ \alpha \times 3/6 \times 2/3 \times 0/3 = 0\]
 
 \noindent where 
@@ -220,7 +220,7 @@ Let's assume that we wish to predict whether a person who eats healthy foods ($\
 \[\alpha = \frac{1}{3/6 \times 1/3 \times 3/3 + 3/6 \times 2/3 \times 0/3} = 6. \]
 
 \vspace{0.5cm}
-As $p(\text{cancer} = \textit{yes}| \text{healthy} = \textit{yes}, \text{pain} = \textit{yes})  > p(\text{cancer} = \textit{no}| \text{healthy} = \textit{yes}, \text{pain} = \textit{yes})$, Na\"{i}ve Bayes predicts that the person is developing cancer.
+As $p(\text{cancer} = \textit{yes}| \text{healthyFood} = \textit{yes}, \text{pain} = \textit{yes})  > p(\text{cancer} = \textit{no}| \text{healthyFood} = \textit{yes}, \text{pain} = \textit{yes})$, Na\"{i}ve Bayes predicts that the person is developing cancer.
 
 Note that in the calculations above, the whole probability of the person not developing cancer became zero, because $p(\text{pain} = \textit{yes} | \text{cancer} = \textit{no}) = 0$. In fact, even if there had been many other input variables in this problem, all with values suggesting that this person was not developing cancer, the whole probability of the person not developing cancer would still become zero, just because $p(\text{pain} = yes | \text{cancer} = \textit{no}) = 0$. This would lead to several inaccuracies on Na\"{i}ve Bayes' predictions. 
 
@@ -230,11 +230,11 @@ One way to avoid this problem is to adopt Laplace Smoothing. This consists in su
 \centering
 \caption{An Illustrative Frequency Table With Laplace Smoothing For The Two Input Variable Dataset From Table \ref{tab:dataset-2dim}} \label{tab:nb-laplace-frequency-2dim}
 \begin{subtable}[h]{0.49\textwidth}
-\caption{Frequency Table For $x_1$ (Healthy)} \label{tab:nb-laplace-frequency-2dim-healthy}
+\caption{Frequency Table For $x_1$ (healthyFood)} \label{tab:nb-laplace-frequency-2dim-healthy}
 \begin{tabular}{|l|c|c|c|} \hline
  & cancer = \textit{no} & cancer= \textit{yes} & total \\ \hline
-healthy = \textit{no} & 1+1=2 & 2+1=3 & 5 \\ \hline
-healthy = \textit{yes} & 2+1=3 & 1+1=2 & 5 \\ \hline
+healthyFood = \textit{no} & 1+1=2 & 2+1=3 & 5 \\ \hline
+healthyFood = \textit{yes} & 2+1=3 & 1+1=2 & 5 \\ \hline
 total & 5 & 5 & 10 \\ \hline
 \end{tabular}
 \end{subtable}
@@ -253,13 +253,13 @@ total & 5 & 5 & 10 \\ \hline
 
 When computing the probabilities for Eq.~\ref{eq:naive-bayes}, the values of $p(a_i|c)$ should be computed based on the updated tables, whereas $p(c)$ is still calculated based on the original tables (without Laplace Smoothing) \footnote{Try out Exercise \ref{ex:laplace} to understand why.}.  For instance, the calculations to predict whether a person who eats healthy foods and is experiencing pain would be as follows:
 
-\[p(\text{cancer} = \textit{yes}| \text{healthy} = \textit{yes}, \text{pain} = \textit{yes}) = \]
-\[\alpha p(\text{cancer} = \textit{yes}) \times p(\text{healthy} = yes | \text{cancer} = \textit{yes}) \times p(\text{pain} = yes | \text{cancer} = \textit{yes}) = \]
+\[p(\text{cancer} = \textit{yes}| \text{healthyFood} = \textit{yes}, \text{pain} = \textit{yes}) = \]
+\[\alpha p(\text{cancer} = \textit{yes}) \times p(\text{healthyFood} = yes | \text{cancer} = \textit{yes}) \times p(\text{pain} = yes | \text{cancer} = \textit{yes}) = \]
 \[ \alpha \times 3/6 \times 2/5 \times 4/5 = \alpha \times 8/50\]
 
 \vspace{0.5cm}
-\[p(\text{cancer} = \textit{no}| \text{healthy} = \textit{yes}, \text{pain} = \textit{yes}) = \]
-\[\alpha p(\text{cancer} = \textit{no}) \times p(\text{healthy} = \textit{yes} | \text{cancer} = \textit{no}) \times p(\text{pain} = \textit{yes} | \text{cancer} = \textit{no}) = \]
+\[p(\text{cancer} = \textit{no}| \text{healthyFood} = \textit{yes}, \text{pain} = \textit{yes}) = \]
+\[\alpha p(\text{cancer} = \textit{no}) \times p(\text{healthyFood} = \textit{yes} | \text{cancer} = \textit{no}) \times p(\text{pain} = \textit{yes} | \text{cancer} = \textit{no}) = \]
 \[ \alpha \times 3/6 \times 3/5 \times 1/5 = 3/50\]
 
 \noindent where 
@@ -267,18 +267,18 @@ When computing the probabilities for Eq.~\ref{eq:naive-bayes}, the values of $p(
 \[\alpha = \frac{1}{3/6 \times 2/5 \times 4/5 + 3/6 \times 3/5 \times 1/5} = 50/11 .\]
 
 \vspace{0.5cm}
-As $p(\text{cancer} = \textit{yes}| \text{healthy} = \textit{yes}, \text{pain} = \textit{yes})  > p(\text{cancer} = \textit{no}| \text{healthy} = \textit{yes}, \text{pain} = \textit{yes})$, Na\"{i}ve Bayes still predicts that the person is developing cancer in this example. However, in other examples the predicted class could potentially change when adopting Laplace Smoothing.
+As $p(\text{cancer} = \textit{yes}| \text{healthyFood} = \textit{yes}, \text{pain} = \textit{yes})  > p(\text{cancer} = \textit{no}| \text{healthyFood} = \textit{yes}, \text{pain} = \textit{yes})$, Na\"{i}ve Bayes still predicts that the person is developing cancer in this example. However, in other examples the predicted class could potentially change when adopting Laplace Smoothing.
 
 \section{Na\"{i}ve Bayes for Numeric Input Variables}
 \label{sec:nb-numeric}
 
 The Na\"{i}ve Bayes frequency tables explained in the previous section contain one row for each possible value of the input variables. When dealing with numeric input variables, it is infeasible to have one row for each possible numeric value. How can Na\"{i}ve Bayes deal with numeric input variables?
 
-To gain some insight into that, it is worth observing that, when we are collecting frequency values for the frequency tables and transforming them into probabilities, we are actually learning probability mass functions. These are functions that give the probability of observing each possible value of a discrete random variable \cite{RussellNorvig,MathsForML}, e.g., of a categorical value in our machine learning problems. For instance, the figure below shows an example of probability mass function for $p(\text{healthy}|\text{cancer} = \textit{yes})$, obtained through the frequency table given in Table \ref{tab:nb-laplace-frequency-2dim-healthy}.
+To gain some insight into that, it is worth observing that, when we are collecting frequency values for the frequency tables and transforming them into probabilities, we are actually learning probability mass functions. These are functions that give the probability of observing each possible value of a discrete random variable \cite{RussellNorvig,MathsForML}, e.g., of a categorical value in our machine learning problems. For instance, the figure below shows an example of probability mass function for $p(\text{healthyFood}|\text{cancer} = \textit{yes})$, obtained through the frequency table given in Table \ref{tab:nb-laplace-frequency-2dim-healthy}.
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{"figures/nb-mass-function.png"} %"Part 3 - Learning Systems/Supervised Learning/Naive Bayes/
+\includegraphics[scale=0.4]{"Part 3 - Learning Systems/Supervised Learning/Naive Bayes/figures/nb-mass-function.png"} %"
 \caption{Probability Mass Function Obtained Through The Frequency Table Given in Table \ref{tab:nb-laplace-frequency-2dim-healthy}}
 \end{figure}
 
@@ -303,8 +303,8 @@ Let's have a look at an example of how to calculate this. Assume that we need to
 \begin{table}[ht]
 \centering
 \caption{An Illustrative Dataset With A Categorical and A Numeric Input Variable} \label{tab:dataset-2dim-numeric}
-\begin{tabular}{|c|c|c|} \hline
-$x_1$ (healthy) & $x_2$ (alcohol) & $y$ (cancer) \\ \hline
+\begin{tabular}{|c|c||c|} \hline
+$x_1$ (healthyFood) & $x_2$ (alcohol) & $y$ (cancer) \\ \hline
 \textit{no} & 40 & \textit{yes} \\
 \textit{no} & 35 &  \textit{yes} \\
 \textit{yes} & 60 &  \textit{yes} \\
@@ -332,14 +332,14 @@ Therefore, one of the Gaussian conditional probability density functions is $p(\
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.3]{"figures/nb-gaussian-pdfs.png"} %"Part 3 - Learning Systems/Supervised Learning/Naive Bayes/
+\includegraphics[scale=0.3]{"Part 3 - Learning Systems/Supervised Learning/Naive Bayes/figures/nb-gaussian-pdfs.png"} %"Part 3 - Learning Systems/Supervised Learning/Naive Bayes/
 \caption{Conditional Probability Density Functions For The Alcohol Variable Illustrative Dataset From Table \ref{tab:dataset-2dim-numeric}. $P(\text{alcohol}|\text{cancer}=\textit{no})$ is shown in green and $P(\text{alcohol}|\text{cancer}=\textit{yes})$ is shown in red.} \label{fig:nb-gaussian-pdfs}
 \end{figure}
 
 
 Once the parameters of the probability density functions are set, the values of $p(a_i|c)$ used in Equation \ref{eq:naive-bayes} can be taken from these functions. It is worth noting, though, that these values are relative likelihood instead of probabilities. However, the resulting $p(c|a_i)$ will still be probabilities due to the use of the normalising factor $\alpha$.
 
-An example of prediction for this problem would be as follows. Consider that we wish to predict whether a person who does not eat healthy foods ($\text{healthy} = \textit{no}$) and consumes 20 units of alcohol per month ($\text{alcohol} = 20$) is developing cancer. The frequency tables for $x_1$ (healthy) with Laplace smoothing, the total number of training examples for $\text{cancer} = \textit{yes}$ and $\text{cancer} = \textit{no}$ and the parameters of the conditional probability density functions for $x_2$ (alcohol) computed based on the training set are shown in Tables \ref{tab:nb-laplace-frequency-2dim-healthy}, \ref{tab:num-examples-each-class} and \ref{tab:gaussian-parameters}, respectively.
+An example of prediction for this problem would be as follows. Consider that we wish to predict whether a person who does not eat healthy foods ($\text{healthyFood} = \textit{no}$) and consumes 20 units of alcohol per month ($\text{alcohol} = 20$) is developing cancer. The frequency tables for $x_1$ (healthyFood) with Laplace smoothing, the total number of training examples for $\text{cancer} = \textit{yes}$ and $\text{cancer} = \textit{no}$ and the parameters of the conditional probability density functions for $x_2$ (alcohol) computed based on the training set are shown in Tables \ref{tab:nb-laplace-frequency-2dim-healthy}, \ref{tab:num-examples-each-class} and \ref{tab:gaussian-parameters}, respectively.
 
 \begin{table}[h]
 \caption{Number of Training Examples From Each Class In The Training Set From Table \ref{tab:dataset-2dim-numeric}} \label{tab:num-examples-each-class}
@@ -361,15 +361,15 @@ $\sigma^2$ & 46.34 & 175 \\ \hline
 \end{tabular}
 \end{table}
 
-The probabilities $p(\text{cancer} = \textit{yes} | \text{healthy} = \textit{no}, \text{alcohol} = 20)$ and $p(\text{cancer} = \textit{no} | \text{healthy} = \textit{no}, \text{alcohol} = 20)$ are shown below:
+The probabilities $p(\text{cancer} = \textit{yes} | \text{healthyFood} = \textit{no}, \text{alcohol} = 20)$ and $p(\text{cancer} = \textit{no} | \text{healthyFood} = \textit{no}, \text{alcohol} = 20)$ are shown below:
 
-\[ p(\text{cancer} = \textit{yes} | \text{healthy} = \textit{no}, \text{alcohol} = 20) = \]
-\[ \alpha p(\text{cancer} = \textit{yes}) p(\text{healthy} = \textit{no} | \text{cancer} = \textit{yes}) p(\text{alcohol} = 20 | \text{cancer} = \textit{yes}) = \]
+\[ p(\text{cancer} = \textit{yes} | \text{healthyFood} = \textit{no}, \text{alcohol} = 20) = \]
+\[ \alpha p(\text{cancer} = \textit{yes}) p(\text{healthyFood} = \textit{no} | \text{cancer} = \textit{yes}) p(\text{alcohol} = 20 | \text{cancer} = \textit{yes}) = \]
 \[ \alpha \times 3/6 \times 3/5 \times 0.0051 = \alpha \times 0.00153 = 12.15\%\]
 
 \vspace{0.5cm}
-\[ p(\text{cancer} = \textit{no} | \text{healthy} = \textit{no}, \text{alcohol} = 20) = \]
-\[ \alpha p(\text{cancer} = \textit{no}) p(\text{healthy} = \textit{no} | \text{cancer} = \textit{no}) p(\text{alcohol} = 20 | \text{cancer} = \textit{no}) = \]
+\[ p(\text{cancer} = \textit{no} | \text{healthyFood} = \textit{no}, \text{alcohol} = 20) = \]
+\[ \alpha p(\text{cancer} = \textit{no}) p(\text{healthyFood} = \textit{no} | \text{cancer} = \textit{no}) p(\text{alcohol} = 20 | \text{cancer} = \textit{no}) = \]
 \[ \alpha \times 3/6 \times 2/5 \times 0.0553 = \alpha \times 0.01106 = 87.85\%\]
 
 \vspace{0.5cm}
@@ -404,7 +404,7 @@ Na\"ive Bayes is a simple probabilistic learning approach that has demonstrated 
 \item \label{ex:frequency-tables} Consider the illustrative training set below, which was inspired by the real Heart Disease dataset from the UCI Machine Learning Repository\footnote{\url{https://archive.ics.uci.edu/ml/datasets/heart+disease}}.
 
 \begin{center}
-\begin{tabular}{|c|c|c|c|}\hline
+\begin{tabular}{|c|c|c||c|}\hline
 $x_1$ (gender) & $x_2$ (smoker) & $x_3$ (paintype) & $y$ (heartdisease) \\ \hline
 $female$ & $smokes$ & $angina$ & $yes$ \\ \hline
 $male$ & $smokes$ & $angina$ & $yes$ \\ \hline
