@@ -278,7 +278,7 @@ To gain some insight into that, it is worth observing that, when we are collecti
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{"Part 3 - Learning Systems/Supervised Learning/Naive Bayes/figures/nb-mass-function.png"} %"
+\includegraphics[scale=0.3]{"Part 3 - Learning Systems/Supervised Learning/Naive Bayes/figures/nb-mass-function.png"} %"
 \caption{Probability Mass Function Obtained Through The Frequency Table Given in Table \ref{tab:nb-laplace-frequency-2dim-healthy}}
 \end{figure}
 
@@ -418,6 +418,8 @@ $female$ & $doesnt$ & $angina$ & $yes$\\ \hline
 
 Create the frequency tables that compose the Na\"ive Bayes classifier for this training set using Laplace Smoothing with $\epsilon=1$. 
 
+\item \label{ex:pmf} Draw a plot for the probability mass function $p(\text{painType} | \text{heartDisease}=\textit{no})$ represented by the frequency table for the input variable painType created in Exercise \ref{ex:frequency-tables}.
+
 \item \label{ex:prediction} Determine the prediction that Na\"ive Bayes would give to the instance ($\text{gender}=female$, $\text{smoker}=smokes$, $\text{painType}=nonangina$, heartDisease=?) using Laplace Smoothing with $\epsilon=1$, given the training set from Exercise \ref{ex:frequency-tables}.
 
 \item \label{ex:laplace} Compute the probability $p(\text{heartDisease}=yes)$ based on the three different smoothed frequency tables that you have obtained in Exercise \ref{ex:prediction}, rather than based on the original frequency values of each class. Reflect about the results.
@@ -462,6 +464,10 @@ total & 6 & 7 & 13 \\ \hline
 \end{tabular}
 
 \vspace{0.5cm}
+
+\item The probability mass function is given below:
+
+\includegraphics[width=0.5\textwidth]{"Part 3 - Learning Systems/Supervised Learning/Naive Bayes/figures/nb-mass-function-exercise.png"}
 
 \item  In order to predict whether the person does or does not have disease, we need to compute $p(yes|female,smokes,nonangina)$ and $p(no|female,$ $smokes,nonangina)$. Then, we give a prediction corresponding to the higher probability.
 
