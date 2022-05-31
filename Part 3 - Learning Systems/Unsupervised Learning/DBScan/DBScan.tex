@@ -12,7 +12,7 @@ proven to have promising performance in various applications, and it received
 the SIGKDD test-of-time award in 2014.  DBSCAN is a unsupervised machine learning and density-based clustering method. 
 It aims for identifying high-density regions in data space and treating them as 
 clusters, separated by regions of low point density. Let's starting by an 
-illustrative example for better understanding the density. Taking a look at Figure~\ref{fig:example}, there 3 sets of sample points. Intuitively, we can identify these clusters of points and unclustered outliers straightforwardly, no matter how those sample points are distributed or in what shapes. By instinct, we naturally observe and recognize the density differences within those areas and consider each cluster of points have higher denseness. While the rest points of considerably lower densities are regarded as noises and belongs to no cluster~\cite{ester1996density}. Based on a set of points in this 
+illustrative example for better understanding the density. Taking a look at Figure~\ref{fig:exampledb}, there 3 sets of sample points. Intuitively, we can identify these clusters of points and unclustered outliers straightforwardly, no matter how those sample points are distributed or in what shapes. By instinct, we naturally observe and recognize the density differences within those areas and consider each cluster of points have higher denseness. While the rest points of considerably lower densities are regarded as noises and belongs to no cluster~\cite{ester1996density}. Based on a set of points in this 
 example, DBSCAN groups together points that are close to each other based on an 
 arbitrary distance measurement in different application domains 
 (e.g., Euclidean distance) and a minimum number of points that is a threshold to 
@@ -21,9 +21,9 @@ distinguish the outliers in the lower density regions.
 
 \begin{figure}[tbp]
 	\centering
-	\label{fig:example}
 	\includegraphics[width=\textwidth]{"Part 3 - Learning Systems/Unsupervised Learning/DBScan/figures/example_density.png"}
 	\caption{Samples for density illustration. Different colors represent different clusters of points}
+	\label{fig:exampledb}
 \end{figure}
 
 
@@ -140,7 +140,7 @@ density-reachable from $\mathbf{x}^{(k)}$ wrt. $\epsilon$ and $MinPts$. Density-
 \end{itemize}
 
 \begin{algorithm}
-\caption{DBSCAN}\label{euclid}
+\caption{DBSCAN}\label{algo}
 Parameters: \\
 $\mathcal{X} = \{\mathbf{x}^{(1)},\mathbf{x}^{(2)},\cdots,\mathbf{x}^{(N)}\} \in \mathbb{R}^{d}$\\
 $\epsilon$: radius distance of neighbour \\
@@ -236,11 +236,11 @@ that DBSCAN can accurately segment the different shapes of furniture.
 %The 
 %source code regarding this example can be found as follows.
 \begin{figure}[h!]
-	\label{fig:scene}
 \includegraphics[width=\textwidth]{"Part 3 - Learning Systems/Unsupervised Learning/DBScan/figures/segment.png"}
 \caption{Object detection using DBSCAN. The first row shows the original 
 images, the second row shows the corresponding depth images, and the last row 
 shows the detection results using DBSCAN.}
+\label{fig:scene}
 \end{figure}
 
 \section{Determine $\epsilon$ and $MinPts$}
@@ -270,11 +270,11 @@ from the number of dimensions $d$ of data set by taking $MinPts = 2 * d - 1$
 
 \begin{figure}
 	\centering
-	\label{fig:para}
 	\includegraphics[width=\textwidth]{"Part 3 - Learning Systems/Unsupervised Learning/DBScan/figures/para.png"}
 	\caption{An illustrative example is finding optimal $\epsilon$ given $k = 
 	4$; the knee point corresponds to $\epsilon = 13.0$. The clustering result 
 	shows the good performance with these two parameters.}
+	\label{fig:para}	
 \end{figure}
 
 
