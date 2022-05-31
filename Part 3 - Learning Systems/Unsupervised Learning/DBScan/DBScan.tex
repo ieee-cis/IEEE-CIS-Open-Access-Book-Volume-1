@@ -9,10 +9,10 @@
 The Density Based Spatial Clustering of Applications with Noise (DBSCAN) 
 algorithm was first proposed in 1996 by \cite{ester1996density}. It has been 
 proven to have promising performance in various applications, and it received 
-the SIGKDD test-of-time award in 2014.  DBSCAN is a unsupervised machine leanring and density-based clustering method. 
+the SIGKDD test-of-time award in 2014.  DBSCAN is a unsupervised machine learning and density-based clustering method. 
 It aims for identifying high-density regions in data space and treating them as 
 clusters, separated by regions of low point density. Let's starting by an 
-illustrative example for better understanding the density. Taking a look at Figure~\ref{fig:example}, there 3 sets of sample points. Intuitively, we can identify thoese clusters of points and unclusterred outliers straightforwardly, no matter how those sample points are distributed or in what shapes. By instinct, we natually observe and recognize the density differences within those areas and consider each cluster of points have higher denseness. While the rest points of considerably lower densities are regarded as noises and belongs to no cluster~\cite{ester1996density}. Based on a set of points in this 
+illustrative example for better understanding the density. Taking a look at Figure~\ref{fig:example}, there 3 sets of sample points. Intuitively, we can identify these clusters of points and unclustered outliers straightforwardly, no matter how those sample points are distributed or in what shapes. By instinct, we naturally observe and recognize the density differences within those areas and consider each cluster of points have higher denseness. While the rest points of considerably lower densities are regarded as noises and belongs to no cluster~\cite{ester1996density}. Based on a set of points in this 
 example, DBSCAN groups together points that are close to each other based on an 
 arbitrary distance measurement in different application domains 
 (e.g., Euclidean distance) and a minimum number of points that is a threshold to 
@@ -141,57 +141,63 @@ density-reachable from $\mathbf{x}^{(k)}$ wrt. $\epsilon$ and $MinPts$. Density-
 
 \begin{algorithm}
 \caption{DBSCAN}\label{euclid}
+Parameters: \\
+$\mathcal{X} = \{\mathbf{x}^{(1)},\mathbf{x}^{(2)},\cdots,\mathbf{x}^{(N)}\} \in \mathbb{R}^{d}$\\
+$\epsilon$: radius distance of neighbour \\
+$MinPts$: minimal size of a cluster
 \begin{algorithmic}[1]
-\Procedure{DBSCAN}{$\mathcal{X}$, $\epsilon$, MinPts}
-\Statex
-\Comment {$\mathcal{X} = \{\mathbf{x}^{(1)},\mathbf{x}^{(2)},\cdots,\mathbf{x}^{(N)}\} \in \mathbb{R}^{d}$}
-\Statex
-\Comment {$\epsilon$: radius distance of neighbour}
-\Statex
-\Comment {$MinPts$: minimal size of a cluster}
-\State $C\gets 0$
-\ForAll {unvisited point $\mathbf{x}$ in $\mathcal{X}$}
-\State mark $\mathbf{x}$ as $Visited$
-\State $N_{\epsilon}(\mathbf{x})$ $\gets$ regionQuery($\mathbf{x}$, $\epsilon$)  \Comment{finding initial neighbourpoints of $\mathbf{x}$}
-\If {$|N_{\epsilon}(\mathbf{x})| < $MinPts}\Comment{size of neighbourpoints of $\mathbf{x}$}
-\State mark $\mathbf{x}$ as $NOISE$
-\Else
-    \State $C\gets C+1$  \Comment{start a new cluster}
-    \State expandCluster($\mathbf{x}$, NeighborPoints, C, $\epsilon$, $MinPts$)
-\EndIf
-\EndFor
-\EndProcedure
-\Statex
-\Procedure {expandCluster}{$\mathbf{x}, \mathbf{x'} \in N_{\epsilon}(\mathbf{x}), C, \epsilon, MinPts$}
-\Statex
-\Comment {$\mathbf{x}$: current points}
-\Statex
-\Comment {$\mathbf{x'} \in N_{\epsilon}(\mathbf{x})$: neighbour points of current points $\mathbf{x}$}
-\Statex
-\Comment {$C$: current cluster}
-\Statex
-\Comment {$\epsilon$}
-\Statex
-\Comment {$MinPts$: minimal size of a cluster}
-\State add $\mathbf{x}$ to cluster $C$
-\ForAll {point $\mathbf{x}'$ in $N_{\epsilon}(\mathbf{x})$}
-    \If {$\mathbf{x'}$ is not $visited$}
-        \State mark $\mathbf{x}'$  as $visited$
-        \State $N_{\epsilon}(\mathbf{x'})$$\gets$ regionQuery($\mathbf{x}'$ , $\epsilon$)
-    \EndIf
-    \If {$|N_{\epsilon}(\mathbf{x'})|$ $\geq$ $MinPts$}
-        \State $N_{\epsilon}(\mathbf{x}) = N_{\epsilon}(\mathbf{x})$ $\cup$ $N_{\epsilon}(\mathbf{x'})$
-    \EndIf
-\EndFor
-\EndProcedure
-\Statex
-\Procedure {regionQuery}{$\mathbf{x}, \epsilon$}
-    \Statex
-    \Comment {$\mathbf{x}$: current point}
-    \Statex
-    \Comment {$\epsilon$: represent min distance of neighbour}
-    \State Return all points within $\epsilon$ distance of $\mathbf{x}$
-\EndProcedure
+%\Procedure{DBSCAN}{$\mathcal{X}$, $\epsilon$, MinPts}
+%\Statex
+\STATE{$C \gets 0$}
+\FOR {all unvisited point $\mathbf{x}$ in $\mathcal{X}$}
+\STATE mark $\mathbf{x}$ as $Visited$
+\STATE $N_{\epsilon}(\mathbf{x})$ $\gets$ regionQuery($\mathbf{x}$, $\epsilon$)  \algorithmiccomment{finding initial neighbourpoints of $\mathbf{x}$}
+\IF {$|N_{\epsilon}(\mathbf{x})| < $MinPts \COMMENT{size of neighbourpoints of $\mathbf{x}$}}
+\STATE {mark $\mathbf{x}$ as $NOISE$}
+\ELSE
+    \STATE {$C\gets C+1$  \COMMENT{start a new cluster}}
+    \STATE {expandCluster($\mathbf{x}$, NeighborPoints, C, $\epsilon$, $MinPts$) \COMMENT{See Algorithm \ref{alg:expandCluster}.}}
+\ENDIF
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{expandCluster}\label{alg:expandCluster}
+Parameters: \\
+$\mathbf{x}$: current points \\
+$\mathbf{x'} \in N_{\epsilon}(\mathbf{x})$: neighbour points of current points $\mathbf{x}$ \\
+$C$: current cluster \\
+$\epsilon$ \\
+$MinPts$: minimal size of a cluster
+\begin{algorithmic}[1]
+%\Statex
+%\Procedure {expandCluster}{$\mathbf{x}, \mathbf{x'} \in N_{\epsilon}(\mathbf{x}), C, \epsilon, MinPts$}
+%\Statex
+\STATE {add $\mathbf{x}$ to cluster $C$}
+\FOR {all point $\mathbf{x}'$ in $N_{\epsilon}(\mathbf{x})$}
+    \IF {$\mathbf{x'}$ is not $visited$}
+        \STATE {mark $\mathbf{x}'$  as $visited$}
+        \STATE {$N_{\epsilon}(\mathbf{x'})$ $\gets$ regionQuery($\mathbf{x}'$ , $\epsilon$) \algorithmiccomment{See Algorithm \ref{alg:regionQuery}.}}
+    \ENDIF
+    \IF {$|N_{\epsilon}(\mathbf{x'})|$ $\geq$ $MinPts$}
+        \STATE {$N_{\epsilon}(\mathbf{x}) = N_{\epsilon}(\mathbf{x})$ $\cup$ $N_{\epsilon}(\mathbf{x'})$}
+    \ENDIF
+\ENDFOR
+%\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{regionQuery}\label{alg:regionQuery}
+Parameters: \\
+$\mathbf{x}$: current point \\
+$\epsilon$: represent min distance of neighbour
+\begin{algorithmic}[1]
+%\Statex
+%\Procedure {regionQuery}{$\mathbf{x}, \epsilon$}
+    \STATE {Return all points within $\epsilon$ distance of $\mathbf{x}$}
+%\EndProcedure
 \end{algorithmic}
 \end{algorithm}
 
