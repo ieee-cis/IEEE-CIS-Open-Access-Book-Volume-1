@@ -12,7 +12,7 @@ proven to have promising performance in various applications, and it received
 the SIGKDD test-of-time award in 2014.  DBSCAN is a unsupervised machine learning and density-based clustering method. 
 It aims for identifying high-density regions in data space and treating them as 
 clusters, separated by regions of low point density. Let's starting by an 
-illustrative example for better understanding the density. Taking a look at Figure~\ref{fig:exampledb}, there 3 sets of sample points. Intuitively, we can identify these clusters of points and unclustered outliers straightforwardly, no matter how those sample points are distributed or in what shapes. By instinct, we naturally observe and recognize the density differences within those areas and consider each cluster of points have higher denseness. While the rest points of considerably lower densities are regarded as noises and belongs to no cluster~\cite{ester1996density}. Based on a set of points in this 
+illustrative example for better understanding the density. Taking a look at Figure~\ref{fig:exampledb}, there 3 sets of sample points (examples). Intuitively, we can identify these clusters of points and unclustered outliers straightforwardly, no matter how those sample points are distributed or in what shapes. By instinct, we naturally observe and recognize the density differences within those areas and consider each cluster of points have higher denseness. While the rest points of considerably lower densities are regarded as noise and belong to no cluster~\cite{ester1996density}. Based on a set of points in this 
 example, DBSCAN groups together points that are close to each other based on an 
 arbitrary distance measurement in different application domains 
 (e.g., Euclidean distance) and a minimum number of points that is a threshold to 
@@ -33,8 +33,8 @@ Suppose we have a set of data points \[\mathcal{X} =
 \{\mathbf{x}^{(1)},\mathbf{x}^{(2)},\cdots,\mathbf{x}^{(N)}\}\]
 \noindent where $\mathbf{x}^{(i)} \in \mathcal{X}$ are drawn i.i.d. 
 (independently and identically distributed).  The core idea of DBSCAN is to 
-estimate the density for each data point $x^{i}$ as a minimal number of 
-$MinPts$ of points that lie inside a radius $\epsilon$ around $x^{i}$. 
+estimate the density for each data point $x^{(i)}$ as a minimal number of 
+$MinPts$ of points that lie inside a radius $\epsilon$ around $x^{(i)}$. 
 % Points are considered directly connected if the distance between them is no greater than $\epsilon$. 
 Points with distances to each other no greater than a pre-defined threshold $\epsilon$ can be deemed connected and within the same cluster.
 As such, DBSCAN has two key parameters. 
@@ -47,13 +47,13 @@ As such, DBSCAN has two key parameters.
 	points within a radius of $\epsilon$ from a given point $\mathbf{x}^{(i)}$, 
 	form its $\epsilon$-Neighborhood denoted as 
 	$\mathit{N_{\epsilon}(\mathbf{x}^{(i)}):\{\mathbf{x}^{(i)}| 
-	dist(\mathbf{x}^{(i)}, \mathbf{x}^{(j)})\leq \epsilon\}}$
+	dist(\mathbf{x}^{(i)}, \mathbf{x}^{(j)})\leq \epsilon\}}$.
 	
 	\item{$MinPts$} is a small positive constant integer, that specifies the 
 	minimum number of data points to define a cluster.	
 \end{itemize}
 
-If the neighborhood $N_{\epsilon}(\mathbf{x}^{(i)})$ contains a number of points equals to or more than $MinPts$, it's called high density, otherwise it is low density. For example, 
+If the neighborhood $N_{\epsilon}(\mathbf{x}^{(i)})$ contains a number of points equal to or more than $MinPts$, it's called high density, otherwise it is low density. For example, 
 if we set $MinPts = 4$ in Figure \ref{fig:relation}, 
 $\epsilon$-Neighborhood of point $A$ is a high density area since it has 5 
 points including $A$ itself in its surrounding neighbourhood, which is more 
@@ -103,12 +103,12 @@ border point.
 As recalled, the intuition of DBSCAN is to find the regions in a data space 
 which have higher density, separated by regions of lower density. In other 
 words, to group each data point in a cluster which contains at least $MinPts$ 
-number of points in the $\epsilon$-neighbourhood of this point. If this point is a core point, and then it forms a cluster along with all data points including core points and border points that are reachable from it. $\epsilon$-neighbourhood of certain border point usually has fewer points than the 
+number of points in the $\epsilon$-neighbourhood of this point. If this point is a core point, and then it forms a cluster along with all data points including core points and border points that are reachable from it. The $\epsilon$-neighbourhood of a certain border point usually has fewer points than the 
 $\epsilon$-neighbourhood of points located within its cluster. A very small 
 $MinPts$ is necessary to be set to group all the points belonging to a same 
-cluster. However, it would also cause a problem in distinguishing points from 
-the data noise/outlier. To tackle this issue, DBSCAN requires that given every 
-point $\mathbf{x}^{(i)}$ in a cluster where there is a point $\mathbf{x}^{(j)}$ so 
+cluster. However, this could also cause a problem in distinguishing points from 
+the data noise/outlier. To tackle this issue, DBSCAN requires that every 
+point $\mathbf{x}^{(i)}$ is in a cluster where there is a point $\mathbf{x}^{(j)}$ so 
 that $\mathbf{x}^{(i)}$ is within $\epsilon$-neighbourhood of $\mathbf{x}^{(j)}$ 
 and its neighbourhood has more than $MinPts$ number of points. To achieve this, 
 the different levels of density reachability are defined \cite{ester1996density}
@@ -201,7 +201,7 @@ $\epsilon$: represent min distance of neighbour
 \end{algorithmic}
 \end{algorithm}
 
-Now, we have a formal notion of density. A cluster $C$ is defined to be a set of density-connected points wrt $\epsilon$ and $MinPts$, which is non-empty and satisfying the following two properties (i) Maximality: for any data point $\mathbf{x}^{(i)} \in C$ and $\mathbf{x}^{(j)}$ is density-reachable it wrt $\epsilon$ and $MinPts$, then $\mathbf{x}^{(j)} \in C$; (ii) any of two points in this cluster are density-connected. A toy 
+Now, we have a formal notion of density. A cluster $C$ is defined to be a set of density-connected points wrt $\epsilon$ and $MinPts$, which is non-empty and satisfying the following two properties (i) Maximality: for any data point $\mathbf{x}^{(i)} \in C$ and $\mathbf{x}^{(j)}$ that is density-reachable from it wrt $\epsilon$ and $MinPts$, then $\mathbf{x}^{(j)} \in C$; (ii) any of two points in this cluster are density-connected. A toy 
 example in Figure~\ref{fig:relation} explains the how it progresses. All 
 neighbors within the $\epsilon$-neighbourhood of a core point $A$
 are considered to be part of the same cluster due to they are direct 
@@ -218,16 +218,15 @@ more points within $\epsilon$-neighbourhoods. A new random point will be
 selected and repeat the same process to identify the next cluster. 
 
 
-The Pseduo code of DBSCAN is 
+The pseudocode of DBSCAN is 
 shown in Algorithm~\ref{algo}. It is noted that the RegionQuery($\cdot$) function is called for each point, which most significantly contributes to the runtime complexity of DBSCAN. The overall runtime complexity is $\mathcal{O}(n \cdot RegionQuery(\cdot))$. If this function is implemented in the most naive way, the runtime complexity of DBSCAN would be $\mathcal{O}(n^{2})$, which is the worst case. Many advanced techniques are proposed to speed up the region query, such as R-tree, KD-tree etc~\cite{schubert2017dbscan}. It is commonly recognized that the average runtime complexity of DBSCAN is $\mathcal{O}(n \cdot \log n)$.
 
 \section{An Example of DBSCAN}
 
-Clustering has been widely used in a variety of real-world applications like market analysis, social network analysis, segmentation and object detection. In this chapter, we demonstrate how DBSCAN can be used for object segmentation task on a RGB+Depth scene dataset, SUN RGB-D, which is a RGB-D scene understanding benchmark suite. The main objective of the clustering method is to classify the pixels into homogeneous clusters (i.e., objects) that hold on maximum similarity within the clusters while reaching the minimum dissimilarity cross the clusters. 
+Clustering has been widely used in a variety of real-world applications like market analysis, social network analysis, segmentation and object detection. In this chapter, we demonstrate how DBSCAN can be used for object segmentation task on a RGB+Depth scene dataset, SUN RGB-D, which is a RGB-D scene understanding benchmark suite. Object segmentation is concerned with partitioning an image into different objects. It can be formulated as an clustering problem whose main objective is to separate pixels into homogeneous clusters (i.e., objects) that hold on maximum similarity within the clusters while reaching the minimum dissimilarity cross the clusters. Each cluster then corresponds to a different object.
 
 
-This SUN RGB-D dataset contains 10,000 RGB-D images. It is densely annotated and includes 146,617 2D polygons and 58,657 3D bounding boxes with accurate object orientations, as well as a 3D room layout and category for scenes.
-with accurate annotations of 146,617 2D polygons, 58,657 3D bounding boxes and object orientations. A 3D room layout where the images are captured and scenario categories for the images are also available. 
+The SUN RGB-D dataset contains 10,000 RGB-D images. It is densely annotated and includes 146,617 2D polygons and 58,657 3D bounding boxes with accurate object orientations. A 3D room layout where the images are captured and scenario categories for the images are provided is also available. 
 The detailed description and download information can be found from here 
 \footnote{\url{http://rgbd.cs.princeton.edu/}}. We use the scikit-learn 
 \footnote{\url{https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html}}
@@ -239,7 +238,7 @@ that DBSCAN can accurately segment the different shapes of furniture.
 \includegraphics[width=\textwidth]{"Part 3 - Learning Systems/Unsupervised Learning/DBScan/figures/segment.png"}
 \caption{Object detection using DBSCAN. The first row shows the original 
 images, the second row shows the corresponding depth images, and the last row 
-shows the detection results using DBSCAN.}
+shows the detection results using DBSCAN, where different colors represent different clusters.}
 \label{fig:scene}
 \end{figure}
 
@@ -254,7 +253,7 @@ A low $MinPts$ means it will build more clusters from noise. In many cases, the
 domain knowledge is generally unknown especially considering that data is usually normalized 
 before further processing. Ester et. al 
 \cite{ester1996density} propose to use the sorted $k$-distance graph to assist with 
-deciding $MinPts$. $k$-dist graph plots the average distance between each point and its $k$-nearest neighbours in ascending order, where $k=MinPts$. In their case, experiments indicate that with a  $k > 4$,  $k$-dist graphs introduce substantially more computational costs while contributing no significantly better results than the 4-dist graph.
+deciding $MinPts$. The $k$-dist graph plots the average distance between each point and its $k$-nearest neighbours in ascending order, where $k=MinPts$. In their case, experiments indicate that with a  $k > 4$,  $k$-dist graphs introduce substantially more computational costs while contributing no significantly better results than the 4-dist graph.
 Therefore, $MinPts = 4$ was recommended for their 2-dimensional data. It is noted that this setting may not be applicable to other datasets. 
 
 
@@ -293,7 +292,7 @@ $\epsilon$ using $k$-distance plot.
 
 
 
-\section{Discussion}
+\section{Summary and Discussion}
 
 DBSCAN can work on discovery of clusters with arbitrary shape of datasets and 
 the number of clusters that does not need to be predefined. It has good noise 
@@ -336,14 +335,22 @@ if the density of the sample set is not uniform, DBSCAN performs poorly as illus
 
 \begin{enumerate}
 
-\item Compared with K-means, what are the advantages and disadvantages of DBSCAN. 
+\item Compared with K-means, give the advantages and disadvantages of DBSCAN. 
 
-\item Run the code provided by varying $MinPts$ and $\epsilon$ of the given example in this chapter to observe the impact of performance
+\item Run the code provided by varying $MinPts$ and $\epsilon$ of the example given in this chapter to observe the impact of performance.
 
-\item Apply $k$-distance plot to find optimal $\epsilon$. You can use the SUN RGB-D dataset in this chapter. The code of solution can be found here \footnote{\url{https://gist.github.com/LinaYao/00f3b2cf65600f7b03df020c81cc5de9}}
-
-
+\item Apply $k$-distance plot to find optimal $\epsilon$. You can use the SUN RGB-D dataset listed in the example given in this chapter. 
 \end{enumerate}
+
+\section{Answers}
+
+\begin{enumerate}
+\item
+\item
+\item The code of solution can be found at \url{https://gist.github.com/LinaYao/00f3b2cf65600f7b03df020c81cc5de9}.
+\end{enumerate} 
+
+
 
 \bibliographystyle{unsrt}
 \bibliography{bibliography}
