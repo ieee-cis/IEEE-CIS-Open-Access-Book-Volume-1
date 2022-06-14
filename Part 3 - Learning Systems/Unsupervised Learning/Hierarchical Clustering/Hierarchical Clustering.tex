@@ -4,7 +4,7 @@
 \institute{School of Computer Science, The University of Birmingham}
 \maketitle
 
-Hierarchical clustering is a type of unsupervised methods that partitions data examples into clusters without asking for the number of clusters before training starts. Unlike K-means or Gaussian mixture models, hierarchical clustering instead requires specifying a dissimilarity measure between groups of examples, and produces a hierarchical representation (a dendrogram) of examples showing which two groups of examples are closer at each level of the hierarchy. Strategies for hierarchical clustering divide into two types: \textit{agglomerative} (bottom-up) and \textit{divisive} (top-down). Agglomerative clustering starts at the bottom treating each single example as a cluster, and recursively merges the closest pair of clusters into a single cluster. Divisive clustering acts in the opposite direction. It starts at the top with one big cluster and recursively splits into two new groups with the largest between-group dissimilarity. Divisive clustering is less popular than agglomerative clustering due to its complexity of looking for the best split at each round, but it can be made faster. Most agglomerative clustering methods have time complexity $\mathcal{O}(N^3)$, while the fastest divisive clustering takes only $\mathcal{O}(N)$ time. In addition, divisive clustering makes splitting decisions in view of all the data examples, while the agglomerative clustering makes myopic merge decisions~\cite{Murphy2012}. 
+Hierarchical clustering is a type of unsupervised methods that partitions data examples into clusters without asking for the number of clusters before training starts. Unlike K-means, hierarchical clustering instead requires specifying a dissimilarity measure between groups of examples, and produces a hierarchical representation (a dendrogram) of examples showing which two groups of examples are closer at each level of the hierarchy. Strategies for hierarchical clustering divide into two types: \textit{agglomerative} (bottom-up) and \textit{divisive} (top-down). Agglomerative clustering starts at the bottom treating each single example as a cluster, and recursively merges the closest pair of clusters into a single cluster. Divisive clustering acts in the opposite direction. It starts at the top with one big cluster and recursively splits into two new groups with the largest between-group dissimilarity. Divisive clustering is less popular than agglomerative clustering due to its complexity of looking for the best split at each round, but it can be made faster. Most agglomerative clustering methods have time complexity $\mathcal{O}(N^3)$, while the fastest divisive clustering takes only $\mathcal{O}(N)$ time. In addition, divisive clustering makes splitting decisions in view of all the data examples, while the agglomerative clustering makes myopic merge decisions~\cite{Murphy2012}. 
 
 \section{Agglomerative Clustering}
 \label{sec:agglo-cluster}
@@ -53,7 +53,7 @@ d_{SL}\left ( C_j, C_k \right ) = \min_{\mathbf{x}^{\left ( t \right )} \in C_j,
 \]
 
 \noindent
-where $d_{t,t'}$ can be any distance measure between two examples $\mathbf{x}^{\left ( t \right )}$ and $\mathbf{x}^{\left ( t' \right )}$, such as Euclidean , Manhattan and Minkowski distances. Euclidean distance is the most commonly used one. It is defined as the length of the line between two points, and can be calculated using the Pythagorean theorem from the Cartesian coordinates of the points. The single linkage measure simply chooses the nearest examples and does not take in any account the internal cohesion of the clusters. If a small cluster is initially formed, it can lead to the progressive merging of adding one example at a time to this cluster, which is called a chain effect~\cite{Marini2020}. In fact, two clusters to be merged based on single linkage do not have to be ``compact". Compactness here means that all the examples within a group are similar to each other.
+where $d_{t,t'}$ can be any distance measure between two examples $\mathbf{x}^{\left ( t \right )}$ and $\mathbf{x}^{\left ( t' \right )}$, such as Euclidean, Manhattan and Minkowski distances. Euclidean distance is the most commonly used one. It is defined as the length of the line between two points, and can be calculated using the Pythagorean theorem from the Cartesian coordinates of the points. The single linkage measure simply chooses the nearest examples and does not take in any account the internal cohesion of the clusters. If a small cluster is initially formed, it can lead to the progressive merging of adding one example at a time to this cluster, which is called a chain effect~\cite{Marini2020}. In fact, two clusters to be merged based on single linkage do not have to be ``compact". Compactness here means that all the examples within a group are similar to each other.
 
 \begin{figure}[htp]
 \centering
@@ -129,7 +129,7 @@ Divisive clustering begins with the whole dataset as a single cluster, and then 
 \end{algorithm}
 %%%%%%%%%%%%%%%%%%%%%%%% ALGORITHM
 
-There are various ways to choose which cluster to be split at step 3, such as the cluster with most examples or the one with the least overall similarity. The existing research has shown that the differences between the choosing schemes were very small~\cite{Steinbach2000}. 
+There are various ways to choose which cluster to be split at step 3, such as the cluster with most examples or the one with the least overall similarity among its examples. The existing research has shown that the differences between the choosing schemes were very small~\cite{Steinbach2000}. 
 
 The splitting scheme can be any of the combinatorial methods, such as K-means with $K=2$. This clustering procedure combining divisive clustering and K-means is called the bisecting K-means algorithm~\cite{Steinbach2000}. However, such schemes would depend on the algorithm initialization specified at each step. In addition, they do not necessarily hold the monotonicity property required for dendrogram representation~\cite{Hastie2009}. A method called \textit{dissimilarity analysis} proposed by Macnaughton-Smith et al. avoids these problems~\cite{Macnaughton-Smith1964}. Instead of considering all divisions, it starts with a single cluster $C_j$ containing all the data examples, then measures the average dissimilarity of each example $\mathbf{x}^{\left( t \right )}$ to all the other examples in $C_j$. The example that has the largest average dissimilarity is then moved to a second cluster $C_k$. The above is repeated, i.e. moving examples from $C_j$ to $C_k$, until the example in $C_j$ with the largest average dissimilarity to the examples in $C_j$ has a smaller average dissimilarity than its average dissimilarity to the examples in $C_k$. That is, there is no more examples in $C_j$ that are on average closer to $C_k$. This process results in two children clusters. Each successive hierarchical level is produced by applying this process to each of the clusters at the previous level. Based on the dissimilarity analysis method, Kaufman and Rousseeuw proposed DIANA (Divisive ANAlysis). It splits a cluster by moving examples from a larger sub-cluster to a smaller one. The move occurs when the average dissimilarity of an example $\mathbf{x}^{\left( t \right )}$ in the larger sub-cluster to the remaining examples in that sub-cluster is larger than the average dissimilarity of $\mathbf{x}^{\left( t \right )}$ to the examples in the smaller sub-cluster~\cite{Kaufman1990}. A comparison between agglomerative and divisive clustering can be found here~\cite{Kumar2020}. 
 
@@ -139,22 +139,22 @@ The splitting scheme can be any of the combinatorial methods, such as K-means wi
 
 The binary tree produced by hierarchical clustering is called a dendrogram. It is a graphical display of how examples are grouped at each hierarchy level. A dendrogram is highly interpretable, which is one of the main reasons for the popularity of hierarchical clustering. 
 
-Let's begin with a simple example. It is a simulated data set with 5 two-dimensional points, as shown in Fig.~\ref{fig:data}. 
+Let's begin with a simple example. It is a simulated data set with 5 two-dimensional examples, as shown in Fig.~\ref{fig:data}. 
 
 \begin{figure}[htp]
 \centering
 \captionsetup{justification=centering}
 \includegraphics[width=6cm]{"Part 3 - Learning Systems/Unsupervised Learning/Hierarchical Clustering/figures/Dendrogram-Data.png"}
-\caption{Two-dimensional data points}
+\caption{Two-dimensional data examples}
 \label{fig:data}
 \end{figure}
 
 If we apply agglomerative clustering with single linkage, the clustering happens in the following order:
 \begin{enumerate}
-\item Points A and D are grouped with distance 1. 
-\item Points B and E are grouped with distance 2. 
+\item Examples A and D are grouped with distance 1. 
+\item Examples B and E are grouped with distance 2. 
 \item Cluster (A, D) and Cluster (B, E) are grouped with distance $\sqrt{5}$. 
-\item Point C is merged to Cluster (A, D, B, E) with $2\sqrt{2}$. 
+\item Example C is merged to Cluster (A, D, B, E) with $2\sqrt{2}$. 
 \end{enumerate}
 
 The resulting dendrogram is shown in Fig.~\ref{fig:dendro}. The horizontal axis indicates the examples in the dataset. The links between the examples represent which examples are merged into one cluster. The vertical axis represents the height of two merging clusters. \textit{Height} is referred to as the distance/dissimilarity between the clusters. In this case, the distance between A and D is 1; thus, their connecting line is at 1 along the vertical axis. Similarly, B and E are connected at the height of 2. This height is monotonically increasing with the level of the dendrogram. In other words, the examples that merge at the very bottom of the tree are quite similar, whereas the examples that merge close to the top of the tree tend to be very different. 
@@ -167,7 +167,7 @@ The resulting dendrogram is shown in Fig.~\ref{fig:dendro}. The horizontal axis 
 \label{fig:dendro}
 \end{figure}
 
-Dendrograms should be read with caution. First, different hierarchical methods and dissimilarity measures can lead to quite different dendrograms. Second, when reading a dendrogram, we cannot conclude about the similarity of two examples based on how far they are along the horizontal axis~\cite{James2013}. For example, point C in Fig.~\ref{fig:dendro} locates next to point E, but it does not mean C closer to E. All the other points are in fact closer to C. Third, hierarchical clustering does not tell you the ``right" number of clusters. Instead, it creates a hierarchical representation of data, even if data has absolutely no hierarchical meanings. By cutting off a dendrogram at various heights, different numbers of clusters are obtained. In practice, people often look at the dendrogram and select by eye a sensible number of clusters, based on the heights of merging clusters and the desired number of clusters~\cite{James2013}. Alternatively, other approaches have to be used, such as Bayesian hierarchical clustering~\cite{Heller2005}.
+Dendrograms should be read with caution. First, different hierarchical methods and dissimilarity measures can lead to quite different dendrograms. Second, when reading a dendrogram, we cannot conclude about the similarity of two examples based on how far they are along the horizontal axis~\cite{James2013}. For example, example C in Fig.~\ref{fig:dendro} locates next to example E, but it does not mean C closer to E. All the other examples are in fact closer to C. Third, hierarchical clustering does not tell you the ``right" number of clusters. Instead, it creates a hierarchical representation of data, even if data has absolutely no hierarchical meanings. By cutting off a dendrogram at various heights, different numbers of clusters are obtained. In practice, people often look at the dendrogram and select by eye a sensible number of clusters, based on the heights of merging clusters and the desired number of clusters~\cite{James2013}. Alternatively, other approaches have to be used, such as Bayesian hierarchical clustering~\cite{Heller2005}.
 
 \section{Example: Yeast Gene Data}
 
@@ -226,7 +226,7 @@ D & & & & 0   \\ \hline
 \begin{enumerate}
 \item Agglomerative clustering is a deterministic algorithm, as the result does not change with the starting states of the algorithm.  \\
 
-\item The distance will be 1 when using the single linkage, because 11 from cluster 1 and 12 from cluster 2 are the nearest points from the 2 clusters, and the distance between these 2 points will be the distance of these 2 clusters. Similarly, when using complete linkage, the distance between the 2 clusters will be 13, which is the distance between points 7 and 20. When using group average, we calculate the average distance of any two points, so the cluster distance will be 7. \\
+\item The distance will be 1 when using the single linkage, because 11 from cluster 1 and 12 from cluster 2 are the nearest examples from the 2 clusters, and the distance between these 2 examples will be the distance of these 2 clusters. Similarly, when using complete linkage, the distance between the 2 clusters will be 13, which is the distance between examples 7 and 20. When using group average, we calculate the average distance between all pairs of examples from the two clusters, so the cluster distance will be 7. \\
 
 \item When using the single linkage, the dendrogram is:
 \begin{figure}[htp]
