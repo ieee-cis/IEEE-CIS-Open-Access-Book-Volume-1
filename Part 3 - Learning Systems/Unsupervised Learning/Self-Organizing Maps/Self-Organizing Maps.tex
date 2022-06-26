@@ -20,7 +20,7 @@ For practical purposes, a SOM network model uses as topological maps 2d or 3d gr
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.08]{ "Part 3 - Learning Systems/Unsupervised Learning/Self-Organizing Maps/figs/maps.eps"}
+\includegraphics[scale=0.08]{ "Part 3 - Learning Systems/Unsupervised Learning/Self-Organizing Maps/figs/maps"}
 \caption{Examples of 2d maps. (left) squared map and (right) hexagonal map.}
 \label{fig:topologic}
 \end{figure}
@@ -41,7 +41,7 @@ Given a set of training examples $\mathcal{T} = \{\mathbf{x}^{(1)},\mathbf{x}^{(
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.08]{"Part 3 - Learning Systems/Unsupervised Learning/Self-Organizing Maps/figs/cooperation.eps"}
+\includegraphics[scale=0.08]{"Part 3 - Learning Systems/Unsupervised Learning/Self-Organizing Maps/figs/cooperation.pdf"}
 \caption{Example of neighbourhood and factors values of weight update according to the distance a of the neurons to a winner neuron.}
 \label{fig:cooperation}
 \end{figure}
@@ -86,7 +86,7 @@ The vast majority of the works define the SOM topology as containing only the in
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.35]{"Part 3 - Learning Systems/Unsupervised Learning/Self-Organizing Maps/figs/arquitetura.eps"}
+\includegraphics[scale=0.35]{"Part 3 - Learning Systems/Unsupervised Learning/Self-Organizing Maps/figs/arquitetura.pdf"}
 \caption{Partial example of SOM architecture. The connections between the input layer and the output neuron 1 are highlighted in red.}
 \label{fig:architecuture}
 \end{figure}
@@ -172,11 +172,11 @@ At the end of the training phase, it is expected that output neurons in a same t
 \subsection{Example of the Algorithm Execution}
 \label{sec:algorithmExecution}
 
-In order to provide a comprehensive understanding of the canonical SOM algorithm, Figure \ref{fig:trset} presents a 3-dimensional dataset containing 16 colors in the RGB format which will be learned so that the main steps of the algorithm can be shown. Notice that the clustering algorithms assume that there is redundant information in the training set, therefore, we inserted variations of the dominant colors blue, green, black and brown in the dataset. 
+In order to provide a comprehensive understanding of the canonical SOM algorithm, Figure \ref{fig:trset} presents a 3-dimensional dataset containing 16 colors in the RGB format which will be learned so that the main stpdf of the algorithm can be shown. Notice that the clustering algorithms assume that there is redundant information in the training set, therefore, we inserted variations of the dominant colors blue, green, black and brown in the dataset. 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.6]{"Part 3 - Learning Systems/Unsupervised Learning/Self-Organizing Maps/figs/trainingSet.eps"}
+\includegraphics[scale=0.6]{"Part 3 - Learning Systems/Unsupervised Learning/Self-Organizing Maps/figs/trainingSet.pdf"}
 \caption{Training set containing 16 RGB colors where each color component is normalized between 0 and 1 and the presentation order of the examples is indexed in square brackets.}
 \label{fig:trset}
 \end{figure}
@@ -218,7 +218,7 @@ Figure \ref{fig:execution} depicts part of the evolution of the algorithm comput
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.35]{"Part 3 - Learning Systems/Unsupervised Learning/Self-Organizing Maps/figs/SOM_Exec.eps"}
+\includegraphics[scale=0.35]{"Part 3 - Learning Systems/Unsupervised Learning/Self-Organizing Maps/figs/SOM_Exec.pdf"}
 \caption{a) Original random topological map; b) Epoch 0 - training example [0] neighbourhood after their weights' updates; c) Epoch 0 - training example at position 4's  neighbourhood after their weights' updates; d) Epoch 0 - training example at position 11's neighbourhood after their weights' updates; e) Epoch 5 - training example at position 4's neighbourhood after their weights' updates; f) Map status at epoch 20.}
 \label{fig:execution}
 \end{figure}
@@ -246,7 +246,7 @@ Particularly for this illustration example, the small number of examples in the 
 
 The GSOM was initially developed by Alahakoon and Srinivasan \cite{Alahakoon:2000} who claimed that their method had significant advantages for knowledge discovery over the original one. The main difference between both methods consists in a \textit{growing} topological map introduced in the GSOM. Furthermore, given the growing feature of the GSOM, its spreading factor enables the practitioner to track hierarchical aspect of the clusters, i.e., one can find the path from a finer cluster to a higher level cluster.  
 
-The following high level steps depicts the GSOM algorithm:
+The following high level stpdf depicts the GSOM algorithm:
 
 \begin{enumerate}
     \item Initialization Phase
@@ -263,7 +263,7 @@ The following high level steps depicts the GSOM algorithm:
         \item If TE $>$ GT and the winner neuron is a boundary neuron, grow it (i.e., place new neurons in free positions of the current neuron. For example, above or at right.). Otherwise, distribute its weights to the neighbors of the current neuron.
         \item Initialize the new nodes weights to match the current neighbourhood
         \item Reset the LR (Learning rate) to its starting value
-        \item Repeat steps a. to g.
+        \item Repeat stpdf a. to g.
     \end{enumerate}
     \item Smoothing phase
     \begin{enumerate}
@@ -295,7 +295,7 @@ Reconstructing the surface of an object based on a set of examples structured or
 
 \begin{figure}[!h]
 \centering
-\includegraphics[scale=0.35]{"Part 3 - Learning Systems/Unsupervised Learning/Self-Organizing Maps/figs/reconstruction.eps"}
+\includegraphics[scale=0.35]{"Part 3 - Learning Systems/Unsupervised Learning/Self-Organizing Maps/figs/reconstruction.pdf"}
 \caption{Examples of images reconstructed from 3d points. From left to right: cow, Max Planck, teapot and stanford-bunny. \\Source: https://github.com/alecjacobson/common-3d-test-models.}
 \label{fig:reconstruction}
 \end{figure}
@@ -309,7 +309,7 @@ Image segmentation consists in identifying the boundaries (lines, curves, etc.) 
 
 \begin{figure}[!h]
 \centering
-\includegraphics[scale=0.55]{ "Part 3 - Learning Systems/Unsupervised Learning/Self-Organizing Maps/figs/imageSeg.eps"}
+\includegraphics[scale=0.55]{ "Part 3 - Learning Systems/Unsupervised Learning/Self-Organizing Maps/figs/imageSeg.pdf"}
 \caption{Segmentation for object identification in a traffic image.\\ Source: https://ai.googleblog.com/2021/04/max-deeplab-dual-path-transformers-for.html. }
 \label{fig:imgSeg}
 \end{figure}
@@ -344,4 +344,3 @@ All resources necessary for the exact reproduction of the experiments in the exe
 
 \bibliographystyle{unsrt}
 \bibliography{bibliography}
-
