@@ -25,7 +25,7 @@ For practical purposes, a SOM network model uses as topological maps 2d or 3d gr
 \label{fig:topologic}
 \end{figure}
 
-Given a set of training examples $\mathcal{T} = \{\mathbf{x}^{(1)},\mathbf{x}^{(2)},\mathbf{x}^{(3)},\cdots,\mathbf{x}^{(N)}\}$, where each training example $\mathbf{x}^{(n)}$ is a $d$-dimensional vector, a training \textbf{epoch} consists in the presentation of the $n$ training examples to the classifier. Nevertheless, the whole training procedure takes several epochs, often, hundreds or more. The learning phase of a self organization involves 3 major concepts from neuroscience.
+Given a set of training examples $\mathcal{T} = \{\mathbf{x}^{(1)},\mathbf{x}^{(2)},\mathbf{x}^{(3)},\cdots,\mathbf{x}^{(N)}\}$, where each training example $\mathbf{x}^{(n)}$ is a $d$-dimensional vector, a training \textbf{epoch} consists in the presentation of the $n$ training examples to the classifier for learning purposes. Nevertheless, the whole training procedure takes several epochs, often, hundreds or more, i.e., the $n$ training examples are presented multiple times. The learning phase of a self organization involves 3 major concepts from neuroscience.
 \vspace{0.2cm}
 
 \noindent\textbf{Competition} As a training example \textbf{x}$^{(n)}$ is presented to the network, each neuron competes against the others in such a manner that the winner neuron is the neuron with its weights closer to \textbf{x}$^{(n)}$'s features. Notice that each neuron, therefore, has a set of $d$ weights associated to it (provided that $d$ is the number of problem features). The measure of how close a neuron is to a training example can be computed by the Euclidean distance between two examples (Equation \ref{eq:euclid_dist_som}).
@@ -165,7 +165,7 @@ Algorithm \ref{alg:som} depicts the operation sequence of a SOM neural network f
 % \end{enumerate}
 
 
-At the end of the training phase, it is expected that output neurons in a same topological region represent a cluster (or class). 
+At the end of the training phase, it is expected that output neurons in a same topological region represent a cluster (or class). In particular, examples that are similar to each other are mapped to the same or nearby regions of the topological map.
 
 %As seen in the previous paragraphs, the SOM is formed by (i) an input layer with the same size as the number of features of the problem and (ii) an 2d or 3d output layer. Each output neuron is fully connected to the input layer. Furthermore, the topological location of the output neurons is key such that at the end of the training phase, output neurons in a same topological region represent a cluster (or class). 
 
@@ -260,9 +260,9 @@ The following high level stpdf depicts the GSOM algorithm:
         \item Find the winner neuron, similar to the original SOM.
         \item Update weights values of the winner neuron and its neighbors as well as in the original SOM method
         \item The difference between the weights and the training example will be used as an error to be accumulated in the winner neuron as its total error (TE)
-        \item If TE $>$ GT and the winner neuron is a boundary neuron, grow it (i.e., place new neurons in free positions of the current neuron. For example, above or at right.). Otherwise, distribute its weights to the neighbors of the current neuron.
+        \item If TE $>$ GT and the winner neuron is a boundary neuron, grow it (i.e., place new neurons in free positions in the neighbourhood of the current neuron. For example, above or at right.). Otherwise, distribute its weights to the neighbors of the current neuron.
         \item Initialize the new nodes weights to match the current neighbourhood
-        \item Reset the LR (Learning rate) to its starting value
+        \item Reset the learning rate to its starting value
         \item Repeat stpdf a. to g.
     \end{enumerate}
     \item Smoothing phase
