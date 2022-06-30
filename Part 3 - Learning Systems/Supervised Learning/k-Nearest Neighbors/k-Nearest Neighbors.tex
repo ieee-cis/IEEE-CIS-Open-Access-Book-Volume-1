@@ -260,7 +260,7 @@ example index & x1 & x2 & class \\
 
 \vspace{0.4cm}
 
-As result, CNN stores only the training examples with indexes $\{1,2,5,\\6,7,9,11,15\}$. Figure \ref{fig:cnndataset} shows the complete original training set (left) and the training set with the reference set $S$ marked (right). Notice that example 2 seems to be a noise. Overall, the main aim of the CNN is to select examples at the classification border, however, depending on the presentation order of the examples in the training set it may select examples placed inside the class distribution, i.e., examples in non-conflict regions. Additionally, noisy examples are very likely to be added to $S$ since they tend to be misclassified during the training phase.%   e noisy training then, conclude that the CNN can't handle noise and is sensitive to the order in which the training examples are presented to the algorithm.
+As result, CNN stores only the training examples with indexes $\{1,2,5,6,7,9,11,15\}$. Figure \ref{fig:cnndataset} shows the complete original training set (left) and the training set with the reference set $S$ marked (right). Notice that example 2 seems to be a noise. Overall, the main aim of the CNN is to select examples at the classification border, however, depending on the presentation order of the examples in the training set it may select examples placed inside the class distribution, i.e., examples in non-conflict regions. Additionally, noisy examples are very likely to be added to $S$ since they tend to be misclassified during the training phase.%   e noisy training then, conclude that the CNN can't handle noise and is sensitive to the order in which the training examples are presented to the algorithm.
 
 \begin{figure}[h]
     \centering
