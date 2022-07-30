@@ -362,12 +362,12 @@ and \cite{FraStu2019:cor} for SA specifically.
 We consider the Quadratic Assignment Problem (QAP), one of the classic NP-hard
 problems where we want to find the assignment of $n$ facilities to $n$ locations
 with the minimal cost \cite{KooBec57}. A QAP instance is defined by two
-matrices, one with the distances $d_{kl}$ between two locations $k$ and $l$, and
-one with the flows $f_{ij}$ between two facilities $i$ and $j$.
+matrices, one with the distances $D_{k,l}$ between two locations $k$ and $l$, and
+one with the flows $F_{i,j}$ between two facilities $i$ and $j$.
 We represent a solution as a permutation $\pi$, whose
 elements $\pi(i)$ contain the location of facility $i$. The objective function is
 \begin{equation}
-  \min\sum_{i=1}^n\sum_{j=1}^n f_{ij} d_{{\pi(i)}{\pi(j)}}.
+  \min\sum_{i=1}^n\sum_{j=1}^n F_{ij} D_{{\pi(i)}{\pi(j)}}.
 \end{equation}
 
 We use two groups of different QAP instances. In the first one the distance matrices 
@@ -391,7 +391,7 @@ using $10$K, $20$K, $40$K and $80$K experiments, where one experiment is a SA ru
 The experiments are done on a machine with two Intel Xeon E5-2680v3 CPUs 
 at 2.5GHz with 16MB cache, with 2.4GB of RAM available for each experiment.
 
-irace is an algorithm configurator that implements the iterated racing algorithm 
+The algorithm configurator irace implements the iterated racing algorithm 
 in an easy-to-use \texttt{R} package
 \cite{LopDubPerStuBir2016irace,BirStuPaqVar02:gecco,MarMoo1997air}. 
 The basic idea is to spend computational budget only on configurations
