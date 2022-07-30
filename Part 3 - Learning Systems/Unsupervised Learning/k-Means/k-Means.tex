@@ -11,11 +11,11 @@ The $k$-means clustering algorithm ($k$-means for short) provides a method of fi
 
 While there are different \emph{structures} that can be extracted from input examples the most intuitive is a \emph{cluster}. Very simply, a cluster is a set of examples that are grouped together, often as a consequence of those examples sharing some similarities. The $k$-means algorithm is one method of finding clusters in input examples. It is important to note that $k$-means requires as input the number of clusters ($k$) and the method of selecting this number is not always obvious. While there are methods of estimating a `good' $k$, some of which we will discuss later in Section \ref{sec:find-k}, this might not always be feasible and, in such instances, one might use algorithms which do not require selecting a value of $k$. You will study some of these other algorithms, such as DBScan, in subsequent chapters of this book. Although clustering provides us with methods of grouping input examples, it does not provide information on the relationship between these resulting groups. For those cases where we might require such relations, one might use algorithms that can extract what is called connectivity information such as  ``Hierarchical Clustering'', yet another unsupervised learning algorithm that is also detailed in subsequent chapters.
 
-This chapter begins by exploring some applications of clustering algorithms, of which $k$-means is by far the most favored because it is simple, intuitive and also effective. The chapter then provides an intuitive overview of the algorithm, before stepping into the details of its implementation including its optimization objective and computational complexity. Finally, we explore some methods of picking $k$, the number of clusters, before then exploring possible extensions of this algorithm. At the end of this chapter you will \begin{enumerate*}[label=(\alph*)]
+This chapter begins by exploring some applications of clustering algorithms, of which $k$-means is by far the most favored because it is simple, intuitive and also effective. The chapter then provides an intuitive overview of the algorithm, before stepping into the details of its implementation including its optimization objective and computational complexity. Finally, we explore some methods of picking $k$, the number of clusters, before then exploring possible extensions of this algorithm. At the end of this chapter you will \begin{enumerate}[label=(\alph*)]
 \item know what $k$-means is and when to use it, 
 \item know how to implement $k$-means, and
 \item know how to interpret the results. 
-\end{enumerate*}
+\end{enumerate}
 
 \section{Motivation and Applications}
 
@@ -32,14 +32,14 @@ Consider a set of input examples each consisting of two input variables as illus
      \centering
      \begin{subfigure}[b]{0.48\textwidth}
          \centering
-         \includegraphics[width=\textwidth]{inputData.png}
+         \includegraphics[width=\textwidth]{"Part 3 - Learning Systems/Unsupervised Learning/k-Means/images/inputData.png"}
          \caption{Input examples}
          \label{fig:input-data-a}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.48\textwidth}
          \centering
-         \includegraphics[width=\textwidth]{clusterInit.png}
+         \includegraphics[width=\textwidth]{"Part 3 - Learning Systems/Unsupervised Learning/k-Means/images/clusterInit.png"}
          \caption{with cluster centroids added.}
          \label{fig:input-data-b}
      \end{subfigure}
@@ -58,42 +58,42 @@ Notice how, on the third iteration, there is very little movement of the centroi
      \centering
      \begin{subfigure}[b]{0.48\textwidth}
          \centering
-         \includegraphics[width=\textwidth]{CA1.png}
+         \includegraphics[width=\textwidth]{"Part 3 - Learning Systems/Unsupervised Learning/k-Means/images/CA1.png"}
          \caption{Iter. 1: Cluster assignment}
          \label{fig:k-means-loop-1-ca}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.48\textwidth}
          \centering
-         \includegraphics[width=\textwidth]{MC1.png}
+         \includegraphics[width=\textwidth]{"Part 3 - Learning Systems/Unsupervised Learning/k-Means/images/MC1.png"}
          \caption{Iter. 1: Move centroid.}
          \label{fig:k-means-loop-1-mc}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.48\textwidth}
          \centering
-         \includegraphics[width=\textwidth]{CA2.png}
+         \includegraphics[width=\textwidth]{"Part 3 - Learning Systems/Unsupervised Learning/k-Means/images/CA2.png"}
          \caption{Iter. 2: Cluster assignment}
          \label{fig:k-means-loop-2-ca}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.48\textwidth}
          \centering
-         \includegraphics[width=\textwidth]{MC2.png}
+         \includegraphics[width=\textwidth]{"Part 3 - Learning Systems/Unsupervised Learning/k-Means/images/MC2.png"}
          \caption{Iter. 2: Move centroid.}
          \label{fig:k-means-loop-2-mc}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.48\textwidth}
          \centering
-         \includegraphics[width=\textwidth]{CA3.png}
+         \includegraphics[width=\textwidth]{"Part 3 - Learning Systems/Unsupervised Learning/k-Means/images/CA3.png"}
          \caption{Iter. 3: Cluster assignment.}
          \label{fig:k-means-loop-3-ca}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.48\textwidth}
          \centering
-         \includegraphics[width=\textwidth]{MC3.png}
+         \includegraphics[width=\textwidth]{"Part 3 - Learning Systems/Unsupervised Learning/k-Means/images/MC3.png"}
          \caption{Iter. 3: Move centroid.}
          \label{fig:k-means-loop-3-mc}
      \end{subfigure}
@@ -105,7 +105,7 @@ It is important to remember that $k$-means is sensitive to both the initializati
 
 \section{$k$-means: The internals}
 
-Now that we have an intuitive overview of the $k$-means algorithm, let us explore the algorithm more formally. To begin with, let us revisit the terminology we will be using: The $n$ input examples are denoted as $\mathcal{T} = \{ \mathbf{x}^{(1)}, \mathbf{x}^{(2)}, ... \mathbf{x}^{(n)}\} $ each consisting of $m$ input variables (each person's details in the sweater example above consists of height and weight which are the input variables), and $\{ \boldsymbol{\mu}_1, \boldsymbol{\mu}_2, ... \boldsymbol{\mu}_k\}$ denote the $k$ cluster centroids.  $\{\mathcal{C}^{(1)}, \mathcal{C}^{(2)}, ..., \mathcal{C}^{(k)}\}$ denote the \emph{sets} consisting of the indexes of input examples assigned to the corresponding cluster centroid. Specifically, $\mathcal{C}^{(1)}$ is a set that contains the indexes of input examples assigned to the cluster centroid $\boldsymbol{\mu}_1$ and so on -- for example, $\mathcal{C}^{(1)}$ might be $\{ 1, 4\}$, which would imply that the input examples $\mathbf{x}^{(1)}$ and $\mathbf{x}^{(4)}$ are assigned to the cluster centroid $\boldsymbol{\mu}_1$. 
+Now that we have an intuitive overview of the $k$-means algorithm, let us explore the algorithm more formally. To begin with, let us revisit the terminology we will be using: The $n$ input examples are denoted as $\mathcal{T} = \{ \mathbf{x}^{(1)}, \mathbf{x}^{(2)}, ... \mathbf{x}^{(n)}\} $ each consisting of $m$ input variables (each person's details in the sweater example above consists of height and weight which are the input variables), and $\{ \bm{\mu}_1, \bm{\mu}_2, ... \bm{\mu}_k\}$ denote the $k$ cluster centroids.  $\{\mathcal{C}^{(1)}, \mathcal{C}^{(2)}, ..., \mathcal{C}^{(k)}\}$ denote the \emph{sets} consisting of the indexes of input examples assigned to the corresponding cluster centroid. Specifically, $\mathcal{C}^{(1)}$ is a set that contains the indexes of input examples assigned to the cluster centroid $\bm{\mu}_1$ and so on -- for example, $\mathcal{C}^{(1)}$ might be $\{ 1, 4\}$, which would imply that the input examples $\mathbf{x}^{(1)}$ and $\mathbf{x}^{(4)}$ are assigned to the cluster centroid $\bm{\mu}_1$. 
 
 %%%%%%%%%%%%%%%%%%%%%%%% ALGORITHM
 \begin{algorithm}[ht!]
@@ -117,14 +117,14 @@ Now that we have an intuitive overview of the $k$-means algorithm, let us explor
     Output: $k$ clusters ($\{\mathcal{C}^{(1)}, \mathcal{C}^{(2)}, ..., \mathcal{C}^{(k)}\}$).
     
 	\begin{algorithmic}[1] 
-		\STATE{Initialize (randomly) $k$ cluster centroids $\{ \boldsymbol{\mu}_1, \boldsymbol{\mu}_2, ... \boldsymbol{\mu}_k\} \in \mathbb{R}^m$}
+		\STATE{Initialize (randomly) $k$ cluster centroids $\{ \bm{\mu}_1, \bm{\mu}_2, ... \bm{\mu}_k\} \in \mathbb{R}^m$}
 		
         \REPEAT
 		\FOR{$i = 1$ to $k$}
-		\STATE{ $\mathcal{C}^{(i)} := \text{indexes of input examples whose ``closest'' cluster centroid is } \boldsymbol{\mu}_i$} %\COMMENT{``Cluster Assignment''}
+		\STATE{ $\mathcal{C}^{(i)} := \text{indexes of input examples whose ``closest'' cluster centroid is } \bm{\mu}_i$} %\COMMENT{``Cluster Assignment''}
 		\ENDFOR
         \FOR{$i = 1$ to $k$}
-        \STATE{ $\boldsymbol{\mu}_i := \text{center of input examples assigned to }\mathcal{C}^{(i)}$}  %\COMMENT{``Move Centroid''}
+        \STATE{ $\bm{\mu}_i := \text{center of input examples assigned to }\mathcal{C}^{(i)}$}  %\COMMENT{``Move Centroid''}
         \ENDFOR
 
 		\UNTIL No change to clusters ($\{\mathcal{C}^{(1)}, \mathcal{C}^{(2)}, ..., \mathcal{C}^{(k)}\}$) between iterations. 
@@ -143,23 +143,23 @@ In the next section, we will discuss the optimization objective associated with 
 \subsection{Optimization Objective}
 \label{section:optimization-objective}
 
-Let's define $\mu(\mathbf{x}^{(i)})$ to represent the cluster centroid that input example $\mathbf{x}^{(i)}$ is assigned to. Recall that $\mathcal{C}^{(i)}$ is a set that contains the indexes of input examples assigned to the cluster centroid $\boldsymbol{\mu}_i$. Therefore, $\mu(\mathbf{x}^{(i)})$ can be written as $\mu(\mathbf{x}^{(i)}) = \boldsymbol{\mu}_j \iff i \in \mathcal{C}^{(j)}$, which expresses the fact that $\mu(\mathbf{x}^{(i)})$ will be equal to $\boldsymbol{\mu}_j$ (a given cluster centroid $j$) \emph{if and only if} $i$ is an element of $\mathcal{C}^{(j)}$. Notice that $i$ being an element of $\mathcal{C}^{(j)}$ would in turn imply that the input example $\mathbf{x}^{(i)}$ is assigned to $\boldsymbol{\mu}_j$. 
+Let's define $\mu(\mathbf{x}^{(i)})$ to represent the cluster centroid that input example $\mathbf{x}^{(i)}$ is assigned to. Recall that $\mathcal{C}^{(i)}$ is a set that contains the indexes of input examples assigned to the cluster centroid $\bm{\mu}_i$. Therefore, $\mu(\mathbf{x}^{(i)})$ can be written as $\mu(\mathbf{x}^{(i)}) = \bm{\mu}_j \iff i \in \mathcal{C}^{(j)}$, which expresses the fact that $\mu(\mathbf{x}^{(i)})$ will be equal to $\bm{\mu}_j$ (a given cluster centroid $j$) \emph{if and only if} $i$ is an element of $\mathcal{C}^{(j)}$. Notice that $i$ being an element of $\mathcal{C}^{(j)}$ would in turn imply that the input example $\mathbf{x}^{(i)}$ is assigned to $\bm{\mu}_j$. 
 
-Notice that if a centroid is a \emph{good} representation of a set of input examples in a cluster, then it would be ``close'' to each of them. As such, a good measure of this is the sum of the squared distance between the cluster centroid of a cluster and each of the constituent input examples associated with that cluster. This measure is called the \emph{residual sum of squares} (RSS) and is expressed with respect to the cluster centroids ($\{ \boldsymbol{\mu}_1, \boldsymbol{\mu}_2, ... \boldsymbol{\mu}_k\}$) and the cluster assignments ($\{\mathcal{C}^{(1)}, \mathcal{C}^{(2)}, ..., \mathcal{C}^{(k)}\}$) by Equation \ref{eq:rss} below.
+Notice that if a centroid is a \emph{good} representation of a set of input examples in a cluster, then it would be ``close'' to each of them. As such, a good measure of this is the sum of the squared distance between the cluster centroid of a cluster and each of the constituent input examples associated with that cluster. This measure is called the \emph{residual sum of squares} (RSS) and is expressed with respect to the cluster centroids ($\{ \bm{\mu}_1, \bm{\mu}_2, ... \bm{\mu}_k\}$) and the cluster assignments ($\{\mathcal{C}^{(1)}, \mathcal{C}^{(2)}, ..., \mathcal{C}^{(k)}\}$) by Equation \ref{eq:rss} below.
 
 \begin{equation}
-    RSS(\mathcal{C}^{(1)}, \mathcal{C}^{(2)}, ..., \mathcal{C}^{(k)}, \boldsymbol{\mu}_1, \boldsymbol{\mu}_2, ..., \boldsymbol{\mu}_k) = \mathlarger{\mathlarger{\sum}}_{i = 1}^{n} \norm{ \mathbf{x}^{(i)} - \mu(\mathbf{x}^{(i)}) }^2
+    RSS(\mathcal{C}^{(1)}, \mathcal{C}^{(2)}, ..., \mathcal{C}^{(k)}, \bm{\mu}_1, \bm{\mu}_2, ..., \bm{\mu}_k) = \mathlarger{\mathlarger{\sum}}_{i = 1}^{n} ( \mathbf{x}^{(i)} - \mu(\mathbf{x}^{(i)}) )^2
     \label{eq:rss}
 \end{equation}
 
 Since the RSS represents how well our cluster assignment is doing, we can use it to build an \emph{optimization objective} where we aim to minimize the RSS with respect to the centroids and the cluster assignments. We normalize the RSS by the number of input examples so as to make this value comparable across different sets of inputs. The resultant optimization objective is given by Equation \ref{eq:argmin}.
 
 \begin{equation}
-    \underset{\rm \substack{ \mathcal{C}^{(1)}, \mathcal{C}^{(2)}, ..., \mathcal{C}^{(k)} \\ \boldsymbol{\mu}_1, \boldsymbol{\mu}_2, ..., \boldsymbol{\mu}_k }}{\rm \text{min}}~~\frac{1}{n} RSS(\mathcal{C}^{(1)}, \mathcal{C}^{(2)}, ..., \mathcal{C}^{(k)}, \boldsymbol{\mu}_1, \boldsymbol{\mu}_2, ..., \boldsymbol{\mu}_k)
+    \underset{\rm \substack{ \mathcal{C}^{(1)}, \mathcal{C}^{(2)}, ..., \mathcal{C}^{(k)} \\ \bm{\mu}_1, \bm{\mu}_2, ..., \bm{\mu}_k }}{\rm \text{min}}~~\frac{1}{n} RSS(\mathcal{C}^{(1)}, \mathcal{C}^{(2)}, ..., \mathcal{C}^{(k)}, \bm{\mu}_1, \bm{\mu}_2, ..., \bm{\mu}_k)
     \label{eq:argmin}
 \end{equation}
 
-In fact, the $k$-means algorithm presented in Algorithm \ref{algo:k-means} does exactly what is required by Equation \ref{eq:argmin}, that is, it minimizes the RSS. This is because the first step -- the cluster assignment step -- minimizes the RSS with respect to the cluster assignment ($\mathcal{C}^{(1)}, \mathcal{C}^{(2)}, ..., \mathcal{C}^{(k)}$), while holding the cluster centroids constant, and the second step -- the move centroid step -- minimizes the RSS with respect to the centroids ($\boldsymbol{\mu}_1, \boldsymbol{\mu}_2, ..., \boldsymbol{\mu}_k$), while holding the cluster assignment constant. Also, notice that, for a given cluster, the right hand side of Equation \ref{eq:rss} is the within-cluster variance that $k$-means is implicitly minimizing.  
+In fact, the $k$-means algorithm presented in Algorithm \ref{algo:k-means} does exactly what is required by Equation \ref{eq:argmin}, that is, it minimizes the RSS. This is because the first step -- the cluster assignment step -- minimizes the RSS with respect to the cluster assignment ($\mathcal{C}^{(1)}, \mathcal{C}^{(2)}, ..., \mathcal{C}^{(k)}$), while holding the cluster centroids constant, and the second step -- the move centroid step -- minimizes the RSS with respect to the centroids ($\bm{\mu}_1, \bm{\mu}_2, ..., \bm{\mu}_k$), while holding the cluster assignment constant. Also, notice that, for a given cluster, the right hand side of Equation \ref{eq:rss} is the within-cluster variance that $k$-means is implicitly minimizing.  
 
 \subsection{Time Complexity}
 \label{sec:complexity}
@@ -187,7 +187,7 @@ Given that the $k$-means algorithm requires the number of clusters as input, we 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\textwidth]{Elbow.png}
+    \includegraphics[width=0.7\textwidth]{"Part 3 - Learning Systems/Unsupervised Learning/k-Means/images/Elbow.png"}
          \caption{Plot of how RSS varies with change in the number of cluster centroids. Notice how $k = 4$ provides an ``Elbow''.}
          \label{fig:elbow}
 \end{figure}
@@ -205,14 +205,15 @@ In this chapter, we discussed the need for methods of discovering both standalon
 
 \section{Exercises}
 
-\paragraph{Exercise 1} 
-The $k$-means algorithm is run with $k$ set to 2. During a particular iteration, the cluster centroids of the two clusters are A: $(15, 3)$ and B: $(12, 18)$. Which of the two centroids will the following input examples be assigned to and why: $(1, 2)$ and $(8, 9)$ 
+\begin{enumerate}
 
-\paragraph{Exercise 2}
+\item The $k$-means algorithm is run with $k$ set to 2. During a particular iteration, the cluster centroids of the two clusters are A: $(15, 3)$ and B: $(12, 18)$. Which of the two centroids will the following input examples be assigned to and why: $(1, 2)$ and $(8, 9)$ 
+
+\item This exercise is for those who are familiar with time complexity analysis of algorithms.
+
 Assume that a special chip, designed to optimize vector manipulation, is able to calculate the distance between vectors and to add vectors in constant time. What would the time complexity of the $k$-means algorithm be, assuming we always run it for a fixed number of iterations (say 15)?
 
-\paragraph{Exercise 3} 
-Implement the $k$-means algorithm and additionally ensure that, for a given input, your implementation: 
+\item  Implement the $k$-means algorithm and additionally ensure that, for a given input, your implementation: 
     \begin{enumerate}
         \item Executes $k$-means for a varying number of clusters (e.g. between 2 and 10).
         \item Executes $k$-means multiple times (e.g. 10) using different initializations for each $k$ and picks the best based on the value of RSS. 
@@ -235,12 +236,13 @@ from sklearn.datasets import make_blobs
 X, _ = make_blobs(n_samples=30, centers=3, 
             cluster_std=0.7, random_state=2)
 \end{lstlisting}
+\end{enumerate}
 
 \subsection{Solutions}
 
-\paragraph{Solution to Exercise 1}
+\begin{enumerate}
 
-The Euclidean distance between two points $(X_1, Y_1)$ and $(X_2, Y_2)$ is given by: $\sqrt{ (X_2 - X_1)^2 + (Y_2 - Y_1)^2 }$
+\item The Euclidean distance between two points $(X_1, Y_1)$ and $(X_2, Y_2)$ is given by: $\sqrt{ (X_2 - X_1)^2 + (Y_2 - Y_1)^2 }$
 \\ \\
 The distance between: 
 \begin{enumerate}
@@ -252,14 +254,13 @@ The distance between:
 
 Since both points are closer to A, they will both be assigned to the cluster centroid A. 
 
-\paragraph{Solution to Exercise 2}
+\item  The cluster assignment step requires the calculation of distances between $k$ centroids and $n$ input examples, and so has an overall complexity of $\mathcal{O}(kn)$. The move centroid step requires that we perform a total of $n$ additions (across different clusters) resulting in a complexity of $\mathcal{O}(n)$. Therefore, the complexity of each iteration is $\mathcal{O}(kn)$. Since we run the algorithm for a fixed number of iterations, this is also the complexity of the algorithm itself.
 
-The cluster assignment step requires the calculation of distances between $k$ centroids and $n$ input examples, and so has an overall complexity of $\mathcal{O}(kn)$. The move centroid step requires that we perform a total of $n$ additions (across different clusters) resulting in a complexity of $\mathcal{O}(n)$. Therefore, the complexity of each iteration is $\mathcal{O}(kn)$. Since we run the algorithm for a fixed number of iterations, this is also the complexity of the algorithm itself.
-
-\paragraph{Solution to Exercise 3}
-Before you take a look at the solution, you are strongly encouraged to attempt the exercise yourself. The solution is available on Google Colaboratory at: { \footnotesize
+\item Before you take a look at the solution, you are strongly encouraged to attempt the exercise yourself. The solution is available on Google Colaboratory at: { \footnotesize
 \url{https://colab.research.google.com/drive/1QNoSZpySciaBmik4eMKf3IaqTiRadWH0?usp=sharing}. 
 } The notebook also contains a step-by-step run through of the $k$-means algorithm which should be very helpful in understanding it. Feel free to make a copy of the notebook and play around with it. 
+
+\end{enumerate}
 
 \bibliographystyle{unsrt}
 \bibliography{bibliography}
