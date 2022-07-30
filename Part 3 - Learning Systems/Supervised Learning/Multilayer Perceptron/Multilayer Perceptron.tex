@@ -1,10 +1,7 @@
 \title{Multilayer Perceptron}
 \label{chp:multilayer-perceptron}
-\author{Lucas Costa, Márcio Guerreiro, Erickson Puchta, Yara de Souza Tadano, Thiago Antonini Alves, Maurício Kaster, Hugo Valadares Siqueira}
+\author{Lucas Costa \and Márcio Guerreiro \and Erickson Puchta \and Yara de Souza Tadano \and Thiago Antonini Alves \and  Maurício Kaster \and Hugo Valadares Siqueira}
 \institute{}
-\maketitle
-
-\begin{document}
 \maketitle
 
 Artificial Neural Networks (ANNs) are parallel and distributed systems inspired by higher organisms' nervous system %functioning.
@@ -41,7 +38,7 @@ Figure \ref{fig:neuronio} shows the generic artificial neuron scheme used in ANN
 	\caption{Scheme of an artificial neuron built with $u_i$ inputs and $y$ outputs.}
 	\vspace{0.2cm}
 	\begin{center}
-		\includegraphics[width=0.8\textwidth]{neuronioArtificial.png}
+		\includegraphics[width=0.8\textwidth]{"Part 3 - Learning Systems/Supervised Learning/Multilayer Perceptron/neuronioArtificial.png"}
 	\end{center}
 	\label{fig:neuronio}
 \end{figure}
@@ -154,7 +151,7 @@ A layer is the arrangement of parallel neurons, which receive all the signals fr
     \centering
     \caption{Example of building an MLP.}
     \vspace{0.2cm}
-    \includegraphics[width=1\textwidth]{MLP.png}
+    \includegraphics[width=1\textwidth]{"Part 3 - Learning Systems/Supervised Learning/Multilayer Perceptron/MLP.png"}
     \label{fig:mlp}
 \end{figure}
 
@@ -386,12 +383,6 @@ Note that, for each gate, one could consider a system with desired inputs and ou
 \end{enumerate}
 
 This is one of several available databases from the UCI Machine Learning Repository \cite{Dua:2019}. Using this database from the Repository, implement an MLP as in the previous exercise. Use the first three attributes as input data for training, and the last one as the desired response (surviving or not). Conduct your workout by checking and discussing your performance. Run the algorithm ten times, average the final validation MSE result for each round, and analyze if the variance is too large. Perform the procedure again, varying $n$ iteration values and $\eta$ learning rate, and check for deterioration or improvement. Present the final test error.
-
-\bibliographystyle{unsrt}
-\bibliography{bibliography}
-
-\end{document}
-
 
 \bibliographystyle{unsrt}
 \bibliography{bibliography}
