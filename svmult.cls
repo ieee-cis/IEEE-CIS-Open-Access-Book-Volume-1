@@ -669,6 +669,7 @@ passing it to article class \MessageBreak
 \newcommand{\foreword}[1][\forewordname]{\chapter*{#1}\markboth{#1}{#1}}
 \newcommand{\abouteditors}[1][\abouteditorsname]{\chapter*{#1}\markboth{#1}{#1}}
 \newcommand{\contributors}[1][\contriblistname]{\chapter*{#1}\markboth{#1}{#1}}
+\newcommand{\notation}[1][\notationname]{\chapter*{#1}\markboth{#1}{#1}}
 \newcommand{\extrachap}[1]{\chapter*{#1}\markboth{#1}{#1}}
 % same with TOC entry
 \newcommand{\Extrachap}[1]{\chapter*{#1}\markboth{#1}{#1}%
@@ -1091,6 +1092,7 @@ passing it to article class \MessageBreak
 \def\lemmaname{Lemma}%
 \def\abouteditorsname{About the Editors}%
 \def\contriblistname{List of Contributors}%
+\def\notationname{Mathematical Notation}%
 \def\listfigurename{List of Figures}%
 \def\listtablename{List of Tables}%
 \def\mailname{{\it Correspondence to\/}:}%
@@ -1548,6 +1550,19 @@ to\z@{\kern0.55\wd0\vrule\@height0.45\ht0\hss}\box0}}}}
                 \addvspace{\bigskipamount}}    
 
 \newenvironment{thecontriblist}
+               {\par
+                \addvspace{\bigskipamount}
+                \parindent\z@
+                \rightskip\z@ \@plus 40\p@
+                \def\iand{\\[\medskipamount]\let\and=\nand}%
+                \def\nand{\ifhmode\unskip\nobreak\fi\ $\cdot$ }%
+                \let\and=\nand
+                \def\at{\\\let\and=\iand}%
+                }
+               {\par
+                \addvspace{\bigskipamount}}
+                
+\newenvironment{thenotation}
                {\par
                 \addvspace{\bigskipamount}
                 \parindent\z@
