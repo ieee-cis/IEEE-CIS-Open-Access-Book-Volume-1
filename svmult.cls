@@ -667,6 +667,7 @@ passing it to article class \MessageBreak
 % predefined unnumbered headings
 \newcommand{\preface}[1][\prefacename]{\chapter*{#1}\markboth{#1}{#1}}
 \newcommand{\foreword}[1][\forewordname]{\chapter*{#1}\markboth{#1}{#1}}
+\newcommand{\abouteditors}[1][\abouteditorsname]{\chapter*{#1}\markboth{#1}{#1}}
 \newcommand{\contributors}[1][\contriblistname]{\chapter*{#1}\markboth{#1}{#1}}
 \newcommand{\extrachap}[1]{\chapter*{#1}\markboth{#1}{#1}}
 % same with TOC entry
@@ -1089,6 +1090,7 @@ passing it to article class \MessageBreak
 \def\indexname{Index}%
 \def\lemmaname{Lemma}%
 \def\contriblistname{List of Contributors}%
+\def\abouteditors{About the Editors}%
 \def\listfigurename{List of Figures}%
 \def\listtablename{List of Tables}%
 \def\mailname{{\it Correspondence to\/}:}%
