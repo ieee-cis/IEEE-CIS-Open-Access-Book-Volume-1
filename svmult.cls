@@ -1089,8 +1089,8 @@ passing it to article class \MessageBreak
 \def\keywordname{{\bf Key words:}}%
 \def\indexname{Index}%
 \def\lemmaname{Lemma}%
+\def\abouteditorsname{About the Editors}%
 \def\contriblistname{List of Contributors}%
-\def\abouteditors{About the Editors}%
 \def\listfigurename{List of Figures}%
 \def\listtablename{List of Tables}%
 \def\mailname{{\it Correspondence to\/}:}%
@@ -1533,6 +1533,19 @@ to\z@{\kern0.55\wd0\vrule\@height0.45\ht0\hss}\box0}}}}
       \markboth{\listtablename}{\listtablename}}%
     \@starttoc{lot}%
     }
+    
+\newenvironment{theabouteditors}
+               {\par
+                \addvspace{\bigskipamount}
+                \parindent\z@
+                \rightskip\z@ \@plus 40\p@
+                \def\iand{\\[\medskipamount]\let\and=\nand}%
+                \def\nand{\ifhmode\unskip\nobreak\fi\ $\cdot$ }%
+                \let\and=\nand
+                \def\at{\\\let\and=\iand}%
+                }
+               {\par
+                \addvspace{\bigskipamount}}    
 
 \newenvironment{thecontriblist}
                {\par
