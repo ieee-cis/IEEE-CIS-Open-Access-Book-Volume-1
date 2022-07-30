@@ -119,31 +119,31 @@ In previous chapters we have seen detailed examples of search-based optimization
 
 \begin{figure}[htbp]
  \begin{center}
-\begin{pspicture}(0,0)(5.0,5.0)
-\psset{xunit=1.6cm,yunit=1.6cm}
-\dotnode[dotstyle=*,dotscale=2](0,2){A1}
-\dotnode[dotstyle=*,dotscale=2](1,2){A2}
-\dotnode[dotstyle=*,dotscale=2](1,3){A3}
-\dotnode[dotstyle=*,dotscale=2](2,2){A5}
-\dotnode[dotstyle=*,dotscale=2](3,1){A11}
-
-
-\dotnode[dotstyle=o,dotscale=2](2,3){A4}
-\dotnode[dotstyle=o,dotscale=2](3,2){A6}
-\dotnode[dotstyle=o,dotscale=2](3,3){A7}
-\dotnode[dotstyle=o,dotscale=2](4,3){A8}
-\dotnode[dotstyle=o,dotscale=2](4,2){A9}
-\dotnode[dotstyle=o,dotscale=2](4,1){A10}
-
-\ncline{-}{A1}{A2} \ncline{-}{A2}{A3} \ncline{-}{A3}{A4} \ncline{-}{A4}{A5}
-\ncline{-}{A5}{A6} \ncline{-}{A6}{A7} \ncline{-}{A7}{A8} \ncline{-}{A8}{A9}
-\ncline{-}{A9}{A10} \ncline{-}{A10}{A11}
-
-\ncline[linestyle=dotted,dotsep=5pt,linewidth=2.0pt]{-}{A2}{A5}
-\ncline[linestyle=dotted,linewidth=2.0pt]{-}{A6}{A9}
-\ncline[linestyle=dotted,linewidth=2.0pt]{-}{A4}{A7}
-\ncline[linestyle=dashed,linewidth=2.0pt]{-}{A6}{A11}
-\end{pspicture}
+%\begin{pspicture}(0,0)(5.0,5.0)
+%\psset{xunit=1.6cm,yunit=1.6cm}
+%\dotnode[dotstyle=*,dotscale=2](0,2){A1}
+%\dotnode[dotstyle=*,dotscale=2](1,2){A2}
+%\dotnode[dotstyle=*,dotscale=2](1,3){A3}
+%\dotnode[dotstyle=*,dotscale=2](2,2){A5}
+%\dotnode[dotstyle=*,dotscale=2](3,1){A11}
+%
+%
+%\dotnode[dotstyle=o,dotscale=2](2,3){A4}
+%\dotnode[dotstyle=o,dotscale=2](3,2){A6}
+%\dotnode[dotstyle=o,dotscale=2](3,3){A7}
+%\dotnode[dotstyle=o,dotscale=2](4,3){A8}
+%\dotnode[dotstyle=o,dotscale=2](4,2){A9}
+%\dotnode[dotstyle=o,dotscale=2](4,1){A10}
+%
+%\ncline{-}{A1}{A2} \ncline{-}{A2}{A3} \ncline{-}{A3}{A4} \ncline{-}{A4}{A5}
+%\ncline{-}{A5}{A6} \ncline{-}{A6}{A7} \ncline{-}{A7}{A8} \ncline{-}{A8}{A9}
+%\ncline{-}{A9}{A10} \ncline{-}{A10}{A11}
+%
+%\ncline[linestyle=dotted,dotsep=5pt,linewidth=2.0pt]{-}{A2}{A5}
+%\ncline[linestyle=dotted,linewidth=2.0pt]{-}{A6}{A9}
+%\ncline[linestyle=dotted,linewidth=2.0pt]{-}{A4}{A7}
+%\ncline[linestyle=dashed,linewidth=2.0pt]{-}{A6}{A11}
+%\end{pspicture}
  
     \caption{One possible configuration of  sequence  $HHHPHPPPPPH$  in   the HP model. Solid lines indicate a pair of residues neighbors in the sequence. There is   one $HH$ (represented by a dotted line with wide spaces), one $HP$ (represented by a dashed line) and  two $PP$ (represented by dotted lines) contacts.}
  \label{fig:PROTEXAM}
