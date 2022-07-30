@@ -105,7 +105,7 @@ This section introduces the basic concepts of the standard PSO and how it works.
 
 Essentially, each particle in the swarm (which is considered a candidate solution) is randomly distributed and represented by a vector in a multidimensional search space; all this set of particles is considered the initial population. Once established the initial population, PSO searches for optima by updating each particle according to notions such as position, velocity, inertia, etc. These notions can be defined as a vector usually called \textit{the velocity vector}, which helps to determine the next movement of the particle. Nonetheless, this movement is not entirely random; each particle is attracted towards both its own personal best position and the best position of the swarm. Then, the population is evaluated in the objective function to determine the population quality. This also allows finding the best element that will be defined as a criterion to beat in the subsequent evaluation. The new generated positions of the particles and the speed with which they are moving are calculated considering the value of the best global element and the actual value of every particle compared with a random number \cite{erick2021matlab}.\\
 
-When the population is initialized and evaluated, the particle with the lowest or highest fitness is obtained depending on whether it is a minimization or maximization problem, respectively. This found particle is called \textit{the global particle} $gB$. On the other hand, in each iteration of the algorithm, the current particle is compared with the newly generated particle; in other words, particles have to be evaluated in the objective function every time they are moved. If the generated particle is better than the current one, then it is replaced by the new particle, receiving the usual name of \textit{the actual best particle} $lB$. The general pseudocode of the particle swarm optimization algorithm is shown in \ref{alg:PSO}. In contrast, the phases of initialization and movement of particles that compose the PSO are explained in the following two subsections.\\
+When the population is initialized and evaluated, the particle with the lowest or highest fitness is obtained depending on whether it is a minimization or maximization problem, respectively. This found particle is called \textit{the global particle} $gB$. On the other hand, in each iteration of the algorithm, the current particle is compared with the newly generated particle; in other words, particles have to be evaluated in the objective function every time they are moved. If the generated particle is better than the current one, then it is replaced by the new particle, receiving the usual name of \textit{the actual best particle} $lB$. The general pseudocode of the particle swarm optimization algorithm is shown in Algorithm \ref{alg:PSO}. In contrast, the phases of initialization and movement of particles that compose the PSO are explained in the following two subsections.\\
 
 \begin{algorithm}[h!]
 \caption{Particle swarm optimization pseudocode}
@@ -139,7 +139,7 @@ All meta-heuristic algorithms have an initialization phase that has the primary 
 \label{eq:equation1}
 \end{equation}
 
-Where, $\vec{x}_{i,j}^t$ is the $i-th$ population particle, $i$ represents the number of particles and its size is $(i=1,2,3,...,N)$, where $N$ is the maximum number of particles, $j$ defines the problem dimensions, the iteration number is represented by $t$. While $lb_j$ and $ub_j$ define the lowest and upper limit, respectively. It is worth saying that $rand$ is a uniformly distributed random number between $0$ and $1$. Once established the respective position of each particle, it is necessary to define the velocity each one of them will move around the search space to find the global optimal. We will explain that phase next.
+\noindent where, $\vec{x}_{i,j}^t$ is the $i-th$ population particle, $i$ represents the number of particles and its size is $(i=1,2,3,...,N)$, where $N$ is the maximum number of particles, $j$ defines the problem dimensions, the iteration number is represented by $t$. While $lb_j$ and $ub_j$ define the lowest and upper limit, respectively. It is worth saying that $rand$ is a uniformly distributed random number between $0$ and $1$. Once established the respective position of each particle, it is necessary to define the velocity each one of them will move around the search space to find the global optimal. We will explain that phase next.
 
 \subsubsection{Velocity and movement of particles}
 
@@ -155,7 +155,7 @@ To find the velocity, it is necessary to get the best global and local values of
 \label{eq:equation3}
 \end{equation}
 
-Where $\vec{v}_i^{t+1}$ is the velocity of the iteration $t+1$, $\vec{v}_i^{t}$ is the velocity of last iteration, the vector that contains each particle position is $\vec{x}_i^{t}$, $\vec{r1}^t$ and $\vec{r2}^t$ represent uniformly distributed random numbers between $0$ and $1$. It is worth to say that $c_{1}$ and $c_{2}$ are constants that control the balance between a local and global optimal positions, such as $w$ that represents a weight generally establishes as 1 . Meanwhile, Eq. \ref{eq:equation3} is used to displace the particles to new positions in the next iteration. Where $\vec{x}_i^{t+1}$ is the vector where the new obtained positions at iteration $t+1$ are stored, $\vec{x}_i^{t}$ corresponds to the previous position of particles calculated at iteration $t$, and finally $\vec{v}_i^{t+1}$ is the velocity vector obtained by Eq.~\ref{eq:equation2}.
+\noindent where $\vec{v}_i^{t+1}$ is the velocity of the iteration $t+1$, $\vec{v}_i^{t}$ is the velocity of last iteration, the vector that contains each particle position is $\vec{x}_i^{t}$, $\vec{r1}^t$ and $\vec{r2}^t$ represent uniformly distributed random numbers between $0$ and $1$. It is worth to say that $c_{1}$ and $c_{2}$ are constants that control the balance between a local and global optimal positions, such as $w$ that represents a weight generally establishes as 1 . Meanwhile, Eq. \ref{eq:equation3} is used to displace the particles to new positions in the next iteration. Where $\vec{x}_i^{t+1}$ is the vector where the new obtained positions at iteration $t+1$ are stored, $\vec{x}_i^{t}$ corresponds to the previous position of particles calculated at iteration $t$, and finally $\vec{v}_i^{t+1}$ is the velocity vector obtained by Eq.~\ref{eq:equation2}.
 
 It is essential to mention that the majority of modifications to the PSO algorithm have as purpose to find new ways to accelerate the particles as best as possible \cite{erick2016optimizacion}. To end this section, Fig. \ref{fig:PSOmovement} shows a graphic description of particle's velocity and their movement in the particle swarm optimization algorithm for a better understanding by the reader.\\
 
@@ -434,8 +434,8 @@ The main novelty of this algorithm is that the authors propose a new function fo
 \end{equation}
 
 
-Where $fi=[f_i(1),f_i(2),…,f_i(D)]$ defines which particles of $lB$ the particle $i$ should follow. $lB_{f_i(j),j}$ can be the corresponding dimensions of any particle’s $lB$ including its own $lB$, and the decision depends on probability $P_c$, referred to as the learning probability, which can take different values for different particles.
-For each dimension of particle $i$, the authors generate a random number. If this random number is higher than $P_{c_i}$, the corresponding dimension will learn from its own $lB$; otherwise, it will learn from another particle’s $lB$.The selection method used by the tournament and the main steps for selection are as follows:
+\noindent where $fi=[f_i(1),f_i(2),…,f_i(D)]$ defines which particles of $lB$ the particle $i$ should follow. $lB_{f_i(j),j}$ can be the corresponding dimensions of any particle’s $lB$ including its own $lB$, and the decision depends on probability $P_c$, referred to as the learning probability, which can take different values for different particles.
+For each dimension of particle $i$, the authors generate a random number. If this random number is higher than $P_{c_i}$, the corresponding dimension will learn from its own $lB$; otherwise, it will learn from another particle’s $lB$. The selection method used by the tournament and the main steps for selection are as follows:
 
 \begin{itemize}
     \item First, two particles are chosen randomly from the population, except the particle with its updated velocity.
@@ -445,7 +445,7 @@ For each dimension of particle $i$, the authors generate a random number. If thi
 
 \subsubsection{Fuzzy adaptative PSO} 
 
-The authors of this paper, published in 2001~\cite{shi2001fuzzy} proposed to adapt the $PSO$ dynamically at four different levels: environment, population, individual, and component level. As the inertia weight is a global variable, it can be applied to the whole population. The authors designed a fuzzy system to adapt the inertia weight dynamically. Typically, the system's inputs are variables that measure the performance of the $PSO$, and the output is the inertia weight or the change in the inertia weight. The current best performance evaluation named $CBPE$ indicates the best solution found by the $PSO$. Due to the wide variety of optimization problems, this term must be converted into a normalized format called $NCPBE$. Assume that to solve a minimization problem and the actual minimum is denoted $CBPE_{min}$ and the non-optimal $CBPE$ is denoted $CBPE_{max}$, which represents any suboptimal solution that is equal to or greater than $CBPE_{max}$. The normalized $CBPE$ ($NCBPE$) can be computed as three fuzzy variables in order to define three fuzzy sets: low, medium, and high with associated membership functions as $left\_triangle$, $triangle$ and $right\_triangle$, respectively. The definitions of these three membership functions are: 
+The authors of a paper published in 2001~\cite{shi2001fuzzy} proposed to adapt the $PSO$ dynamically at four different levels: environment, population, individual, and component level. As the inertia weight is a global variable, it can be applied to the whole population. The authors designed a fuzzy system to adapt the inertia weight dynamically. Typically, the system's inputs are variables that measure the performance of the $PSO$, and the output is the inertia weight or the change in the inertia weight. The current best performance evaluation named $CBPE$ indicates the best solution found by the $PSO$. Due to the wide variety of optimization problems, this term must be converted into a normalized format called $NCPBE$. Assume that to solve a minimization problem and the actual minimum is denoted $CBPE_{min}$ and the non-optimal $CBPE$ is denoted $CBPE_{max}$, which represents any suboptimal solution that is equal to or greater than $CBPE_{max}$. The normalized $CBPE$ ($NCBPE$) can be computed as three fuzzy variables in order to define three fuzzy sets: low, medium, and high with associated membership functions as $left\_triangle$, $triangle$ and $right\_triangle$, respectively. The definitions of these three membership functions are: 
 
 \begin{equation}
     f_{left\_triangle}=
@@ -473,7 +473,7 @@ The authors of this paper, published in 2001~\cite{shi2001fuzzy} proposed to ada
     \end{cases}
 \end{equation}
 
-where $x_1$ and $x_2$ are critical parameters that determine the shape and location of the functions, other definitions of membership functions are possible, of course. However, the authors have found that the ones they propose are useful for various problems and easy to implement on microcontrollers and microprocessors.
+\noindent where $x_1$ and $x_2$ are critical parameters that determine the shape and location of the functions, other definitions of membership functions are possible, of course. However, the authors have found that the ones they propose are useful for various problems and easy to implement on microcontrollers and microprocessors.
 
 \subsection{Major PSO variants for multi-objective optimization}
 \label{sec:variants2}
@@ -514,12 +514,13 @@ This multi-objective algorithm has been widely used in the literature for applic
 
 \subsubsection{SMPSO}
 
-In 2009, Nebro et al.~\cite{nebro2009smpso} studied six representative variants of MOPSO and found that they had problems solving multi-modal problems. The problem was the "swarm explosion"~\cite{clerc2002particle}: erratic movements toward the upper and lower boundaries of particle positions that occur when particles acquire very high velocity. Based on a MOPSO algorithm, they presented in~\cite{nebro2009smpso} a new multi-objective PSO algorithm using the velocity constraint strategy~\cite{clerc2002particle}. Their proposal could obtain proper particle positions when high velocity was present, avoiding the swarm explosion effect. The new algorithm, called Speed-constrained Multi-objective PSO (SMPSO), applies the following equations to perform its task:
+In 2009, Nebro et al.~\cite{nebro2009smpso} studied six representative variants of MOPSO and found that they had problems solving multi-modal problems. The problem was the ``swarm explosion"~\cite{clerc2002particle}: erratic movements toward the upper and lower boundaries of particle positions that occur when particles acquire very high velocity. Based on a MOPSO algorithm, they presented in~\cite{nebro2009smpso} a new multi-objective PSO algorithm using the velocity constraint strategy~\cite{clerc2002particle}. Their proposal could obtain proper particle positions when high velocity was present, avoiding the swarm explosion effect. The new algorithm, called Speed-constrained Multi-objective PSO (SMPSO), applies the following equations to perform its task:
 
 \begin{equation} \label{eq:con_coe}
 \chi = \frac{2}{2 -\varphi - \sqrt{\varphi^2 -4\varphi}}
 \end{equation}
-where
+
+\noindent where
 \begin{equation}
 \varphi = \left\{ \begin{matrix}
     C_1 +C_2 & \rm{if} \quad C_1 +C_2 > 4 \\ 
@@ -536,7 +537,8 @@ v_{i, j}^t = \left\{ \begin{matrix}
     v_{i,j}^t & {\rm otherwise}
 \end{matrix} \right.
 \end{equation}
-where
+
+\noindent where
 \begin{equation}
     delta_j = \frac{(upper\_limit_j -lower\_limit_j)}{2}
 \end{equation}
@@ -558,7 +560,7 @@ In the original PSO $lB_i$ represents the best position found by the $i^{th}$ pa
     v_{i_j}^{t+1} \leftarrow \left\{  \begin{matrix} v_{i_j}^{t+1} & \rm{ if} \, |v_{i_j}^{t+1}| \leq v_m^j \\ v_m^j sign ( v_{i_j}^{t+1} ) & \rm{otherwise} \end{matrix} \right. , j \in [1,s]
 \end{equation}
 
-Where $v_m = [v_m^1, \dots, v_m^s]$ is the vector of maximum admissible speeds. The authors suggest that FC-MOPSO starts with random velocities no greater than $v_{m} = 0.1(ub - lb)$. In other words, they prevent the method from starting with large velocities while starting with some speeds to start the search at a more advanced stage. 
+\noindent where $v_m = [v_m^1, \dots, v_m^s]$ is the vector of maximum admissible speeds. The authors suggest that FC-MOPSO starts with random velocities no greater than $v_{m} = 0.1(ub - lb)$. In other words, they prevent the method from starting with large velocities while starting with some speeds to start the search at a more advanced stage. 
 
 %lgorithms should use the package algorithmic. An example is given below:
 
@@ -603,12 +605,12 @@ In \cite{bahrami2014short} Bahrami et al. use the PSO algorithm to determine the
 In 2016, Mesbahi et al. used a hybrid PSO-Nelder-Mead algorithm to identify and model electric vehicle batteries and then used this information to simulate vehicle energy demand, which allows maximum energy harvesting~\cite{mesbahi2016dynamical}. Finally, Mesbahi et al. compare their results against the power consumption of a physical urban electric vehicle, with a modeling error inferior to 0.5\%.
 Mozafar et al. applied a multiobjective algorithm, using PSO combined with GA to optimize the location and capacity of renewable power sources and electric vehicle charging stations within the same distribution network.~\cite{mozafar2017simultaneous}.
 
-\section{Conclusions}
+\section{Summary and Discussion}
 \label{sec:conclusionspso}
 
 The PSO is an interesting algorithm that has attracted the attention of researchers and practitioners from different areas over the years. The simplicity of the PSO makes it a popular mechanism for single-objective optimization. Their operators are easy to implement and permit finding solutions to complex problems. Since the PSO has been extensively used, it has also been modified to improve its performance.
 Multi-objective problems require more sophisticated algorithms that permit handle with them.
-In this sense, the PSO has been extended for multi-objective optimization. Regarding the importance of the PSO, it is possible to see how this method stills being a source of research from different repositories. The multiple modifications of the PSO algorithm are an excellent example of this. This chapter just considered the most relevant derivative work of PSO from 2010 to 2020. There exists more, but analyzing them is a complex and irrelevant task to the present work scopes. The quantity of derivative works is similar to the number of applications of the PSO; since its implementation is relatively easy and the code is entirely available, it is possible to find a significant number of articles that reports result from different fields of applications. Then it is possible to conclude that the PSO is one of the most important meta-heuristic algorithms, and the research related to it is still a field of research.
+In this sense, the PSO has been extended for multi-objective optimization. Regarding the importance of the PSO, it is possible to see how this method is still being a source of research from different repositories. The multiple modifications of the PSO algorithm are an excellent example of this. This chapter just considered the most relevant derivative work of PSO from 2010 to 2020. There exists more, but analyzing them is a complex and irrelevant task to the present work scopes. The quantity of derivative works is similar to the number of applications of the PSO; since its implementation is relatively easy and the code is entirely available, it is possible to find a significant number of articles that reports result from different fields of applications. Then it is possible to conclude that the PSO is one of the most important meta-heuristic algorithms, and the research related to it is still a field of research.
 
 \subsection{Exercises}
 \label{sec:exeercises}
@@ -620,7 +622,7 @@ In this sense, the PSO has been extended for multi-objective optimization. Regar
     f(x_1 \cdots x_n) = \sum_{i=1}^{n-1} (100(x_i^2 - x_{i+1})^2 + (1-x_i)^2)
 \end{equation}
 
-Where $-2.048 \leq x_i \leq 2.048$ and $\text{ the minimum at }f(1, 1, \cdots, 1) = 0$.  Once you have implemented the Rosenbrock function plot its surface in 2 dimensions.
+\noindent where $-2.048 \leq x_i \leq 2.048$ and $\text{ the minimum at }f(1, 1, \cdots, 1) = 0$.  Once you have implemented the Rosenbrock function plot its surface in 2 dimensions.
 
     \item Considering the Rosenbrock function, initialize a random population of 50 particles and plot them in the the 2-dimensional surface of the function.
     
