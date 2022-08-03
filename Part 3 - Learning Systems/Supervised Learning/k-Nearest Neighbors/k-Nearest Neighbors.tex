@@ -92,7 +92,7 @@ The Hamming distance can be viewed as a special case of the Levenshtein distance
 
 \section{The kNN Algorithm Explained}
 
-In contrast to other common machine learning families of algorithms, such as Neural Networks and Decision Trees, the $k$NN family of algorithms do not possess a learning phase yielding an abstract model representing the problem, instead, these algorithms only store the training examples. Given this fact, $k$NN like algorithms are also known as lazy algorithms. In the test phase, once a new unlabelled example \textbf{z} arrives: (i) its distances (or similarities) to all training examples are computed; (ii) the training examples are sorted accordingly to their distances to \textbf{z}; (iii) the most frequent class among the classes of the $k$ \textbf{z}'s nearest neighbors is then returned (note that for regression problems, the average of the target values from the $k$ \textbf{z}'s nearest neighbors is returned). 
+In contrast to other common machine learning families of algorithms, such as Neural Networks and Decision Trees, the $k$NN family of algorithms do not possess a learning phase yielding an abstract model representing the problem, instead, these algorithms only store the training examples. Given this fact, $k$NN-like algorithms are also known as lazy algorithms. In the test phase, once a new unlabelled example \textbf{z} arrives: (i) its distances (or similarities) to all training examples are computed; (ii) the training examples are sorted accordingly to their distances to \textbf{z}; (iii) the most frequent class among the classes of the $k$ \textbf{z}'s nearest neighbors is then returned (note that for regression problems, the average of the target values from the $k$ \textbf{z}'s nearest neighbors is returned). 
 
 Algorithm \ref{alg:knn} depicts the test procedure for the original $k$NN . In Alg. \ref{alg:knn}, $\mathcal{T}$ is a set of training examples consisting of tuples (\textbf{x},$y$), \textbf{z} is an unlabelled test example and $k$ is the number of neighbors to be considered. In line 1, $neighbors$ is an empty list that shall store tuples containing a distance $d$ (between a training example \textbf{x}$^{(i)}$ and a test example \textbf{z}) and the label $y^{(i)}$. The loop from lines 2 to 4 fills the $neighbors$ list and in line 6 this list is sorted in ascending order according the stored distances $d$. The returned class label ($y^{'}$) will be the most frequent class considering the first $k$ items of $neighbors$ (or the average of the \textit{k} \textbf{z}'s neighbors target values for regression problems, as aforementioned).
 
@@ -260,7 +260,7 @@ example index & x1 & x2 & class \\
 
 \vspace{0.4cm}
 
-As result, CNN stores only the training examples with indexes $\{1,2,5,6,7,9,11,15\}$. Figure \ref{fig:cnndataset} shows the complete original training set (left) and the training set with the reference set $S$ marked (right). Notice that example 2 seems to be a noise. Overall, the main aim of the CNN is to select examples at the classification border, however, depending on the presentation order of the examples in the training set it may select examples placed inside the class distribution, i.e., examples in non-conflict regions. Additionally, noisy examples are very likely to be added to $S$ since they tend to be misclassified during the training phase.%   e noisy training then, conclude that the CNN can't handle noise and is sensitive to the order in which the training examples are presented to the algorithm.
+As result, CNN stores only the training examples with indexes $\{1,2,5,6,7,$ $9,11,15\}$. Figure \ref{fig:cnndataset} shows the complete original training set (left) and the training set with the reference set $S$ marked (right). Notice that example 2 seems to be a noise. Overall, the main aim of the CNN is to select examples at the classification border, however, depending on the presentation order of the examples in the training set it may select examples placed inside the class distribution, i.e., examples in non-conflict regions. Additionally, noisy examples are very likely to be added to $S$ since they tend to be misclassified during the training phase.%   e noisy training then, conclude that the CNN can't handle noise and is sensitive to the order in which the training examples are presented to the algorithm.
 
 \begin{figure}[h]
     \centering
@@ -271,7 +271,7 @@ As result, CNN stores only the training examples with indexes $\{1,2,5,6,7,9,11,
 
 \subsection{Nearest Neighbor Structural Risk Minimization}
 
-NNSRM \cite{nnsrm:2003}, the CNN, also aims to select examples at the order of the classes, however, NNSRM is not sensitive to the presentation order of the examples in the training set. 
+NNSRM \cite{nnsrm:2003}, as CNN, also aims to select examples at the order of the classes, however, NNSRM is not sensitive to the presentation order of the examples in the training set. 
 
 NNSRM finds the most significant training examples such that, for all $\mathbf{x}^{(i)} \in \mathcal{T}$, 1$NN(\mathbf{x}^{(i)}) = y^{(i)}$, i.e., the $R_{emp}$ (empirical risk or training error) is 0. For a two class problem, let $\rho(\mathbf{x}^{(i)},\mathbf{x}^{(j)})$ be the distance between examples $\mathbf{x}^{(i)}$ and $\mathbf{x}^{(j)}$ so that $y^{(i)} = -1$ and $y^{(j)} = 1$. Let $d_k$ be an ascendant ordered list of distances computed between each two elements of opposite classes for $k = 1, 2, 3 \: .. \: \#(y=1) * \#(y=-1)$.
 
@@ -321,7 +321,7 @@ Figure \ref{fig:nnsrmdataset} presents the result of the execution of the NNSRM 
 \begin{figure}[ht!]
     \centering
     \includegraphics[height = 4.5cm, width =  10cm]{"Part 3 - Learning Systems/Supervised Learning/k-Nearest Neighbors/figures/nnsrmdataset.png"}
-    \caption{Training examples locations of a hypothetical two class training set $\mathcal{T}$ and the examples selected by the NNSRM.}
+    \caption{Training examples locations of a hypothetical two class training set $\mathcal{T}$. The examples selected by the NNSRM are marked with a cross.}
     \label{fig:nnsrmdataset}
 \end{figure}
 
