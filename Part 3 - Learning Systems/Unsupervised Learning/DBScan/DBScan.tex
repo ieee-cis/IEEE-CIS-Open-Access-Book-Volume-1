@@ -347,7 +347,13 @@ if the density of the sample set is not uniform, DBSCAN performs poorly as illus
 \begin{enumerate}
 \item The advantages of DBSCAN are (1) it doesn't need hyperparameter like predefining the number of clusters k as k-means; (2) it can work well to form the artitary shapes of clusters; (3) it is robust to outliers. The disadvantages of DBSCAN are (1) it may work properly on the varying density datasets; (2) it requires the prior knowledge for distance function, minPts and $\epsilon$ 
 \item Keeping one parameter fixed and varying another one to observe how changing parameters can impact on the performance. As per extensive research studies, with increased $MinPts$, the performance might be observed improved espeically over large, high dimensional datasets or datasets containing lots of duplicates. The $\epsilon$ is a bit tricky. Its value may heavily rely on domain knowledge (e.g., distance function in different application domains in terms of clustering location clusters measured in km, or clustering in medical imaging measure in cm). You may observe significantly different situations over different datasets. 
-\item The code of solution can be found at \url{https://gist.github.com/LinaYao/00f3b2cf65600f7b03df020c81cc5de9}.
+\item The code of solution can be found at 
+
+\url{https://github.com/ieee-cis/IEEE-CIS-Open-Access-Book-Volume-1/blob/main/Part%203%20-%20Learning%20Systems/Unsupervised%20Learning/DBScan/code/find_eps.py} 
+
+or 
+
+\url{https://gist.github.com/LinaYao/00f3b2cf65600f7b03df020c81cc5de9}.
 \end{enumerate} 
 
 
