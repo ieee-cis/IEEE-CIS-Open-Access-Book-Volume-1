@@ -93,7 +93,7 @@ If we want the output image to be the same size as the input image, we have to a
 
 \subsection{Stride}
 
-The convolution examples we saw earlier used one-by-one displacement steps. But we can also use larger steps, as this reduces the computational cost of performing these steps at intervals. This clearly has an impact on the final result, decreasing its resolution, but in cases where we do not need to extract delicate features this becomes a good option \cite{goodfellow2016}.
+The convolution examples we saw earlier used baby steps. But we can also use larger steps, as this reduces the computational cost of performing these steps at intervals. This clearly has an impact on the final result, decreasing its resolution, but in cases where we do not need to extract delicate features this becomes a good option \cite{goodfellow2016}.
 
 When we use a stride value greater than one, this will also affect the output size, which will be governed by the following relationship \cite{adrian2017}:
 
