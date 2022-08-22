@@ -37,7 +37,7 @@ The processing performed by neuron $j$ consists in weighting the input signals $
 
 An activation function $f(\cdot)$ defines the output of a given neuron, respecting the integration (activation) value $x$. Several functions have already been used or developed, which allow the production of results with actual values, not only binary outputs, as in the case of Perceptron \cite{haykin}.
 
-The linear activation function is widely used in output layer neurons. It's a simple function that can be described by equation \ref{eq:funcaoAtivacaoLinear}: \begin{equation}
+The linear activation function is a simple function that can be described by equation \ref{eq:funcaoAtivacaoLinear}: \begin{equation}
 	\label{eq:funcaoAtivacaoLinear}
 	f(x) = \alpha x,
 \end{equation}
@@ -52,13 +52,13 @@ Another standard function is the signal, also known as \textit{Heaviside} \cite{
 	\end{matrix}\right.
 \end{equation}
 
-A group of functions most commonly used in the hidden layers of an MLP is the sigmoid functions \cite{haykin, Castro2006FundamentalsON}. Its graph has the peculiar shape of an ``S". It presents a balance between linear and nonlinear behavior, obtained from several functions, such as the logistic function and the hyperbolic tangent \cite{Jeffrey2008}. The logistic function can be defined as Equation \ref{eq:funcaoAtivacaoLogistica}:
+A group of functions most commonly used in the hidden layers of an MLP are the sigmoid functions \cite{haykin, Castro2006FundamentalsON}. Their plot has the peculiar shape of an ``S". They presents a balance between linear and nonlinear behavior, which can be obtained from several functions, such as the logistic function and the hyperbolic tangent \cite{Jeffrey2008}. The logistic function can be defined by Equation \ref{eq:funcaoAtivacaoLogistica}:
 \begin{equation}
 	\label{eq:funcaoAtivacaoLogistica}
 	f(x) = \frac{1}{1 + e^{-x}}\:.
 \end{equation}
 
-Therefore, the hyperbolic tangent is defined by Equation \ref{eq:funcaoAtivacaotanh}:
+The hyperbolic tangent is defined by Equation \ref{eq:funcaoAtivacaotanh}:
 \begin{equation}
 \label{eq:funcaoAtivacaotanh}
 	f(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}\:.
@@ -67,12 +67,12 @@ Therefore, the hyperbolic tangent is defined by Equation \ref{eq:funcaoAtivacaot
 The wide use of S-Shaped functions is also due to some essential features \cite{Menon1996}:
 
 \begin{itemize}
-    \item This function is continuous and differentiable at all points, allowing adjustment with derivative-based algorithms such as gradient;
+    \item This function is continuous and differentiable at all points, allowing adjustment with derivative-based learning algorithms such as gradient descent;
     \item It has output saturation, which ends up preventing the output signal of each neuron from diverging;
     \item It is possible to use them to create different mappings since these functions have an almost linear character in the region around the origin. At the same time, close to saturation, they are strongly nonlinear.
 \end{itemize}
 
-Recently, with the advancement of ANNs studies and, more specifically, \textit{deep learning} methods, new activation functions were developed to solve vanishing gradients or flat surfaces \cite{Fahlman1988}.
+Recently, with the advancement of ANNs studies and, more specifically, \textit{deep learning} methods, new activation functions have been developed to solve vanishing gradients or flat surfaces \cite{Fahlman1988}, which are problems that learning algorithms such as gradient descent may face and that may prevent them from being able to successfully learn the weights of the neurons.
 
 One new activation function, the Rectified Linear Unit or ReLU \cite{Maas2013}, can be expressed by Equation \ref{eq:relu}.
 \begin{equation}
