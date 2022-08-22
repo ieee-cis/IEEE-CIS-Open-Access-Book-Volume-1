@@ -12,9 +12,9 @@ This chapter will explain the MultiLayer Perceptron (MLP), the best-known ANN ar
 \section{Artificial Neuron}
 \label{sec:neuronio}
 
-The biological neuron inspires the artificial neuron. Neural impulses are received through dendrites and processed in the cell body. Depending on the result of the integration of the received signals, if they are higher than a critical threshold, the neuron may or may not produce a new impulse (action potential), which will, in turn, be transmitted to other neurons connected to its axon terminals \cite{Castro2006FundamentalsON}. The axon union with dendrites is called a synapse, which works as a valve controlling the flow of information (impulses) between neurons. The synapse is variable, hence, with the ability to adapt and learn.
+The artificial neuron is inspired by the biological neuron. In biological systems, neural impulses are received through dendrites and processed in the cell body. Depending on the result of the integration of the received signals, if they are higher than a critical threshold, the neuron may or may not produce a new impulse (action potential), which will, in turn, be transmitted to other neurons connected to its axon terminals \cite{Castro2006FundamentalsON}. The axon union with dendrites is called a synapse, which works as a valve controlling the flow of information (impulses) between neurons. The synapse is variable, hence, with the ability to adapt and learn.
 
-Figure \ref{fig:neuronio} shows the generic artificial neuron scheme used in ANNs. This device receives a set of $\textbf{u} = [ u_1 , u_2 ,..., u_i]$ inputs from other neurons or the network input, processes this information, and responds with a $y$ signal. This response, a transformation of the received inputs, is propagated to other neurons.
+Figure \ref{fig:neuronio} shows the generic artificial neuron scheme used in ANNs. This device receives a set of $\textbf{u} = [ u_1 , u_2 ,..., u_i]$ inputs, which may come either from other neurons or from the network input. It then processes this information, and responds with a $y$ signal. This response, which is a transformation of the received inputs, is either propagated to other neurons or given as the output of the ANN.
 
 \begin{figure}[h!]
 	\caption{Scheme of an artificial neuron built with $u_i$ inputs and $y$ outputs.}
@@ -25,13 +25,11 @@ Figure \ref{fig:neuronio} shows the generic artificial neuron scheme used in ANN
 	\label{fig:neuronio}
 \end{figure}
 
-This figure shows that the input signals $u_i , i=1, 2,..., I$ and a fixed value bias signal $+1$ are weighted by the weights $w_{ji}$ in each neuron $j$. The activation $x$ (induced local field) is reached with these terms, which goes through the activation function $f(\cdot)$, generating the output $y_j$. In general, the activation function $f(\cdot)$ is nonlinear. The mathematical representation of this model is given by Equation \ref{eq:neuronio}, where the index $i=0$ represents the bias:
+The processing performed by neuron $j$ consists in weighting the input signals $u_i , i=1, 2,..., I$ and a fixed value bias signal $+1$ by the weights $w_{ji}$ of this neuron. Then, the sum of the weighted input signals passes through an activation function $f(\cdot)$, generating the output $y_j$. The activation function $f(\cdot)$ is explained in Section \ref{ssec:ativacao}. The mathematical representation of this model is given by Equation \ref{eq:neuronio}, where the index $i=0$ represents the bias:
 \begin{equation}
     \label{eq:neuronio}
     y_j = f \left( \sum_{i=0}^I w_{ji} u_i  \right).
 \end{equation}
-
-Next chapter will describe more information about the activation functions.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Activation Functions}
@@ -43,7 +41,7 @@ The linear activation function is widely used in output layer neurons. It's a si
 	\label{eq:funcaoAtivacaoLinear}
 	f(x) = \alpha x,
 \end{equation}
-where $\alpha$ is a real number.
+\noindent where $\alpha$ is a real number.
 
 Another standard function is the signal, also known as \textit{Heaviside} \cite{haykin}, which can respond in a binary $\{0, 1\}$ or bipolar $\{-1, 1\}$ way, the first being the one used in the McCulloch and Pitts neuron \cite{McCulloch1990}, as shown in Equation \ref{eq:funcaoAtivacaoMCP}:
 \begin{equation}
