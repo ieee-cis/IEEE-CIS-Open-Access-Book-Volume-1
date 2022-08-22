@@ -584,20 +584,16 @@ They reported that the approximations to the Pareto front found by their algorit
 
 \subsubsection{FC-MOPSO}
 
-This algorithm presented in 2017~\cite{mokarram2018new} proposes a new multi-objective algorithm, originally targeted at the problem of optimal design of engineering problems with few function evaluations.\\
-The main contributions are the following:
-\begin{itemize}
-    \item Effective leader selection process for each particle to guarantee diversity and fast convergence.
-    \item The FC-MOPSO is a modified algorithm for handling discrete optimization problems.
-    \item Use of constant value close to unity: $\alpha = 0.9.$.
-\end{itemize}
-In the original PSO $\vec{lB}_i^t$ represents the best position found by the $i^{th}$ particle in the $t^{th}$ iteration. However, in a multi-objective problem the authors generalize this concept to the set $P_i$, which is defined as the set of non-dominant solutions found so far by the particle $i$. Subsequently a particle called $\vec{psel}_i$ will be selected from $P_i$ for the flight stage. In the same way the concept $\vec{gB}_i$ is generalized to $\vec{Leader}_i$ which randomly selects $n$ neighboring sets $P_j (j\in[1,...,n])$ by extracting non-dominant sets to assign to $Q_i$. A non-dominant set means a group of particles of the population, that have noncompetitive objective values and that do not benefit the search for the global optimum.
+This algorithm presented in 2017~\cite{mokarram2018new} originally targeted at the problem of multi-objective design of engineering problems with few function evaluations.
+%The main contributions are the following:
+%\begin{itemize}
+%    \item Effective leader selection process for each particle to guarantee diversity and fast convergence.
+%    \item The FC-MOPSO is a modified algorithm for handling discrete optimization problems.
+%    \item Use of constant value close to unity: $\alpha = 0.9.$.
+%\end{itemize}
+It generalizes the concept of personal best $\vec{lB}_i^t$ to the set $P_i$, which contains all non-dominated solutions found so far by the particle $i$. A particle called $\vec{psel}_i$ is selected from $P_i$ for the purpose updating the velocity (and position) of the particle $i$ in the algorithm. Similarly, the concept of local best $\vec{lB}_i$, which is used by some PSO variants to capture the best particle found in the neighbourhood of particle $i$ instead of in the population of particles as a whole, is also generalized to randomly select non-dominated solutions. 
 
-\begin{equation}
-    v_{i,j}^{t+1} \leftarrow \left\{  \begin{matrix} v_{i,j}^{t+1} & \rm{ if} \, |v_{i,j}^{t+1}| \leq v_m^k \\ v_m^k sign ( v_{i,j}^{t+1} ) & \rm{otherwise} \end{matrix} \right. , k \in [1, \cdots,s]
-\end{equation}
-
-\noindent where $v_m = [v_m^1, \dots, v_m^s]$ is the vector of maximum admissible speeds. The authors suggest that FC-MOPSO starts with random velocities no greater than $v_{m} = 0.1(ub - lb)$, where $ub$ and $lb$ are the upper and the lower boundaries of the search space, respectively. In other words, they prevent the method from starting with large velocities while starting with some speeds to start the search at a more advanced stage. 
+The authors also suggest that FC-MOPSO starts with random velocities no greater than $v_{m} = 0.1(ub - lb)$, where $ub$ and $lb$ are the upper and the lower boundaries of the search space defined by $\mathcal{X}$, respectively. In other words, they prevent the method from starting with large velocities while starting with some speeds to start the search at a more advanced stage. 
 
 %lgorithms should use the package algorithmic. An example is given below:
 
