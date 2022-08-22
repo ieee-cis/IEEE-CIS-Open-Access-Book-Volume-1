@@ -496,38 +496,57 @@ All variables are associated to three fuzzy sets: low, medium, and high with ass
 \subsection{Major PSO variants for multi-objective optimization}
 \label{sec:variants2}
 
-PSO is a powerful tool for solving single-objective problems; for that reason, researchers expanded its capabilities to the multi-objective domain. The idea is to generate PSO-based approaches that can optimize more than one objective function. Multi-objective optimization (MO) is related to problems that are necessary to search for solutions for conflicting goals. The main difference between MO and single-objective optimization is that in MO, a set of solutions called a Pareto front is generated where each objective value is a feasible solution \cite{coello2007evolutionary}. This section briefly discusses the most relevant versions of the PSO for MO problems. These variants were selected based on their citations in scientific repositories.
+PSO is a powerful tool for solving single-objective problems; for that reason, researchers expanded its capabilities to the multi-objective domain. The idea is to generate PSO-based approaches that can optimize more than one objective function. Assume a multi-objective optimization problem in the canonical form given in the introduction of Part II of this book:
+
+\[
+\begin{tabular}{ll}
+minimize        & $f_k(\mathbf{x})$, \ \ \ \ \ \ \ \ \ \ \ $k=\{1,2,\cdots,p\}$ \\ 
+subject to      & $g_i(\mathbf{x}) \leq 0$, \ \ \ \ \ $i=\{1,2,\cdots,m\}$ \\
+                & $h_j(\mathbf{x}) = 0$, \ \ \ \ \ $j=\{1,2,\cdots,n\}$ ,\\
+\end{tabular}
+\]
+
+\noindent where $\mathbf{x} \in \mathcal{X}$ is the design variable being optimised, $p$ is the number of objective functions to be optimised, $m$ is the number of constraints of the type $g_i$ and $n$ is the number of constraints of the type $h_j$. 
+Multi-objective optimization (MO) aims to find a set of solutions called a Pareto set \cite{coello2007evolutionary}, where each solution is non-dominated by any other solution in the search space. A solution $\mathbf{x}^{(1)}$ is said to dominate another solution $\mathbf{x}^{(2)}$ if and only if:
+
+\begin{equation}
+\begin{tabular}{l}
+$\forall i, f_i(\mathbf{x}^{(1)}) \leq f_i(\mathbf{x}^{(2)})$  and  \\
+$\exists i, f_i(\mathbf{x}^{(1)}) < f_i(\mathbf{x}^{(2)})$ \label{eq:dominance}
+\end{tabular}
+\end{equation}
+
+As such, the Pareto set can be seen as composed of solutions that represent different trade-offs among the objectives. This section briefly discusses the most relevant versions of the PSO for MO problems. These variants were selected based on their citations in scientific repositories.
 
 \subsubsection{MOPSO} 
 
-This algorithm proposed in 2002 introduces concepts of multiobjective optimization to modify the original PSO algorithm and implement it to solve multiobjective optimization problems, the authors named this approach multiobjective particle swarm optimization (MOPSO)~\cite{coello2002mopso} and was validated with algorithms such as Pareto Archived Evolution Strategy (PAES)~\cite{knowles1999pareto} and the Non-dominated Sorting Genetic Algorithm II (NSGA II)~\cite{deb2000fast}.
-
-\paragraph{\textit{Algorithm design and general structure}}
-
-The analogy of the particle swarm with evolutionary algorithms made it evident that this algorithm could be designed for a multi-objective approach. Introducing concepts such as the Pareto front and using a memory known as a global repository in which each particle will deposit its flight experiences after each cycle to establish dominance degrees.
-Another adapted mechanism was that each particle could choose a different leader to perform the search and is based on the generation of hyper-cubes, which allows dividing the search space into already explored spaces; the general structure of the algorithm is listed below:
+This algorithm proposed in 2002 introduces concepts of multiobjective optimization to modify the original PSO algorithm and implement it to solve multiobjective optimization problems. The authors named this approach MultiObjective Particle Swarm Optimization (MOPSO)~\cite{coello2002mopso} and validated it by comparing it with algorithms such as Pareto Archived Evolution Strategy (PAES)~\cite{knowles1999pareto} and the Non-dominated Sorting Genetic Algorithm II (NSGA II)~\cite{deb2000fast}.
+%
+%The analogy of the particle swarm with evolutionary algorithms made it evident that this algorithm could be designed for a multi-objective approach. Introducing concepts such as the Pareto front and using a memory known as a global repository in which each particle will deposit its flight experiences after each cycle to establish dominance degrees. Another adapted mechanism was that each particle could choose a different leader to perform the search and is based on the generation of hyper-cubes, which allows dividing the search space into already explored spaces; 
+%
+The general structure of the MOPSO algorithms is listed below:
 
 \begin{enumerate}
-    \item Initialize population with random position and velocity vectors
-    \item Evaluate the objective value of each particle in the set of objective functions, with their respective constraints and bounds $lb$ and $ub$ using the Eq.~\ref{eq:mo_criterion}.
-    \item Archive=non-dominated solutions.
-    \item Determine the objective value of each particle.
-    \item Apply the Eq.~\ref{eq:equation2} and~\ref{eq:equation3}.
-    \item Update personal best and the archive
-    \item Repeat steps 5 to 7 until the stop criterion is reached.
+    \item Initialize population with random position and velocity vectors.
+    \item Evaluate the objective values of each particle. %, with their respective constraints and bounds $lb$ and $ub$ using the Eq.~\ref{eq:mo_criterion}.
+    \item Archive=non-dominated solutions found so far.
+    \item Determine the personal best of each particle.
+    \item Apply Eqs.~\ref{eq:equation2} and~\ref{eq:equation3}.
+    \item Repeat steps 2 to 6 until the stop criterion is reached.
 \end{enumerate}
 
-\begin{equation}
-\begin{split}\label{eq:mo_criterion}
-    \text{Minimize/Maximize } f_n (x) &,\quad n=\{1,2,\cdots,O\}\\
-    \text{Subject to } g_j(x) \geq &, \quad j = \{1,2,\cdots,J\}\\
-    h_k(x)=0 &, \quad k=\{1,2,\cdots,K\}\\
-    x_i^{(lb)} \leq x_i \leq x_i^{(ub)} &, \quad i=\{1,2,\cdots,N\}
-\end{split}
-\end{equation} 
+%\begin{equation}
+%\begin{split}\label{eq:mo_criterion}
+%    \text{Minimize/Maximize } f_n (x) &,\quad n=\{1,2,\cdots,O\}\\
+%    \text{Subject to } g_j(x) \geq &, \quad j = \{1,2,\cdots,J\}\\
+%    h_k(x)=0 &, \quad k=\{1,2,\cdots,K\}\\
+%    x_i^{(lb)} \leq x_i \leq x_i^{(ub)} &, \quad i=\{1,2,\cdots,N\}
+%\end{split}
+%\end{equation} 
 
 
-In MOPSO the velocity and position update equations remain the same as Eq.~\eqref{eq:equation2} and Eq.~\eqref{eq:equation3} of PSO. All the stated parameters are also the same except the objective function. The objective function contains multiple objectives as formulated in Eq.~\eqref{eq:mo_criterion}.
+In MOPSO the velocity and position update equations remain similar to Eq.~\eqref{eq:equation2} and Eq.~\eqref{eq:equation3} of PSO, but the personal best and global best are computed differently. The personal best is determined based on the non-dominance concept. If the new position of a particle dominates the previous personal best of this particle, the new position replaces the previous personal best. If the previous personal best dominates the new position, then the previous personal best is kept. If the new position and the previous personal best are non-dominated by each other, one of them is chosen uniformly at random to become (or remain) the personal best of this particle. The global best is randomly selected among the non-dominated solutions from the archive by giving higher chance to select solutions located in less crowded regions of the search space, i.e., in regions where there are few archive solutions. 
+
 This multi-objective algorithm has been widely used in the literature for applications in different fields; three of the most notable fields, according to the reports in~\cite{lalwani2013comprehensive} are Electrical Engineering, Industrial Engineering, Flow-shop, and Job-shop Scheduling.
 
 \subsubsection{SMPSO}
