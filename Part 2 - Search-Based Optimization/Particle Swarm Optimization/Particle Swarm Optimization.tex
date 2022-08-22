@@ -88,12 +88,12 @@ The rest of the chapter is organized as follows: Section \ref{sec:psobasics} exp
  
 
 %\newpage
-\section{The fundamentals of PSO algorithm}
+\section{The Fundamentals of the PSO Algorithm}
 \label{sec:psobasics}
 
 This section introduces the basic concepts of the standard PSO and how it works. The pseudocode is described easily, and an example permits an analysis of the behavior of the algorithm.
 
-\subsection{The PSO structure}
+\subsection{The PSO Structure}
 
 Essentially, each particle in the swarm (which is considered a candidate solution) is randomly distributed and represented by a vector in a multidimensional search space; all this set of particles is considered the initial population. Once established the initial population, PSO searches for optima by updating each particle according to notions such as position, velocity, inertia, etc. These notions can be defined as a vector usually called \textit{the velocity vector}, which helps to determine the next movement of the particle. Nonetheless, this movement is not entirely random; each particle is attracted towards both its own personal best position and the best position of the swarm. Then, the population is evaluated in the objective function to determine the population quality. This also allows finding the best element that will be defined as a criterion to beat in the subsequent evaluation. The new generated positions of the particles and the speed with which they are moving are calculated considering the value of the best global element and the actual value of every particle compared with a random number \cite{erick2021matlab}.\\
 
@@ -133,7 +133,7 @@ All meta-heuristic algorithms have an initialization phase that has the primary 
 
 \noindent where $\vec{x}_{i,j}^t$ is the $i-th$ population particle, $i \in \{i=1,2,3,...,N\}$ represents the index of a given particle, $N$ is the maximum number of particles, $j$ represents the $j_{th}$ dimension of the design variable, where $0<j\leq d$ and $d$ is the dimensionality of the design variable. The iteration number is represented by $t$. While $lb_j$ and $ub_j$ define the lowest and upper limit, respectively. It is worth saying that $rand$ is a uniformly distributed random number between $0$ and $1$. Once established the respective position of each particle, it is necessary to define the velocity each one of them will move around the search space to find the global optimal. We will explain that phase next.
 
-\subsubsection{Velocity and movement of particles}
+\subsubsection{Velocity and Movement of Particles}
 
 To find the velocity, it is necessary to get the best global and local values of each particle, commonly called $\vec{gB}^t$ and $\vec{lB}_i^t$ respectively. Eq.~\ref{eq:equation2} defines the velocity calculation for each particle $i$:
 
@@ -158,7 +158,7 @@ It is essential to mention that the majority of modifications to the PSO algorit
 \label{fig:PSOmovement}
 \end{figure}
 
-\subsection{A PSO example}
+\subsection{A PSO Example}
 
 To show how the PSO works here is presented a graphical example. Figure~\ref{fig:f1} shows the peaks function plotted in 3D with a lateral view. This function is commonly used in the literature to explain the behavior of optimization algorithms. Figure~\ref{fig:f2} shows the random initialization of the population of a particle (swarm) in PSO \cite{kennedy1995particle}. The population has 30 particles uniformly distributed in the search space defined by the peaks function with an upper bound as $ub=3$ and a lower bound as $lb=-3$ (from the top view).\\
 The examples show the distribution of particles at different stages of the optimization process establishing $1000$ iterations as a stop criteria. In Figs.~\ref{fig:f3}, \ref{fig:f4}, \ref{fig:f5} and \ref{fig:f6} it is shown the interaction of the swarm in 50, 300, 600 and 999 iterations in the test function. Finally, in Fig.~\ref{fig:f6} it is possible to see that the swarm has found the zone of the global minimum according to the color bar for the z-axis of Fig.~\ref{fig:f1}.
@@ -286,12 +286,12 @@ The examples show the distribution of particles at different stages of the optim
 %
 %\end{itemize}
 
-\section{The PSO variants}
+\section{The PSO Variants}
 \label{sec:variants}
 
 This algorithm has been so successful since its emergence that it has been the base for designing new methods. Same that preserves the essence and structure of the PSO but adds improvements in operators, parameters, initialization, or combines concepts that make the algorithm more specialized for specific problems. The most important variants are listed below, divided into two fields, single-objective and multi-objective optimization:\\ 
 
-\subsection{Top PSO variants for single-objective problems}
+\subsection{Top PSO Variants for Single-Objective Problems}
 \label{tab:pso_variants}
 There are many publications related to PSO variants for single-objective optimization. Most of them were compiled and sorted by year of publication, adding the citations obtained from publication date up to the current year $2021$. Based on this information, the top 30 most cited PSO variants were obtained (see Table~\ref{tab:pso_variants}).
 
@@ -493,7 +493,7 @@ All variables are associated to three fuzzy sets: low, medium, and high with ass
 
 \noindent where $x_1$ and $x_2$ are critical parameters that determine the shape and location of the functions. Other definitions of membership functions are possible, but the authors have found that the ones they proposed are useful for various problems and are easy to implement on microcontrollers and microprocessors.
 
-\subsection{Major PSO variants for multi-objective optimization}
+\subsection{Major PSO Variants for Multi-Objective Optimization}
 \label{sec:variants2}
 
 PSO is a powerful tool for solving single-objective problems; for that reason, researchers expanded its capabilities to the multi-objective domain. The idea is to generate PSO-based approaches that can optimize more than one objective function. Assume a multi-objective optimization problem in the canonical form given in the introduction of Part II of this book:
@@ -638,7 +638,7 @@ In \cite{bahrami2014short} Bahrami et al. use the PSO algorithm to determine the
 In 2016, Mesbahi et al. used a hybrid PSO-Nelder-Mead algorithm to identify and model electric vehicle batteries and then used this information to simulate vehicle energy demand, which allows maximum energy harvesting~\cite{mesbahi2016dynamical}. Finally, Mesbahi et al. compare their results against the power consumption of a physical urban electric vehicle, with a modeling error inferior to 0.5\%.
 Mozafar et al. applied a multiobjective algorithm, using PSO combined with GA to optimize the location and capacity of renewable power sources and electric vehicle charging stations within the same distribution network.~\cite{mozafar2017simultaneous}.
 
-\section{Conclusions}
+\section{Summary and Discussion}
 \label{sec:conclusions}
 
 The PSO is an interesting algorithm that has attracted the attention of researchers and practitioners from different areas over the years. The simplicity of the PSO makes it a popular mechanism for single-objective optimization. Their operators are easy to implement and permit finding solutions to complex problems. Since the PSO has been extensively used, it has also been modified to improve its performance.
