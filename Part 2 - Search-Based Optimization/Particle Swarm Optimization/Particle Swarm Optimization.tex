@@ -131,7 +131,7 @@ All meta-heuristic algorithms have an initialization phase that has the primary 
 \label{eq:equation1}
 \end{equation}
 
-Where, $\vec{x}_{i,j}^t$ is the $i-th$ population particle, $i$ represents the index of a given particle and its size is $(i=1,2,3,...,N)$, where $N$ is the maximum number of particles, $j$ represents the $j_{th}$ dimension of the design variable understanding that $0<j\leq d,$ where $d$ is the dimensionality of the design variable. The iteration number is represented by $t$. While $lb_j$ and $ub_j$ define the lowest and upper limit, respectively. It is worth saying that $rand$ is a uniformly distributed random number between $0$ and $1$. Once established the respective position of each particle, it is necessary to define the velocity each one of them will move around the search space to find the global optimal. We will explain that phase next.
+\noindent where $\vec{x}_{i,j}^t$ is the $i-th$ population particle, $i$ represents the index of a given particle and its size is $(i=1,2,3,...,N)$, where $N$ is the maximum number of particles, $j$ represents the $j_{th}$ dimension of the design variable understanding that $0<j\leq d,$ where $d$ is the dimensionality of the design variable. The iteration number is represented by $t$. While $lb_j$ and $ub_j$ define the lowest and upper limit, respectively. It is worth saying that $rand$ is a uniformly distributed random number between $0$ and $1$. Once established the respective position of each particle, it is necessary to define the velocity each one of them will move around the search space to find the global optimal. We will explain that phase next.
 
 \subsubsection{Velocity and movement of particles}
 
@@ -147,7 +147,7 @@ To find the velocity, it is necessary to get the best global and local values of
 \label{eq:equation3}
 \end{equation}
 
-Where $\vec{v}_i^{t+1}$ is the particle $i$'s velocity of the iteration $t+1$, $\vec{v}_i^{t}$ is the particle $i$'s velocity in the previous iteration, the vector that contains each particle $i$'s position is $\vec{x}_i^{t}$ and $\vec{r1}^t$ and $\vec{r2}^t$ represent $d$-dimensional vectors containing uniformly distributed random numbers between $0$ and $1$. It is worth to say that $c_{1}$ and $c_{2}$ are called learning coefficients, and $w$ represents an inertia weight that affects the convergence and exploration- exploitation trade-off in PSO process. Since inception of inertia Weight in PSO, a large number of variations of Inertia Weight strategy have been proposed, nonetheless, it is generally established as 1. Meanwhile, Eq.~\ref{eq:equation3} is used to displace the particles to new positions in the next iteration. Where $\vec{x}_i^{t+1}$ is the vector where the new obtained position of particle $i$ at iteration $t+1$ is stored, $\vec{x}_i^{t}$ corresponds to the previous position of particle $i$ calculated at iteration $t$, and finally $\vec{v}_i^{t+1}$ is the velocity vector obtained by Eq.~\ref{eq:equation2}.
+\noindent where $\vec{v}_i^{t+1}$ is the particle $i$'s velocity of the iteration $t+1$, $\vec{v}_i^{t}$ is the particle $i$'s velocity in the previous iteration, the vector that contains each particle $i$'s position is $\vec{x}_i^{t}$ and $\vec{r1}^t$ and $\vec{r2}^t$ represent $d$-dimensional vectors containing uniformly distributed random numbers between $0$ and $1$. It is worth to say that $c_{1}$ and $c_{2}$ are called learning coefficients, and $w$ represents an inertia weight that affects the convergence and exploration- exploitation trade-off in PSO process. Since inception of inertia Weight in PSO, a large number of variations of Inertia Weight strategy have been proposed, nonetheless, it is generally established as 1. Meanwhile, Eq.~\ref{eq:equation3} is used to displace the particles to new positions in the next iteration. Where $\vec{x}_i^{t+1}$ is the vector where the new obtained position of particle $i$ at iteration $t+1$ is stored, $\vec{x}_i^{t}$ corresponds to the previous position of particle $i$ calculated at iteration $t$, and finally $\vec{v}_i^{t+1}$ is the velocity vector obtained by Eq.~\ref{eq:equation2}.
 
 It is essential to mention that the majority of modifications to the PSO algorithm have as purpose to find new ways to accelerate the particles as best as possible \cite{erick2016optimizacion}. To end this section, Fig.~\ref{fig:PSOmovement} shows a graphic description of particle's velocity and their movement in the particle swarm optimization algorithm for a better understanding by the reader.\\
 
@@ -426,7 +426,7 @@ The main novelty of this algorithm is that the authors propose a new function fo
 \end{equation}
 
 
-Where $fi=[f_i(1),f_i(2),\cdots,f_i(D)]$ defines which particles of $lB$ the particle $i$ should follow, and $D$ represent the dimensions of the problem. $lB_{f_i(j),j}$ can be any particle’s $lB$ including its own $lB$. The decision depends on probability $P_c$, referred to as the learning probability, which can take different values for different particles.
+\noindent where $fi=[f_i(1),f_i(2),\cdots,f_i(D)]$ defines which particles of $lB$ the particle $i$ should follow, and $D$ represent the dimensions of the problem. $lB_{f_i(j),j}$ can be any particle’s $lB$ including its own $lB$. The decision depends on probability $P_c$, referred to as the learning probability, which can take different values for different particles.
 For each dimension of particle $i$, the authors generate a random number. If this random number is higher than $P_{c_i}$, the corresponding dimension will learn from its own $lB$; otherwise, it will learn from another particle’s $lB$.The selection method used by the tournament and the main steps for selection are as follows:
 
 \begin{itemize}
@@ -486,7 +486,7 @@ The authors of this paper, published in 2001~\cite{shi2001fuzzy} proposed to ada
     \end{cases}
 \end{equation}
 
-where $x_1$ and $x_2$ are critical parameters that determine the shape and location of the functions, other definitions of membership functions are possible, of course. However, the authors have found that the ones they propose are useful for various problems and easy to implement on microcontrollers and microprocessors.
+\noindent where $x_1$ and $x_2$ are critical parameters that determine the shape and location of the functions, other definitions of membership functions are possible, of course. However, the authors have found that the ones they propose are useful for various problems and easy to implement on microcontrollers and microprocessors.
 
 \subsection{Major PSO variants for multi-objective optimization}
 \label{sec:variants2}
@@ -532,14 +532,14 @@ In 2009, Nebro et al.~\cite{nebro2009smpso} studied six representative variants 
 \begin{equation} \label{eq:con_coe}
 \chi = \frac{2}{2 -\varphi - \sqrt{\varphi^2 -4\varphi}}
 \end{equation}
-where
+\noindent where
 \begin{equation}
 \varphi = \left\{ \begin{matrix}
     C_1 +C_2 & \rm{if} \quad C_1 +C_2 > 4 \\ 
     1 & \rm{if} \quad C_1 +C_2 \leq 4
 \end{matrix} \right.
 \end{equation}
-where $C_1$ and $C_2$ are the parameters to control the effect of the personal and global best particles.
+\noindent where $C_1$ and $C_2$ are the parameters to control the effect of the personal and global best particles.
 Once the velocity of the particles is calculated in the original form ~\cite{nebro2009smpso} it is obtained the constriction coefficient through Eq.~\ref{eq:con_coe}. The calculated velocity is multiplied by the constriction coefficient, and then the velocity is constrained by Eq.~\ref{eq:vel_con} The effect of this calculation is to provide diversity to the solutions, otherwise the exploitation of the particles would be intensified.
 
 \begin{equation} \label{eq:vel_con}
@@ -549,11 +549,11 @@ v_{i, j}^t = \left\{ \begin{matrix}
     v_{i,j}^t & {\rm otherwise}
 \end{matrix} \right.
 \end{equation}
-where
+\noindent where
 \begin{equation}
     \Delta b_j = \frac{(ub_j -lb_j)}{2}
 \end{equation}
-where $ub$ and $lb$ are the upper and lower boundaries of search space, and $\Delta b_j$ is the center point between them.
+\noindent where $ub$ and $lb$ are the upper and lower boundaries of search space, and $\Delta b_j$ is the center point between them.
 By implementing this strategy, SMPSO overcomes the swarm explosion effect of MOPSO algorithms. They reported that the approximations to the Pareto front found by their algorithm were better than the MOPSO algorithms. The SMPSO was the fastest algorithm converged to the Pareto front in their experiments.
 
 \subsubsection{FC-MOPSO}
@@ -571,7 +571,7 @@ In the original PSO $\vec{lB}_i^t$ represents the best position found by the $i^
     v_{i,j}^{t+1} \leftarrow \left\{  \begin{matrix} v_{i,j}^{t+1} & \rm{ if} \, |v_{i,j}^{t+1}| \leq v_m^k \\ v_m^k sign ( v_{i,j}^{t+1} ) & \rm{otherwise} \end{matrix} \right. , k \in [1, \cdots,s]
 \end{equation}
 
-Where $v_m = [v_m^1, \dots, v_m^s]$ is the vector of maximum admissible speeds. The authors suggest that FC-MOPSO starts with random velocities no greater than $v_{m} = 0.1(ub - lb)$, where $ub$ and $lb$ are the upper and the lower boundaries of the search space, respectively. In other words, they prevent the method from starting with large velocities while starting with some speeds to start the search at a more advanced stage. 
+\noindent where $v_m = [v_m^1, \dots, v_m^s]$ is the vector of maximum admissible speeds. The authors suggest that FC-MOPSO starts with random velocities no greater than $v_{m} = 0.1(ub - lb)$, where $ub$ and $lb$ are the upper and the lower boundaries of the search space, respectively. In other words, they prevent the method from starting with large velocities while starting with some speeds to start the search at a more advanced stage. 
 
 %lgorithms should use the package algorithmic. An example is given below:
 
@@ -633,7 +633,7 @@ In this sense, the PSO has been extended for multi-objective optimization. Regar
     f(x_1 \cdots x_n) = \sum_{i=1}^{n-1} (100(x_i^2 - x_{i+1})^2 + (1-x_i)^2)
 \end{equation}
 
-Where $-2.048 \leq x_i \leq 2.048$ and $\text{ the minimum at }f(1, 1, \cdots, 1) = 0$.  Once you have implemented the Rosenbrock function plot its surface in 2 dimensions.
+\noindent where $-2.048 \leq x_i \leq 2.048$ and $\text{ the minimum at }f(1, 1, \cdots, 1) = 0$.  Once you have implemented the Rosenbrock function plot its surface in 2 dimensions.
 
     \item Considering the Rosenbrock function, initialize a random population of 50 particles and plot them in the the 2-dimensional surface of the function.
     
