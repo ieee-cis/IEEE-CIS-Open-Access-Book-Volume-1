@@ -4,31 +4,19 @@
 \institute{}
 \maketitle
 
-Artificial Neural Networks (ANNs) are parallel and distributed systems inspired by higher organisms' nervous system %functioning.
-behavior. They are based on processing units called artificial neurons, capable of calculating mathematical functions \cite{haykin}. They can learn to process information to produce the expected output\cite{Castro2006FundamentalsON}.
+Artificial Neural Networks (ANNs) are parallel and distributed systems inspired by higher organisms' nervous system behavior. They are based on processing units called artificial neurons, capable of calculating mathematical functions \cite{haykin}. They can learn to process information to produce the expected output\cite{Castro2006FundamentalsON}.
 
-In general, ANNs emulate how the nervous system performs a specific function or task, having a natural %propensity 
-tendency to store knowledge based on experiences and allow its use. This capability, linked to the modulation of the value of connections between neurons, gives ANNs the character of general tools for solving different problems. Thus, they are often applied in tasks such as pattern classification, data mining, regression/approximation of functions, and information processing, being useful in several areas of knowledge \cite{haykin}.
+In general, ANNs emulate how the nervous system performs a specific function or task, having a natural tendency to store knowledge based on experiences and allow its use. This capability, linked to the modulation of the value of connections between neurons, gives ANNs the character of general tools for solving different problems. Thus, they are often applied in tasks such as pattern classification, data mining, regression/approximation of functions, and information processing, being useful in several areas of knowledge \cite{haykin}.
 
-The conception of ANNs begins with understanding the %functioning 
-operation of the artificial neuron. The concept from which the study started to reach complex structures %establishing 
-establishes the investigation field of computational neuroscience or neurocomputing. This field has gained popularity thanks to its efficient ways of learning \cite{Russell2009}.
+The conception of ANNs begins with understanding the operation of the artificial neuron. The concept from which the study started to reach complex structures establishes the investigation field of computational neuroscience or neurocomputing. This field has gained popularity thanks to its efficient ways of learning \cite{Russell2009}.
 
-In detail, this chapter will discuss the multilayer perceptron (MLP), the best-known ANN architecture. %Prior,
-Previously, it was essential to introduce the artificial neuron concept, 
-the primary processing structure of an MLP.
-%Sugestão de seções:
-
+In detail, this chapter will discuss the multilayer perceptron (MLP), the best-known ANN architecture.  Previously, it was essential to introduce the artificial neuron concept, the primary processing structure of an MLP.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Artificial Neuron}
 \label{sec:neuronio}
 
-The biological neuron inspires the artificial neuron. Neural impulses are received through dendrites and processed in the cell body. Depending on the result of the integration of the received signals, if they are %above 
-higher than
-a critical threshold, the neuron may or may not produce a new impulse (action potential), which will, in turn, be transmitted to other neurons connected to its axon terminals \cite{Castro2006FundamentalsON}. The axon union with dendrites is called a synapse, which works as a valve controlling the flow of information (impulses) between neurons. The synapse is variable, hence,
-with
-the ability to adapt and learn.
+The biological neuron inspires the artificial neuron. Neural impulses are received through dendrites and processed in the cell body. Depending on the result of the integration of the received signals, if they are higher than a critical threshold, the neuron may or may not produce a new impulse (action potential), which will, in turn, be transmitted to other neurons connected to its axon terminals \cite{Castro2006FundamentalsON}. The axon union with dendrites is called a synapse, which works as a valve controlling the flow of information (impulses) between neurons. The synapse is variable, hence, with the ability to adapt and learn.
 
 Figure \ref{fig:neuronio} shows the generic artificial neuron scheme used in ANNs. This device receives a set of $\textbf{u} = [ u_1 , u_2 ,..., u_i]$ inputs from other neurons or the network input, processes this information, and responds with a $y$ signal. This response, a transformation of the received inputs, is propagated to other neurons.
 
@@ -41,9 +29,7 @@ Figure \ref{fig:neuronio} shows the generic artificial neuron scheme used in ANN
 	\label{fig:neuronio}
 \end{figure}
 
-This figure shows that the input signals $u_i , i=1, 2,..., I$ and a fixed value bias signal $+1$ are weighted by the weights $w_{ji}$ in each neuron $j$. The activation $x$ (induced local field) is reached with these terms, which goes through the activation function $f(\cdot)$, generating the output $y_j$. In general, the activation function $f(\cdot)$ is nonlinear. The mathematical representation of this model is given by Equation \ref{eq:neuronio}, %in which 
-where
-the index $i=0$ represents the bias:
+This figure shows that the input signals $u_i , i=1, 2,..., I$ and a fixed value bias signal $+1$ are weighted by the weights $w_{ji}$ in each neuron $j$. The activation $x$ (induced local field) is reached with these terms, which goes through the activation function $f(\cdot)$, generating the output $y_j$. In general, the activation function $f(\cdot)$ is nonlinear. The mathematical representation of this model is given by Equation \ref{eq:neuronio}, where the index $i=0$ represents the bias:
 \begin{equation}
     \label{eq:neuronio}
     y_j = f \left( \sum_{i=0}^I w_{ji} u_i  \right).
@@ -57,8 +43,7 @@ Next chapter will describe more information about the activation functions.
 
 An activation function $f(\cdot)$ defines the output of a given neuron, respecting the integration (activation) value $x$. Several functions have already been used or developed, which allow the production of results with actual values, not only binary outputs, as in the case of Perceptron \cite{haykin}.
 
-The linear activation function is widely used in output layer neurons. It's a simple function that can be described by equation \ref{eq:funcaoAtivacaoLinear}:
-\begin{equation}
+The linear activation function is widely used in output layer neurons. It's a simple function that can be described by equation \ref{eq:funcaoAtivacaoLinear}: \begin{equation}
 	\label{eq:funcaoAtivacaoLinear}
 	f(x) = \alpha x,
 \end{equation}
@@ -85,26 +70,17 @@ Therefore, the hyperbolic tangent is defined by Equation \ref{eq:funcaoAtivacaot
 	f(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}\:.
 \end{equation}
 
-The wide use of S-Shaped functions is also due to 
-some 
-essential features \cite{Menon1996}:
+The wide use of S-Shaped functions is also due to some essential features \cite{Menon1996}:
 
 \begin{itemize}
-    \item %Such a 
-    This function is continuous and differentiable at all points, allowing adjustment with derivative-based algorithms such as gradient;
-    \item It has 
-    output saturation, which ends up preventing the output signal of each neuron from diverging;
-    \item It is possible to use them to create different mappings since 
-    %these functions 
-    
-    these functions 
-    have an almost linear character in the region around the origin. At the same time, close to saturation, they are strongly nonlinear.
+    \item This function is continuous and differentiable at all points, allowing adjustment with derivative-based algorithms such as gradient;
+    \item It has output saturation, which ends up preventing the output signal of each neuron from diverging;
+    \item It is possible to use them to create different mappings since these functions have an almost linear character in the region around the origin. At the same time, close to saturation, they are strongly nonlinear.
 \end{itemize}
 
 Recently, with the advancement of ANNs studies and, more specifically, \textit{deep learning} methods, new activation functions were developed to solve vanishing gradients or flat surfaces \cite{Fahlman1988}.
 
-One new activation function, the Rectified Linear Unit or ReLU \cite{Maas2013}, %and 
-can be expressed by Equation \ref{eq:relu}.
+One new activation function, the Rectified Linear Unit or ReLU \cite{Maas2013}, can be expressed by Equation \ref{eq:relu}.
 \begin{equation}
 	\label{eq:relu}
 	f(x) = \left\{\begin{matrix}
@@ -163,7 +139,7 @@ Backpropagation makes use of an iterative optimizing algorithm to reduce the cal
 There are different learning methods to handle the adjustment of network weights based on the descending gradient \cite{haykin, Bengio2012}:
 
 \begin{itemize}
-	\item Batch learning: weight adjustments occur after all samples are presented to the network, at the end of each epoch during the training;  %\textcolor{red}{season};
+	\item Batch learning: weight adjustments occur after all samples are presented to the network, at the end of each epoch during the training;
 	\item Online learning: at each sample, the weights are updated, turning the search for a solution in the multidimensional weight space happen stochastically since the examples are presented in random order;
 	\item Mini-batch learning: an intermediate process between learning in Batch learning and Online learning, performing updates after computing fixed batch sizes.
 \end{itemize}
@@ -174,7 +150,7 @@ There are different learning methods to handle the adjustment of network weights
 
 The first phase in applying backpropagation is the propagation of the input signal passing through the hidden layers until reaching the output layer (forward). For this to happen, the network has its weights initialized randomly and then follows the presentation of training data. If there is some previous knowledge about the mapping process being worked on, it is possible to initialize the weights with pre-fixed values. Below, we followed the definitions of Simon Haykin \cite{haykin}.
 
-Consider as training data ($\mathbf{u}(n), \mathbf{d}(n)$) for iteration $n$, where $\mathbf{u}(n)$ is the input vector applied to the ANN input layer, and $\mathbf{d}(n)$ is the desired response vector. The input signal propagation is done by calculating the $x_j^{(l)}(n)$ induced local fields for neuron $j$ in layer $l$ (Equation \ref{eq:backprop1}):
+Consider as training data ($\mathbf{u}(n), \mathbf{d}(n)$) for iteration $n$, where $\mathbf{u}(n)$ is the input vector applied to the ANN input layer, and $\mathbf{d} (n)$ is the desired response vector. The input signal propagation is done by calculating the $x_j^{(l)}(n)$ induced local fields for neuron $j$ in layer $l$ (Equation \ref{eq:backprop1}):
 
 \begin{equation}
 \label{eq:backprop1}
@@ -239,9 +215,7 @@ where $\alpha$ is a generally positive constant and $\Delta w_{ji}^{(l)}(n) = w_
 Then, the process must be repeated, presenting training data again until some stopping criterion is reached. Knowing this, you can summarize the Backpropagation with the descending gradient described in Algorithm \ref{alg:backprop}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{algorithm}[h!]
-    %\renewcommand{\baselinestretch}{0.8}
     \caption{Backpropagation. \label{alg:backprop}}
     
     Parameters: max\_it, $\eta$, $\alpha$, $\mathbf{u}$, $\mathbf{d}$
@@ -270,7 +244,6 @@ Then, the process must be repeated, presenting training data again until some st
             % fase backward
             \FOR{$l$ from $L$ down to $1$}
                 \FOR{$j$ from $1$ to $J$}
-                    % calculo do delta
                     \IF{$ l = L $}
                         \STATE $ \delta_j^{(L)} (n) \leftarrow e_j^{(L)}(n) {f}'_j (x_j^{(L)}(n)) $ \COMMENT{Equation \ref{eq:backprop6}}
                     \ELSE
@@ -304,19 +277,15 @@ The goal of training ANNs is to reach a level of generalization such that it is 
 
 Then, the network's response quality needs to be evaluated during the learning process. A standard procedure separates the available data into three sets: training, validation, and test. As stated, the training set is used to adjust ANN weights. After changing the weights at the end of each training period, the network uses the validation set, which has data not used in training and calculates the output error for this set, keeping the weights fixed. The validation error tends to decrease over the iterations and reach an inflection point when it rises. Thus, an optimal weights array must be saved and overwritten whenever the validation error is reduced during the iterations. When reaching the stopping criterion, the final set of weights of the network will be those saved in the optimal weights array.
 
-The above process is known as cross-validation holdout. Variations can be found in the literature, such as K-fold and leave-one-out \cite{haykin, Castro2006FundamentalsON}.
-Furthermore, varying the number of neurons (topology) in the hidden layers and comparing the error achieved in the validation set is a strategy to define the number of neurons \cite{James2013}.
+The above process is known as cross-validation holdout. Variations can be found in the literature, such as K-fold and leave-one-out \cite{haykin, Castro2006FundamentalsON}. Furthermore, varying the number of neurons (topology) in the hidden layers and comparing the error achieved in the validation set is a strategy to define the number of neurons \cite{James2013}.
 
 However, using only the final output value of the ANN is often meaningless without a confidence interval \cite{Kohavi1995}. Therefore, a test set whose data were separated from the entire training process is used to assess the final performance of the model. The test set error is expected to be a percentage higher than the training error, although it needs to be an acceptable value. It is a way to measure overfitting even after cross-validating, which is desirable. Therefore, a test set is only used to assess the final generalization of a model and compare the performance of different architectures or topologies \cite{Ripley2005}.
 
 Note that the three sets must be meaningful, containing patterns from all database subsets. There is no rule for dividing the samples, but the literature presents 70\% for training, 15\% for validation, and 15\% for test. Another possibility is 50\%, 25\%, and 25\%, respectively \cite{haykin}.
 
-It is known that the error-based cost function is multimodal (having multiple minima) for real problems and training algorithms are essentially local optimizers. As mentioned, generating the network weights randomly and respecting a uniform distribution in the interval $[-1,+1]$ is the most common. In this way, initializing the weights leads to outputs with different numerical values. The dispersion in a network's training and validation set should reach similar values, but it is unlikely they will be equal. Because of this, it is necessary that, for a real problem, the network %is 
-be executed several times, ideally 30 times, so that the dispersion of results can be evaluated \cite{demvsar2006statistical}. 
+It is known that the error-based cost function is multimodal (having multiple minima) for real problems and training algorithms are essentially local optimizers. As mentioned, generating the network weights randomly and respecting a uniform distribution in the interval $[-1,+1]$ is the most common. In this way, initializing the weights leads to outputs with different numerical values. The dispersion in a network's training and validation set should reach similar values, but it is unlikely they will be equal. Because of this, it is necessary that, for a real problem, the network be executed several times, ideally 30 times, so that the dispersion of results can be evaluated \cite{demvsar2006statistical}. 
 
-Finally, it is essential to mention the input data of the network must be in the range of the nonlinearity of the activation function. For example, the data must be normalized over the interval $[0,+1]$ when using the sigmoid function. 
-Similarly, if a hyperbolic tangent option is used, the desired range is $[-1,+1]$. If %you 
-we deal with a nonlinear mapping or prediction problem, the normalization needs to be reversed, changing the final results to the original data magnitude.
+Finally, it is essential to mention the input data of the network must be in the range of the nonlinearity of the activation function. For example, the data must be normalized over the interval $[0,+1]$ when using the sigmoid function. Similarly, if a hyperbolic tangent option is used, the desired range is $[-1,+1]$. If we deal with a nonlinear mapping or prediction problem, the normalization needs to be reversed, changing the final results to the original data magnitude.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Proposed Exercises}
@@ -345,8 +314,8 @@ Note that, for each gate, one could consider a system with desired inputs and ou
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \paragraph{\textbf{Exercise 2:}} Haberman's Survival Data Set contains cases from a study conducted at the University of Chicago Billings Hospital between 1958 and 1970 on the survival of patients undergoing surgery to treat breast cancer. The attributes are:
 \begin{enumerate}
-    \item Age of the patient when the procedure was performed;
-	\item Year the process took place;
+	\item Age of the patient when the procedure was performed;
+    	\item Year the process took place;
 	\item Number of positive axillary nodules detected;
 	\item Survivor status, where 1 means the patient survived for five years or more, and 2 represents the patient died before completing five years of surgery.
 \end{enumerate}
