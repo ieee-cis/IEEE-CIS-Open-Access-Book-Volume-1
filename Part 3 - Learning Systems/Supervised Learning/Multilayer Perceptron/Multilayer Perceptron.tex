@@ -84,9 +84,7 @@ One new activation function, the Rectified Linear Unit or ReLU \cite{Maas2013}, 
 \end{equation}
 
 \noindent
-If $x$ is greater than zero, the output will equal the input.
-
-The ReLU function is similar to the linear activation function (Equation \ref{eq:funcaoAtivacaoLinear}) for values greater than zero. %, com exceção da presença de um número real $\alpha$. 
+If $x$ is greater than zero, the output will equal the input. So, the ReLU function is similar to the linear activation function (Equation \ref{eq:funcaoAtivacaoLinear}) for values greater than zero. %, com exceção da presença de um número real $\alpha$. 
 
 Another newly developed function is the Exponential Linear Unit or ELU \cite{Clevert2016}. Its definition is expressed by Equation \ref{eq:relu}:
 
@@ -104,19 +102,17 @@ The definition for $x$ lower than zero allows solutions with negative values.
 \section{MLP Architecture}
 \label{sec:mlp}
 
-One of the best-known ANN architectures is the multilayer perceptron (MLP), which structurally generalizes the Rosenblatt perceptron \cite{Rosenblatt1958}. As demonstrated by \cite{Cybenko1989}, this ANN has universal approximation capability: an MLP can approximate any continuous, bounded, differentiable, nonlinear function with defined inputs in a compact space with arbitrary precision. It is possible by the additive composition of base functions, which, for MLP, are ridge functions. However, this theorem does not specify the amount of artificial neurons required, nor does it define any method for adjusting the value of the weights so that the optimal configuration of the network is guaranteed.
+One of the best-known ANN architectures is the MultiLayer Perceptron (MLP), which structurally generalizes the artificial neuron called Rosenblatt perceptron \cite{Rosenblatt1958}. As demonstrated by \cite{Cybenko1989}, this ANN has universal approximation capability: an MLP can approximate any continuous, bounded, differentiable, nonlinear function with defined inputs in a compact space with arbitrary precision. This is possible by the additive composition of base functions, which, for MLP, are ridge functions. However, this theorem does not specify the amount of artificial neurons required, nor does it define any method for adjusting the value of the weights so that the optimal configuration of the network is guaranteed.
 
-A layer is the arrangement of parallel neurons, which receive all the signals from the previous inputs but do not communicate with each other, and only send the response forward, known as a \textit{feedforward} structure. Several layers of neurons can be chained together, with the initial layer being the input; the final, outgoing; and the inner layers are called intermediate layers or hidden layers. The hidden layers are responsible for mapping the input signal in a nonlinear way in another space, according to the demand of the problem. Figure \ref{fig:mlp} shows one of the possibilities for building an MLP, with one hidden layer and one output.
+MLPs organise neurons in several layers chained together, where each layer is the arrangement of parallel neurons. Neurons in a given layer do not communicate with each other, and only send their output signals forward, which is known as a \textit{feedforward} structure. The first layer is the input layer, whose neurons receive as inputs the input variables of the problem. Neurons in subsequent layers receive as inputs the outputs of the neurons from the previous layer. The last layer is the output layer, whose neurons produce the values of the output variables of the problem. Any layer between the input and the output layers is referred to as a hidden layer. One or more hidden layers can be used.  The hidden layers are responsible for mapping the input signal in a nonlinear way in another space, according to the demand of the problem. As the combination of linear functions is also a linear function, the activation functions of the hidden nodes is usually not linear.
+Figure \ref{fig:mlp} shows one of the possibilities for building an MLP, with one hidden layer and one output.
 
 \begin{figure}[h!]
     \centering
-    \caption{Example of building an MLP.}
-    \vspace{0.2cm}
     \includegraphics[width=1\textwidth]{"Part 3 - Learning Systems/Supervised Learning/Multilayer Perceptron/MLP.png"}
+    \caption{Example of building an MLP.}
     \label{fig:mlp}
 \end{figure}
-
-MLPs can contain several layers in between, but it is common to employ only one or two in practical applications \cite{haykin}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Training}
