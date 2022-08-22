@@ -131,14 +131,14 @@ All meta-heuristic algorithms have an initialization phase that has the primary 
 \label{eq:equation1}
 \end{equation}
 
-\noindent where $\vec{x}_{i,j}^t$ is the $i-th$ population particle, $i$ represents the index of a given particle and its size is $(i=1,2,3,...,N)$, where $N$ is the maximum number of particles, $j$ represents the $j_{th}$ dimension of the design variable understanding that $0<j\leq d,$ where $d$ is the dimensionality of the design variable. The iteration number is represented by $t$. While $lb_j$ and $ub_j$ define the lowest and upper limit, respectively. It is worth saying that $rand$ is a uniformly distributed random number between $0$ and $1$. Once established the respective position of each particle, it is necessary to define the velocity each one of them will move around the search space to find the global optimal. We will explain that phase next.
+\noindent where $\vec{x}_{i,j}^t$ is the $i-th$ population particle, $i \in \{i=1,2,3,...,N\}$ represents the index of a given particle, $N$ is the maximum number of particles, $j$ represents the $j_{th}$ dimension of the design variable, where $0<j\leq d$ and $d$ is the dimensionality of the design variable. The iteration number is represented by $t$. While $lb_j$ and $ub_j$ define the lowest and upper limit, respectively. It is worth saying that $rand$ is a uniformly distributed random number between $0$ and $1$. Once established the respective position of each particle, it is necessary to define the velocity each one of them will move around the search space to find the global optimal. We will explain that phase next.
 
 \subsubsection{Velocity and movement of particles}
 
-To find the velocity, it is necessary to get the best global and local values of each particle, commonly called $\vec{gB}^t$ and $\vec{lB}_i^t$ respectively. Eq.~\ref{eq:equation2} defines the velocity calculation for each particle $i$.
+To find the velocity, it is necessary to get the best global and local values of each particle, commonly called $\vec{gB}^t$ and $\vec{lB}_i^t$ respectively. Eq.~\ref{eq:equation2} defines the velocity calculation for each particle $i$:
 
 \begin{equation}
-\vec{v}_i^{t+1}=w \times \vec{v}_i^{t}+c_{1} \times \vec{r1}^t \times (\vec{lB}_i^t-\vec{x}^{t}_i)+c_{2} \times \vec{r2}^t \times (\vec{gB}^t-\vec{x}^{t}_i)
+\vec{v}_i^{t+1}=w \times \vec{v}_i^{t}+c_{1} \times \vec{r1}_i^t \times (\vec{lB}_i^t-\vec{x}^{t}_i)+c_{2} \times \vec{r2}_i^t \times (\vec{gB}^t-\vec{x}^{t}_i)
 \label{eq:equation2}
 \end{equation}
 
@@ -147,7 +147,7 @@ To find the velocity, it is necessary to get the best global and local values of
 \label{eq:equation3}
 \end{equation}
 
-\noindent where $\vec{v}_i^{t+1}$ is the particle $i$'s velocity of the iteration $t+1$, $\vec{v}_i^{t}$ is the particle $i$'s velocity in the previous iteration, the vector that contains each particle $i$'s position is $\vec{x}_i^{t}$ and $\vec{r1}^t$ and $\vec{r2}^t$ represent $d$-dimensional vectors containing uniformly distributed random numbers between $0$ and $1$. It is worth to say that $c_{1}$ and $c_{2}$ are called learning coefficients, and $w$ represents an inertia weight that affects the convergence and exploration- exploitation trade-off in PSO process. Since inception of inertia Weight in PSO, a large number of variations of Inertia Weight strategy have been proposed, nonetheless, it is generally established as 1. Meanwhile, Eq.~\ref{eq:equation3} is used to displace the particles to new positions in the next iteration. Where $\vec{x}_i^{t+1}$ is the vector where the new obtained position of particle $i$ at iteration $t+1$ is stored, $\vec{x}_i^{t}$ corresponds to the previous position of particle $i$ calculated at iteration $t$, and finally $\vec{v}_i^{t+1}$ is the velocity vector obtained by Eq.~\ref{eq:equation2}.
+\noindent where $\vec{v}_i^{t+1}$ is the particle $i$'s velocity of the iteration $t+1$, $\vec{v}_i^{t}$ is the particle $i$'s velocity in the previous iteration, the vector that contains each particle $i$'s position is $\vec{x}_i^{t}$ and $\vec{r1}_i^t$ and $\vec{r2}_i^t$ represent $d$-dimensional vectors containing uniformly distributed random numbers between $0$ and $1$. It is worth to say that $c_{1}$ and $c_{2}$ are called learning coefficients, and $w$ represents an inertia weight that affects the convergence and exploration-exploitation trade-off in PSO process. Since inception of inertia Weight in PSO, a large number of variations of Inertia Weight strategy have been proposed, nonetheless, it is generally established as 1. Meanwhile, Eq.~\ref{eq:equation3} is used to displace the particles to new positions in the next iteration. Where $\vec{x}_i^{t+1}$ is the vector where the new obtained position of particle $i$ at iteration $t+1$ is stored, $\vec{x}_i^{t}$ corresponds to the previous position of particle $i$ calculated at iteration $t$, and finally $\vec{v}_i^{t+1}$ is the velocity vector obtained by Eq.~\ref{eq:equation2}.
 
 It is essential to mention that the majority of modifications to the PSO algorithm have as purpose to find new ways to accelerate the particles as best as possible \cite{erick2016optimizacion}. To end this section, Fig.~\ref{fig:PSOmovement} shows a graphic description of particle's velocity and their movement in the particle swarm optimization algorithm for a better understanding by the reader.\\
 
@@ -331,16 +331,16 @@ For each particle $i$ and at each time stage $t$, a center of gravity ${\vec{g}}
 
 \begin{itemize}
     \item The current position~(${\vec{x}}_i^t$)
-    \item Point a little “beyond” the best previous personal position~(${\vec{p}}_i^t$) defined as:
+    \item Point a little ``beyond" the best previous personal position~(${\vec{p}}_i^t$) defined as:
     
     \begin{equation}\label{eq:bestpreviouspersonal position}
-        {\vec{p}}_i^t={\vec{x}}_i^t+\ c_1{\vec{r}}1^t\otimes(\ {\vec{lB}}_i^t\ - {\vec{x}}_i^t)
+        {\vec{p}}_i^t={\vec{x}}_i^t+\ c_1{\vec{r}}1_i^t\otimes(\ {\vec{lB}}_i^t\ - {\vec{x}}_i^t)
     \end{equation}
     
     \item Point a little “beyond” the best previous position in the neighborhood~($ {\vec{l}}_i^t$) defined as:
 
       \begin{equation}\label{eq:best previous position in the neighbourhood}
-        {\vec{l}}_i^t={\vec{x}}_i^t+\ c_2{\vec{r}}2^t\otimes(\ {\vec{gB}}^t\ - {\vec{x}}_i^t)
+        {\vec{l}}_i^t={\vec{x}}_i^t+\ c_2{\vec{r}}2_i^t\otimes(\ {\vec{gB}}^t\ - {\vec{x}}_i^t)
     \end{equation}
     
     \item Center of gravity(${\vec{g}}_i^t$) finally defined as:
@@ -376,7 +376,7 @@ Human social behaviors inspired the authors to conclude that individuals are not
 \end{equation}
 
 
-Inspired by the fact that an individual is influenced by the behavior of the individuals around him, the authors define the Eq.~\ref{eq:speedwithneighbors}. Where $C_i$ is the set of particles in the neighborhood of $i$, and $\gamma_m^t[0, c_1+\ c_2]^j$, where $c_1$ and $c_2$ are the learning coefficients, $j$ is the dimensionality of the problem and the position $\mathcal{Y}_m^t$ represents the best position that particle $m$ has visited until iteration $t$ (a particle that has obtained the best evaluation of the objective function).
+Inspired by the fact that an individual is influenced by the behavior of the individuals around him, the authors define the Eq.~\ref{eq:speedwithneighbors}. Where $C_i$ is the set of particles in the neighborhood of $i$, and $\gamma_m^t \in [0, c_1+\ c_2]^j$, where $c_1$ and $c_2$ are the learning coefficients, $j$ is the dimensionality of the problem and the position $\mathcal{Y}_m^t$ represents the best position that particle $m$ has visited until iteration $t$ (a position that has obtained the best evaluation of the objective function).
 The main contribution of this algorithm published in $2004$ that makes it different from other variants is the type of topology used in its particles~\cite{mendes2004population}. Since they all have the exact source of information, there is no difference in the amount of information shared. Some of the topologies that can affect or improve the performance of PSO are the following:
 
 \begin{itemize}
@@ -422,11 +422,11 @@ The main contribution of this algorithm published in $2004$ that makes it differ
 The main novelty of this algorithm is that the authors propose a new function for updating the particle velocity defined as:
 
 \begin{equation}
-     \vec{v}_{i,j}=w\ast \vec{v}_{i,j} + c \ast {\vec{r1}_{i,j}} \ast \left ( \vec{lB}_{f_i(j),j} - \vec{x}_{i,j} \right ) 
+     \vec{v}_{i}^{t+1}=w\ast \vec{v}_{i}^t + c \ast {\vec{r1}_i^t} \ast \left ( \vec{lB}_{f_i}^t - \vec{x}_{i}^t \right ) 
 \end{equation}
 
 
-\noindent where $fi=[f_i(1),f_i(2),\cdots,f_i(D)]$ defines which particles of $lB$ the particle $i$ should follow, and $D$ represent the dimensions of the problem. $lB_{f_i(j),j}$ can be any particle’s $lB$ including its own $lB$. The decision depends on probability $P_c$, referred to as the learning probability, which can take different values for different particles.
+\noindent where $fi=[f_i(1),f_i(2),\cdots,f_i(D)]$ defines which particles of $lB$ the particle $i$ should follow, and $D$ represents the dimensionality of the problem. The value of $lB_{f_i(j),j}$ can be any particle’s $lB$ including its own $lB$. The decision depends on probability $P_c$, referred to as the learning probability, which can take different values for different particles.
 For each dimension of particle $i$, the authors generate a random number. If this random number is higher than $P_{c_i}$, the corresponding dimension will learn from its own $lB$; otherwise, it will learn from another particle’s $lB$.The selection method used by the tournament and the main steps for selection are as follows:
 
 \begin{itemize}
@@ -435,11 +435,12 @@ For each dimension of particle $i$, the authors generate a random number. If thi
       \item Finally, using the winning particle as an example for the next generations to learn from that dimension, if all individuals are their own $lB$, then a random dimension is chosen for the particles to learn from the best $lB$ particles working on it.
 \end{itemize}
 
-\subsubsection{Fuzzy adaptative PSO} 
+\subsubsection{Fuzzy Adaptative PSO} 
 
-\paragraph{\textit{Fuzzy inference system}}
+This version of PSO is based on fuzzy inference systems. For more information about this computational area, the reader is advised to refer to the following references \cite{Sugeno1985,Jang1993}. Readers may understand this version of PSO more fully after learning about fuzzy inference systems, but a brief description of this approach is provided below.
 
-A fuzzy inference system is basically a conditional statements expressed of the form IF A THEN B, where A and B are labels of fuzzy sets defined by appropriated membership functions \cite{Zadeh1973}. A fuzzy inference system is composed of five functional blocks as can be seen in Fig.\ref{fig:FUZZY}:
+%\paragraph{\textit{Fuzzy inference system}}
+Fuzzy inference systems are basically conditional statements expressed in the form IF A THEN B, where A and B are labels of fuzzy sets defined by appropriate membership functions \cite{Zadeh1973}. A fuzzy inference system is depicted in Fig.~\ref{fig:FUZZY} and is composed of four functional blocks as described below:
 
 \begin{figure}[h!]
 \centering
@@ -449,16 +450,20 @@ A fuzzy inference system is basically a conditional statements expressed of the 
 \end{figure}
 
 \begin{itemize}
-\item A \textit{rule base} containing a number of fuzzy if-then rules.
-\item A \textit{database} which defines the memebership functions of the fuzzy sets used in the fuzzy rules.
-\item A \textit{decision-making unit} which performs the inference operations on the rules.
+\item A \textit{knowledge base} containing a number of fuzzy if-then rules and the definitions of the memebership functions of the fuzzy sets used in the fuzzy rules.
+\item A \textit{fuzzy inference engine} which performs the inference operations based on the fuzzy rules.
 \item A \textit{fuzzification interface} that transforms the crisp inputs into degrees of match with linguistic values.
 \item A defuzzification interface which transforms the fuzzy results of the inference into a crisp output.
 \end{itemize}
 
-For more information about this computational area, the reader is advised to refer to the following references \cite{Sugeno1985,Jang1993}.\\
 
-The authors of this paper, published in 2001~\cite{shi2001fuzzy} proposed to adapt the $PSO$ at four different levels: environment, population, individual, and component level. As mentioned above, the inertia weight is an important parameter in PSO, since it affect the convergence and exploration- exploitation trade-off in PSO process. As the inertia weight is a global variable, it can be applied to the whole population. A fuzzy system is basically an environment composed by if-then rules that determine the operation of the environment \cite{shi2001fuzzy}. The authors designed a fuzzy system to adapt the inertia weight dynamically. Typically, the system's inputs are variables that measure the performance of the $PSO$, and the output is the inertia weight or the change in the inertia weight. The current best performance evaluation named $CBPE$ indicates the best solution found by the $PSO$. Due to the wide variety of optimization problems, this term must be converted into a normalized format called $NCPBE$. Assume that to solve a minimization problem and the actual minimum is denoted $CBPE_{min}$ and the non-optimal $CBPE$ is denoted $CBPE_{max}$, which represents any suboptimal solution that is equal to or greater than $CBPE_{max}$. The normalized $CBPE$ ($NCBPE$) can be computed as three fuzzy variables in order to define three fuzzy sets: low, medium, and high with associated membership functions as $left\_triangle$, $triangle$ and $right\_triangle$, respectively. The definitions of these three membership functions are: 
+The authors of the paper \cite{shi2001fuzzy} published in 2001 proposed to adapt $PSO$ by using a fuzzy system to adjust the inertia weight dynamically. 
+%at four different levels: environment, population, individual, and component level. 
+As mentioned previously, the inertia weight is an important parameter in PSO, since it affect the convergence and exploration-exploitation trade-off in PSO process. As the inertia weight is a global variable, it can be applied to the whole population. %A fuzzy system is basically an environment composed of if-then rules that determine the operation of the environment \cite{shi2001fuzzy}. 
+The authors thus designed a fuzzy system to adapt the inertia weight dynamically as a global variable. 
+The fuzzy system's input variables are the performance of the best candidate solution found so far by the PSO in normalised format and the current inertia weight, whereas the output variable is the change in inertia weight. %The current best performance evaluation named $CBPE$ indicates the best solution found by the $PSO$. Due to the wide variety of optimization problems, this term must be converted into a normalized format called $NCPBE$. Assume that we wish to solve a minimization problem and that the actual minimum is denoted $CBPE_{min}$ and the non-optimal $CBPE$ is denoted $CBPE_{max}$, which represents any suboptimal solution. % that is equal to or greater than $CBPE_{max}$. 
+%The normalized $CBPE$ ($NCBPE$) can be computed as three fuzzy variables in order to 
+All variables are associated to three fuzzy sets: low, medium, and high with associated membership functions as $left\_triangle$, $triangle$ and $right\_triangle$, respectively. The definitions of these three membership functions are: 
 
 \begin{equation}
     f_{left\_triangle}=
@@ -486,7 +491,7 @@ The authors of this paper, published in 2001~\cite{shi2001fuzzy} proposed to ada
     \end{cases}
 \end{equation}
 
-\noindent where $x_1$ and $x_2$ are critical parameters that determine the shape and location of the functions, other definitions of membership functions are possible, of course. However, the authors have found that the ones they propose are useful for various problems and easy to implement on microcontrollers and microprocessors.
+\noindent where $x_1$ and $x_2$ are critical parameters that determine the shape and location of the functions. Other definitions of membership functions are possible, but the authors have found that the ones they proposed are useful for various problems and are easy to implement on microcontrollers and microprocessors.
 
 \subsection{Major PSO variants for multi-objective optimization}
 \label{sec:variants2}
