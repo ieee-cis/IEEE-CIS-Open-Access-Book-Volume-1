@@ -564,7 +564,8 @@ In 2009, Nebro et al.~\cite{nebro2009smpso} studied six representative variants 
 \end{matrix} \right.
 \end{equation}
 \noindent where $c_1$ and $c_2$ are the parameters to control the effect of the personal and global best particles.
-Once the velocity of the particles is calculated in the original form ~\cite{nebro2009smpso}, it is multiplied by the constriction coefficient $\chi$, and then the velocity is constrained by Eq.~\ref{eq:vel_con}: %The effect of this calculation is to provide diversity to the solutions, otherwise the exploitation of the particles would be intensified.
+Once the velocity of the particles is calculated in the original form ~\cite{nebro2009smpso}, it is multiplied by the constriction coefficient $\chi$, which helps to enable diverse solutions so that exploitation is not too much intensified. Then,
+the velocity is constrained by Eq.~\ref{eq:vel_con}: 
 
 \begin{equation} \label{eq:vel_con}
 v_{i, j}^t = \left\{ \begin{matrix}
@@ -578,7 +579,7 @@ v_{i, j}^t = \left\{ \begin{matrix}
     \Delta b_j = \frac{(ub_j -lb_j)}{2}
 \end{equation}
 \noindent where $ub$ and $lb$ are the upper and lower boundaries of search space defined by $\mathcal{X}$, and $\Delta b_j$ is the center point between them.
-By implementing this strategy, SMPSO overcomes the swarm explosion effect of MOPSO algorithms while enabling diverse solutions. 
+By implementing this strategy, SMPSO overcomes the swarm explosion effect of MOPSO algorithms. 
 They reported that the approximations to the Pareto front found by their algorithm were better than the MOPSO algorithms. The SMPSO was the fastest algorithm converged to the Pareto front in their experiments.
 
 \subsubsection{FC-MOPSO}
