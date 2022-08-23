@@ -67,7 +67,7 @@ The hyperbolic tangent is defined by Equation \ref{eq:funcaoAtivacaotanh}:
 The wide use of S-Shaped functions is also due to some essential features \cite{Menon1996}:
 
 \begin{itemize}
-    \item This function is continuous and differentiable at all points, allowing adjustment with derivative-based learning algorithms such as gradient descent;
+    \item This function is continuous and differentiable at all points, allowing adjustment with popular derivative-based learning algorithms such as gradient descent;
     \item It has output saturation, which ends up preventing the output signal of each neuron from diverging;
     \item It is possible to use them to create different mappings since these functions have an almost linear character in the region around the origin. At the same time, close to saturation, they are strongly nonlinear.
 \end{itemize}
@@ -110,7 +110,7 @@ Figure \ref{fig:mlp} shows one of the possibilities for building an MLP, with on
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1\textwidth]{"Part 3 - Learning Systems/Supervised Learning/Multilayer Perceptron/MLP.png"}
-    \caption{Example of building an MLP.}
+    \caption{Example of MLP.}
     \label{fig:mlp}
 \end{figure}
 
@@ -122,7 +122,7 @@ Several training algorithms are aimed at adjusting the weights of an MLP. This c
 
 The training process of an MLP is typically supervised, relying on a training set containing labelled training examples with the values of the input variables and the corresponding desired values of the output variables. When using backpropagation, training consists of two steps: forward and backward. In the forward step, the network weights do not change; they are fixed, and the input data (from the training set) is propagated from the first to the last layer to obtain the network output. Then, an error signal is produced by comparing the obtained output with the desired one. After that, the gradient vector of the error function is calculated. Based on it, the backward step applies the gradient descent optimization method from the last to the first layer, adjusting the weights of the neurons in the opposite direction of the gradient, i.e., the ``steepest descent'' direction that most decreases the error function \cite{haykin}. The forward and backward propagation of the whole training set are applied iteratively until some sopping criterion is reached \cite{Castro2006FundamentalsON}. Each iteration through the whole training set is typically referred to as an epoch. The most used error function for this task is the Mean Squared Error (MSE).  In Section \ref{ssec:Pseudocodigo}, this procedure is presented in a mathematical format. 
 
-This procedure is nothing more than an unconstrained nonlinear optimization problem. Even though this chapter describes the use of gradient descent to optimize the weights, any unconstrained nonlinear optimization method of 1st or 2nd orders could be used, such as the gradient and Levenberg-Marquardt methods. Note that such a premise is not based on biological inspiration.
+It is worth noting that this procedure is nothing more than an optimization algorithm being applied to an unconstrained nonlinear optimization problem. Even though this chapter describes the use of gradient descent to optimize the weights, any unconstrained nonlinear optimization method of 1st or 2nd orders could be used, such as the gradient and Levenberg-Marquardt methods. Note that such a premise is not based on biological inspiration.
 
 There are different learning methods to handle the adjustment of network weights based on gradient descent \cite{haykin, Bengio2012}:
 
@@ -138,7 +138,7 @@ There are different learning methods to handle the adjustment of network weights
 \subsection{Backpropagation}
 \label{ssec:Pseudocodigo}
 
-The first phase in applying backpropagation is the propagation of the input signal passing through the hidden layers until reaching the output layer (forward). For this to happen, the network has its weights initialized randomly and then follows the presentation of training data. If there is some previous knowledge about the mapping process being worked on, it is possible to initialize the weights with pre-fixed values. Below, we followed the definitions of Simon Haykin \cite{haykin}.
+The first phase in applying backpropagation is the propagation of the input signal passing through the input and hidden layers until reaching the output layer (forward step). For this to happen, the network has its weights initialized randomly and then follows the presentation of training data. If there is some previous knowledge about the mapping process being worked on, it is possible to initialize the weights with pre-fixed values. Below, we followed the definitions of Simon Haykin \cite{haykin}.
 
 Consider as training data ($\mathbf{u}(n), \mathbf{d}(n)$) for iteration $n$, where $\mathbf{u}(n)$ is the input vector applied to the ANN input layer, and $\mathbf{d} (n)$ is the desired response vector. The input signal propagation is done by calculating the $x_j^{(l)}(n)$ induced local fields for neuron $j$ in layer $l$ (Equation \ref{eq:backprop1}):
 
