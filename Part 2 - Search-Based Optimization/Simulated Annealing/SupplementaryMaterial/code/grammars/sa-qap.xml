@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+     2016/08/18
+
+     Grammar for SA for the QAP
+ -->
+
+<gr:grammar xmlns:gr="grammar">
+    <gr:derivations xmlns:qap="qap_automatic_generation">
+
+   <!--qap:nummaxbaditers type="int" min="1" max="1000000" stepIfEnumerated="1"/>
+   <qap:numiters type="int" min="1" max="10000000" stepIfEnumerated="1"/>
+   <qap:term_acceptancerate type="real" min="0.0" max="1.0" stepIfEnumerated="0.0001"/>
+   <qap:lastaccrate_tenure type="int" min="1" max="1000000" stepIfEnumerated="1"/>
+   <qap:nummaxtemprestart type="int" min="1" max="100000" stepIfEnumerated="1"//>
+   <qap:neighsizeiterterm_coeff type="int" min="1" max="10000" stepIfEnumerated="1"/>
+   <qap:squarednsiterterm_coeff type="int" min="1" max="10000" stepIfEnumerated="1"/>
+   <qap:localminterm_tenure type="int" min="1" max="1000000" stepIfEnumerated="1"/>
+   <qap:nslocalminterm_tenure type="int" min="1" max="10000" stepIfEnumerated="1"/>
+   <qap:numcoolingstepsterm type="int" min="1" max="100000" stepIfEnumerated="1"/-->
+
+
+   <qap:geomacc_reducing_factor type="real" min="0.0001" max="1.0" stepIfumerated="0.0001"/>
+   <qap:gensaacc_beta type="real" min="0.0001" max="10" stepIfEnumerated="0.0001"/>
+   <qap:gensaacc_gamma type="real" min="0" max="10" stepIfEnumerated="0.0001"/>
+   <qap:rtracc_deviation_factor type="real" min="0" max="100" stepIfEnumerated="0.0001"/>
+   <qap:lahcacc_tenure type="int" min="1" max="10000" stepIfEnumerate="1"/>
+   <qap:boundedmetro_coeff type="real" min="0" max="1" stepIfEnumerated="0.0001"/>
+
+   <qap:expk type="int" min="1" max="10000" stepIfEnumerate="1"/>
+
+    <qap:geomcooling_a type="real" min="0.0001" max="1" stepIfEnumerated="0.0001"/>
+    <qap:geomcooling_b type="real" min="0.0001" max="1" stepIfEnumerated="0.0001"/>
+    <qap:lundymees_a type="real" min="0.0001" max="1" stepIfEnumerated="0.0001"/>
+    <qap:lundymees_b type="real" min="0.0001" max="1" stepIfEnumerated="0.0001"/>
+    <!--qap:markovcooling_coeff type="real" min="0.0001" max="1" stepIfEnumerated="0.0001"/-->
+    <qap:constcooling_a type="real" min="0.0001" max="1" stepIfEnumerated="0.0001"/>
+    <qap:constcooling_b type="real" min="0.0001" max="1" stepIfEnumerated="0.0001"/>
+    <qap:linearcooling_factor type="real" min="0.0001" max="1" stepIfEnumerated="0.0001"/>
+    <qap:logcooling_a type="real" min="0.0001" max="1" stepIfEnumerated="0.0001"/>
+    <qap:tempbandcooling_factor type="real" min="0.0001" max="2.00" stepIfEnumerated="0.0001"/>
+    <qap:q87_max_reject type="int" min="1" max="1000000" stepIfEnumerated="1"/>
+    <qap:arithmeticcooling_factor type="int" min="1" max="100" stepIfEnumerated="1"/>
+    <qap:oba_m type="int" min="1" max="1000000" stepIfEnumerated="1"/>
+    <qap:oba_delta type="real" min="0.0001" max="10" stepIfEnumerated="0.0001"/>
+    <qap:oba_a type="real" min="0.0001" max="10" stepIfEnumerated="0.0001"/>
+    <qap:oba_b type="real" min="0.0001" max="10" stepIfEnumerated="0.0001"/>
+    <qap:oba_c type="real" min="0.0001" max="10" stepIfEnumerated="0.0001"/>
+    <qap:oba_d type="real" min="0.0001" max="10" stepIfEnumerated="0.0001"/>
+
+    <qap:templength_value type="int" min="1" max="100000" stepIfEnumerated="1"/>
+    <qap:templength_nscoeff type="int" min="1" max="100" stepIfEnumerated="1"/>
+    <qap:templength_pscoeff type="int" min="1" max="10000" stepIfEnumerated="1"/>
+    <qap:templength_spscoeff type="int" min="1" max="1000" stepIfEnumerated="1"/>
+    <qap:templen_maxaccepted_value type="int" min="1" max="100000" stepIfEnumerated="1"/>
+    <qap:templen_cap type="int" min="1" max="100000" stepIfEnumerated="1"/>
+    <qap:templen_nscap type="int" min="1" max="100" stepIfEnumerated="1"/>
+    <qap:aritmtemplen_a type="int" min="1" max="100000" stepIfEnumerated="1"/>
+    <qap:aritmtemplen_b type="int" min="1" max="100000" stepIfEnumerated="1"/>
+    <qap:geomtemplen_a type="int" min="1" max="100000" stepIfEnumerated="1"/>
+    <qap:geomtemplen_b type="real" min="0.0001" max="100" stepIfEnumerated="0.0001"/>
+    <qap:logtemplen_a type="int" min="1" max="100000" stepIfEnumerated="1"/>
+    <qap:logtemplen_b type="int" min="1" max="100000" stepIfEnumerated="1"/>
+    <qap:exptemplen_a type="int" min="1" max="100000" stepIfEnumerated="1"/>
+    <qap:exptemplen_b type="real" min="0.0001" max="1" stepIfEnumerated="0.0001"/>
+
+    <qap:inittemp_value type="int" min="1" max="10000000" stepIfEnumerated="1"/>
+    <qap:inittemp_coeff type="real" min="0.0001" max="10" stepIfEnumerated="0.0001"/>
+    <qap:inittemp_mcoeff type="real" min="0.0001" max="10" stepIfEnumerated="0.0001"/>
+    <qap:inittemp_ccoeff type="real" min="0.0001" max="10" stepIfEnumerated="0.0001"/>
+    <qap:inittemp_acoeff type="real" min="0.0001" max="10" stepIfEnumerated="0.0001"/>
+    <qap:inittemp_initprob type="real" min="0" max="1" stepIfEnumerated="0.0001"/>
+    <qap:inittemp_ipcoeff type="real" min="0.0001" max="10" stepIfEnumerated="0.0001"/>
+    <qap:mis11 type="real" min="0.0001" max="1.0" stepIfEnumerated="0.0001"/>
+    <qap:mis12 type="real" min="0.0001" max="1.0" stepIfEnumerated="0.0001"/>
+    <qap:mis21 type="real" min="0.0001" max="1.0" stepIfEnumerated="0.0001"/>
+    <qap:mis22 type="real" min="0.0001" max="1.0" stepIfEnumerated="0.0001"/>
+
+    <qap:mintemprestart_threshold type="real" min="0.0001" max="10000" stepIfEnumerated="0.0001"/>
+    <qap:perctemprestart_threshold type="real" min="0.0001" max="10" stepIfEnumerated="0.0001"/>
+    <qap:lowraterestart_threshold type="real" min="0.0001" max="1.0" stepIfEnumerated="0.0001"/>
+    <qap:lastraterestart_threshold type="real" min="0.0001" max="1.0" stepIfEnumerated="0.0001"/>
+    <qap:lastraterestart_tenure type="int" min="1" max="1000000" stepIfEnumerated="1"/>
+    <qap:lastratereheat_threshold type="real" min="0.0001" max="1.0" stepIfEnumerated="0.0001"/>
+    <qap:lowratereheat_threshold type="real" min="0.0001" max="1.0" stepIfEnumerated="0.0001"/>
+    <qap:lowratereheat_reheatfactor type="real" min="0.0001" max="1.0" stepIfEnumerated="0.0001"/>
+    <qap:localminreheat_tenure type="int" min="1" max="1000000" stepIfEnumerate="1"/>
+    <qap:localminreheat_epsilon type="real" min="0.0001" max="1.0" stepIfEnumerated="0.0001"/>
+    <qap:localminrestart_tenure type="int" min="1" max="10000" stepIfEnumerated="1"/>
+    <qap:temprestartmaxiters type="int" min="1" max="10000" stepIfEnumerated="1"/>
+    <qap:tempreheat_maxiters type="int" min="1" max="10000" stepIfEnumerated="1"/>
+    <qap:maxitersreheat_reheatfactor type="real" min="0.0001" max="1.0" stepIfEnumerated="0.0001"/>
+    <qap:nstemprestartmaxiters type="int" min="1" max="10000" stepIfEnumerated="1"/>
+    <qap:snsnstemprestartmaxiters type="int" min="1" max="10000" stepIfEnumerated="1"/>
+    <qap:nsreheatmaxiters type="int" min="1" max="10000" stepIfEnumerated="1"/>
+    <qap:temprestartmaxsteps type="int" min="1" max="10000" stepIfEnumerated="1"/>
+    <qap:tempreheat_maxsteps type="int" min="1" max="10000" stepIfEnumerated="1"/>
+    <qap:maxstepsreheat_reheatfactor type="real" min="0.0001" max="1.0" stepIfEnumerated="0.0001"/>
+    <qap:nstemprestartmaxsteps type="int" min="1" max="1000" stepIfEnumerated="1"/>
+    <qap:nstempreheat_maxsteps type="int" min="1" max="1000" stepIfEnumerated="1"/>
+
+<qap:initial_solution>
+   <![CDATA[random ]]>
+</qap:initial_solution>
+
+<qap:termination>
+   <!--![CDATA[MAXBADITERS ]]><qap:nummaxbaditers/><![CDATA[ ]]>
+   <or/>
+    <![CDATA[MAXITERS ]]><qap:numiters/><![CDATA[ ]]>
+   <or/-->
+   <![CDATA[NEVERTERM ]]><![CDATA[ ]]>
+   <!--or/>
+   <![CDATA[ACCRATETERM ]]><qap:term_acceptancerate/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[LASTACCRATETERM ]]><qap:lastaccrate_tenure/><![CDATA[ ]]><qap:term_acceptancerate/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[MAXTEMPRESTARTTERM ]]><qap:nummaxtemprestart/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[NEIGHSIZEITERTERM ]]><qap:neighsizeiterterm_coeff/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SQUAREDNSITERTERM ]]><qap:squarednsiterterm_coeff/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[LOCALMINTERM ]]><qap:localminterm_tenure/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[NEIGHSIZELOCALMINTERM ]]><qap:nslocalminterm_tenure/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[MAXSTEPSTERM ]]><qap:numcoolingstepsterm/><![CDATA[ ]]-->
+</qap:termination>
+
+<qap:neighborhood>
+   <![CDATA[exchange ]]>
+</qap:neighborhood>
+
+<qap:acceptance>
+   <![CDATA[METROPOLIS ]]><![CDATA[ ]]>
+   <or/>
+   <![CDATA[METROPOLISWFORCED ]]><![CDATA[ ]]>
+   <or/>
+   <![CDATA[BASICACC ]]><![CDATA[ ]]>
+   <or/>
+   <![CDATA[GEOMACC ]]><qap:geomacc_reducing_factor/><![CDATA[ ]]>
+   <!--or/>
+   <![CDATA[APPROXEXPACC ]]><![CDATA[ ]]-->
+   <or/>
+   <![CDATA[GENSAACC ]]><qap:gensaacc_beta/><![CDATA[ ]]><qap:gensaacc_gamma/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[DETERMINISTICACC ]]><![CDATA[ ]]>
+   <or/>
+   <![CDATA[GDAACC ]]><![CDATA[ ]]>
+   <or/>
+   <![CDATA[RTRACC ]]><qap:rtracc_deviation_factor/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[LAHCACC ]]><qap:lahcacc_tenure/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[BOUNDEDMETROPOLIS ]]><qap:boundedmetro_coeff/><![CDATA[ ]]>
+</qap:acceptance>	
+
+<qap:cooling_scheme>
+   <![CDATA[GEOM ]]><qap:geomcooling_a/><![CDATA[ ]]><qap:geomcooling_b/><![CDATA[ ]]>
+   <!--or/>
+   <![CDATA[MARKOV ]]><qap:markovcooling_coeff/><![CDATA[ ]]-->
+   <or/>
+   <![CDATA[CONSTCOOLING ]]><qap:constcooling_a/><![CDATA[ ]]><qap:constcooling_b/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[LUNDYMEES ]]><qap:lundymees_a/><![CDATA[ ]]><qap:lundymees_b/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[LINEARCOOLING ]]><qap:linearcooling_factor/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[NOCOOLING ]]><![CDATA[ ]]>
+   <or/>
+   <![CDATA[LOGCOOLING ]]><qap:logcooling_a/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[Q87COOLING ]]><qap:lundymees_a/><![CDATA[ ]]><qap:lundymees_b/><![CDATA[ ]]><qap:q87_max_reject/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[TEMPBANDCOOLING ]]><qap:tempbandcooling_factor/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[QUADRATICCOOLING]]><![CDATA[ ]]>
+   <or/>
+   <![CDATA[ARITHMETICCOOLING ]]><qap:arithmeticcooling_factor/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[OBA1 ]]><qap:oba_m/><![CDATA[ ]]><qap:oba_delta/><![CDATA[ ]]><qap:oba_a/><![CDATA[ ]]><qap:oba_b/><![CDATA[ ]]><qap:oba_c/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[OBA2 ]]><qap:oba_m/><![CDATA[ ]]><qap:oba_delta/><![CDATA[ ]]><qap:oba_d/><![CDATA[ ]]>
+</qap:cooling_scheme>
+
+<qap:temperature_length>
+   <![CDATA[CONSTTEMPLEN ]]><qap:templength_value/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[NEIGHSIZETEMPLEN ]]><qap:templength_nscoeff/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[PROBSIZETEMPLEN ]]><qap:templength_pscoeff/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SQUAREDPROBSIZETEMPLEN ]]><qap:templength_spscoeff/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[MAXACCEPTEDTEMPLEN ]]><qap:templen_maxaccepted_value/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[CAPPEDMAXACCEPTEDTEMPLEN ]]><qap:templen_maxaccepted_value/><![CDATA[ ]]><qap:templen_cap/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[NEIGHCAPPEDMAXACCEPTEDTEMPLEN ]]><qap:templen_maxaccepted_value/><![CDATA[ ]]><qap:templen_nscap/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[ARITMTEMPLEN ]]><qap:aritmtemplen_a/><![CDATA[ ]]><qap:aritmtemplen_b/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[GEOMTEMPLEN ]]><qap:geomtemplen_a/><![CDATA[ ]]><qap:geomtemplen_b/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[LOGTEMPLEN ]]><qap:logtemplen_a/><![CDATA[ ]]><qap:logtemplen_b/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[EXPTEMPLEN ]]><qap:exptemplen_a/><![CDATA[ ]]><qap:exptemplen_b/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[NOTEMPLEN ]]><![CDATA[ ]]>
+</qap:temperature_length>
+
+<qap:initial_temperature>
+   <![CDATA[FIXEDINITTEMP ]]><qap:inittemp_value/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[INITFROMSOL ]]><qap:inittemp_coeff/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[RANDOMWALKINITTEMP ]]><![CDATA[ 10000 ]]><qap:inittemp_mcoeff/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[CONNOLLYRWIT ]]><![CDATA[ 10000 ]]><qap:inittemp_ccoeff/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[RANDOMWALKAVGINITTEMP ]]><![CDATA[ 10000 ]]><qap:inittemp_acoeff/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[RANDOMWALKINITPROB ]]><![CDATA[ ]]><qap:inittemp_initprob/><![CDATA[ 10000 ]]><qap:inittemp_ipcoeff/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[MISEVICIUSINITTEMP ]]><![CDATA[ 10000 ]]><qap:mis11/><![CDATA[ ]]><qap:mis12/><![CDATA[ ]]><qap:mis21/><![CDATA[ ]]><qap:mis22/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SIMPLEMISEVICIUSINITTEMP ]]><![CDATA[ 10000 ]]><qap:mis11/><![CDATA[ ]]><qap:mis21/><![CDATA[ ]]>
+</qap:initial_temperature>
+
+<qap:exploration>
+   <![CDATA[SARANDOMEXPLORATION ]]><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SASEQUENTIALEXPLORATION ]]><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SABESTOFKEXPLORATION ]]><qap:expk/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SAFIRSTBESTOFKEXPLORATION ]]><qap:expk/><![CDATA[ ]]>
+</qap:exploration>
+
+<qap:temprestart>
+   <![CDATA[SANOTEMPRESTART ]]><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SAMINTEMPRESTART ]]><qap:mintemprestart_threshold/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SAPERCTEMPRESTART ]]><qap:perctemprestart_threshold/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SALOWRATERESTART ]]><qap:lowraterestart_threshold/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SALASTRATERESTART ]]><qap:lastraterestart_tenure/><![CDATA[ ]]><qap:lowraterestart_threshold/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SALOWRATEREHEAT ]]><qap:lowratereheat_threshold/><![CDATA[ ]]><qap:lowratereheat_reheatfactor/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SALASTRATEREHEAT ]]><qap:lastraterestart_tenure/><![CDATA[ ]]><qap:lastratereheat_threshold/><![CDATA[ ]]><qap:lowratereheat_reheatfactor/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SALOCALMINREHEAT ]]><qap:localminreheat_tenure/><![CDATA[ ]]><qap:lowratereheat_reheatfactor/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SALOWRATERESTARTBEST ]]><qap:lowraterestart_threshold/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SALOCALMINRESTARTBEST ]]><qap:localminrestart_tenure/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SALOCALMINTEMPRESTART ]]><qap:localminrestart_tenure/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SALOCALMINENHANCEDREHEAT ]]><qap:localminreheat_tenure/><![CDATA[ ]]><qap:lowratereheat_reheatfactor/><![CDATA[ ]]><qap:localminreheat_epsilon/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SAMAXITERSTEMPRESTART ]]><qap:temprestartmaxiters/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SAMAXITERSREHEAT ]]><qap:tempreheat_maxiters/><![CDATA[ ]]><qap:maxitersreheat_reheatfactor/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SANEIGHSIZEMAXITERSTEMPRESTART ]]><qap:nstemprestartmaxiters/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SASQUAREDNEIGHSIZEMAXITERSTEMPRESTART ]]><qap:snsnstemprestartmaxiters/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SANEIGHSIZEMAXITERSREHEAT ]]><qap:nsreheatmaxiters/><![CDATA[ ]]><qap:maxitersreheat_reheatfactor/><![CDATA[ ]]> 
+   <or/>
+   <![CDATA[SAMAXSTEPSTEMPRESTART ]]><qap:temprestartmaxsteps/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SAMAXSTEPSREHEAT ]]><qap:tempreheat_maxsteps/><![CDATA[ ]]><qap:maxstepsreheat_reheatfactor/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SANEIGHSIZEMAXSTEPSTEMPRESTART ]]><qap:nstemprestartmaxsteps/><![CDATA[ ]]>
+   <or/>
+   <![CDATA[SANEIGHSIZEMAXSTEPSREHEAT ]]><qap:nstempreheat_maxsteps/><![CDATA[ ]]><qap:maxstepsreheat_reheatfactor/><![CDATA[ ]]>
+</qap:temprestart>
+
+	<qap:main>
+		<qap:initial_solution/>
+		<qap:neighborhood/>
+		<qap:initial_temperature/>
+		<qap:acceptance/>
+		<qap:cooling_scheme/>
+		<qap:temprestart/>
+		<qap:termination/>
+		<qap:temperature_length/>
+		<qap:exploration/>
+	</qap:main>
+
+        <qap:main_algorithm output="params">
+	<!--	<![CDATA[
+			#define GRAMMAR2CODE
+		]]>
+	-->
+                <![CDATA[QAP ]]>
+                <![CDATA[SA ]]>
+        	<qap:main/>     
+           <!--<![CDATA[
+                /*emili::LocalSearch* ls = new emili::FirstImprovementSearch(*in, *te, *ne);
+		clock_t time = clock();
+		if(search_time == 0 )
+			solution = ls->search();
+		else
+			solution = ls->timedSearch(search_time);
+		*/
+           ]]>-->
+        </qap:main_algorithm>
+
+    </gr:derivations>
+</gr:grammar>
+@

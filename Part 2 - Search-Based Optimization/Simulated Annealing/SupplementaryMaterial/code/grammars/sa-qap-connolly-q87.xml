@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+     08/12/2015
+
+     Grammar for SA for the QAP - Connolly BR1
+ -->
+
+<gr:grammar xmlns:gr="grammar">
+    <gr:derivations xmlns:qap="qap_automatic_generation">
+
+<qap:cooling_a type="real" min="0.0001" max="1" stepIfEnumerated="0.0001"/>
+<qap:cooling_b type="real" min="0.0001" max="1" stepIfEnumerated="0.0001"/>
+<qap:cooling_m type="int" min="100" max="1000000" stepIfEnumerated="1"/>
+
+<qap:templength_nscoeff type="int" min="1" max="100" stepIfEnumerated="1"/>
+
+<qap:inittemp_coeff type="real" min="0.0001" max="10" stepIfEnumerated="0.0001"/>
+
+<qap:initial_solution>
+   <![CDATA[random ]]>
+</qap:initial_solution>
+
+<qap:termination>
+   <![CDATA[NEVERTERM ]]>
+</qap:termination>
+
+<qap:neighborhood>
+   <![CDATA[exchange ]]>
+</qap:neighborhood>
+
+<qap:acceptance>
+<![CDATA[METROPOLISWFORCED ]]><![CDATA[ ]]>
+</qap:acceptance>	
+
+<qap:cooling_scheme>
+<![CDATA[Q87COOLING ]]><qap:cooling_a/><![CDATA[ ]]><qap:cooling_b/><![CDATA[ ]]><qap:cooling_m/><![CDATA[ ]]>
+</qap:cooling_scheme>
+
+<qap:temperature_length>
+<![CDATA[BRNEIGHSIZETEMPLEN ]]><qap:templength_nscoeff/><![CDATA[ ]]>
+</qap:temperature_length>
+
+<qap:initial_temperature>
+<![CDATA[CONNOLLYRWIT 10000 ]]><qap:inittemp_coeff/><![CDATA[ ]]>
+</qap:initial_temperature>
+
+<qap:exploration>
+<![CDATA[SASEQUENTIALEXPLORATION ]]><![CDATA[ ]]>
+</qap:exploration>
+
+<qap:temprestart>
+<![CDATA[SANOTEMPRESTART ]]><![CDATA[ ]]>
+</qap:temprestart>
+
+	<qap:main>
+		<qap:initial_solution/>
+		<qap:neighborhood/>
+		<qap:initial_temperature/>
+		<qap:acceptance/>
+		<qap:cooling_scheme/>
+		<qap:temprestart/>
+		<qap:termination/>
+		<qap:temperature_length/>
+		<qap:exploration/>
+	</qap:main>
+
+        <qap:main_algorithm output="params">
+	<!--	<![CDATA[
+			#define GRAMMAR2CODE
+		]]>
+	-->
+                <![CDATA[QAP ]]>
+                <![CDATA[SA ]]>
+        	<qap:main/>     
+           <!--<![CDATA[
+                /*emili::LocalSearch* ls = new emili::FirstImprovementSearch(*in, *te, *ne);
+		clock_t time = clock();
+		if(search_time == 0 )
+			solution = ls->search();
+		else
+			solution = ls->timedSearch(search_time);
+		*/
+           ]]>-->
+        </qap:main_algorithm>
+
+    </gr:derivations>
+</gr:grammar>

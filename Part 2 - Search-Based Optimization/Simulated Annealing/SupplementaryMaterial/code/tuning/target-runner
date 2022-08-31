@@ -1,0 +1,66 @@
+#!/bin/bash
+#                 ______ __  __ _____ _      _____ 
+#                |  ____|  \/  |_   _| |    |_   _|
+#                | |__  | \  / | | | | |      | |  
+#                |  __| | |\/| | | | | |      | | 
+#                | |____| |  | |_| |_| |____ _| |_ 
+#                |______|_|  |_|_____|______|_____|
+#
+# EMILI hook-run ver 1.6 for irace 1.07
+#
+# changelog:
+# ver 1.6
+#     - added retry mechanism
+# ver 1.5
+#     - added error reporting
+# ver 1.0
+#     - changed from "compile and run" to "parse and run"
+
+CANDNUM=$1
+INSTANCE_ID=$2
+RND_SEED=$3
+INSTANCE=$4
+
+PARAMS=$*
+TRIES=3
+OUTPUT="/dev/null"
+GRAMMAR2CODE="path/to/grammar2code"
+GRAMMAR_DIR="path/to/grammars/sa-qap.xml"
+mkdir -p "path/to/experimentsdir/execdir"
+ERR_OUT="path/to/experimentsdir/execdir/ERRORS"
+BUILD_DIR=`mktemp -d`
+TIMER_SETTING="-it 10 " # set desired runtime
+$GRAMMAR2CODE $GRAMMAR_DIR -t $BUILD_DIR ${@:5} 1>> $OUTPUT 2>> $OUTPUT
+HOST_NAME=`hostname`
+pushd $BUILD_DIR  1>> $OUTPUT
+PARAMETERS=`cat params`
+
+OUT_VALUE=`path/to/emili $INSTANCE $PARAMETERS $TIMER_SETTING rnds $RND_SEED 3>&1 1>> $OUTPUT 2>&3`
+printf -v OUT_VALUE '%.0f' $OUT_VALUE
+
+re="^-?[0-9]+([.][0-9]+)?$"
+if [[ "$OUT_VALUE" =~ $re ]] 2>> $OUTPUT
+then
+	echo $OUT_VALUE
+else
+        G2Cp=${@:3}
+       	OUT_V=40000000000
+	printf "****ERROR****\nnode: %s\nInstance %s\nRandom seed: %s\n Params to g2c\n %s \n\n Params to EMILI\n %s \n OUTPUT \n %s \n **********\n\n" "${HOST_NAME}" "${INSTANCE}" "${RND_SEED}" "${G2Cp[@]}" "${PARAMETERS}" "${OUT_VALUE}" >> $ERR_OUT
+	for i in `seq 1 $TRIES`
+	    do	
+	    OUT_VALUE=`path/to/emili $INSTANCE $PARAMETERS $TIMER_SETTING rnds $RND_SEED 3>&1 1>> $OUTPUT 2>&3`
+	
+            # OUT_VALUE=`echo "$OUT_VALUE" | tail -n 1`
+            # if [ "$OUT_VALUE" -eq "$OUT_VALUE" ] 2>>$OUTPUT
+            if [[ "$OUT_VALUE" =~ $re ]] 2>> $OUTPUT
+            then
+	      OUT_V=$OUT_VALUE
+	      break
+	    else
+	      printf "****ERROR %s****\nInstance %s\nRandom seed: %s\n Params to g2c\n %s \n\n Params to EMILI\n %s \n OUTPUT \n %s \n **********\n\n" "$i" "${INSTANCE}" "${RND_SEED}" "${G2Cp[@]}" "${PARAMETERS}" "${OUT_VALUE}" >> $ERR_OUT
+            fi
+	done
+	echo $OUT_V
+fi 
+popd 1>> $OUTPUT
+rm -rf $BUILD_DIR
