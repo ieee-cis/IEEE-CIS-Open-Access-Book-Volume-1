@@ -7,6 +7,9 @@
 %% \title{$k$-Means Clustering Algorithm}
 \maketitle
 
+\urldef\supplementurlkm\url{https://github.com/ieee-cis/IEEE-CIS-Open-Access-Book-Volume-1/tree/main/Part%203%20-%20Learning%20Systems/Unsupervised%20Learning/k-Means/code}
+
+
 The $k$-means clustering algorithm ($k$-means for short) provides a method of finding \emph{structure} in input examples. It is also called the Lloyd--Forgy algorithm as it was independently introduced by both Stuart Lloyd~\cite{lloyd1982least} and Edward Forgy~\cite{Forgy1965ClusterAO}. $k$-means, like other algorithms you will study in this part of the book, is an \emph{unsupervised learning} algorithm and, as such, does not require labels associated with input examples. Recall that unsupervised learning algorithms provide a way of discovering some inherent structure in the input examples. This is in contrast with supervised learning algorithms, which require input examples \emph{and} associated labels so as to fit a hypothesis function that maps input examples to one or more output variables. 
 
 While there are different \emph{structures} that can be extracted from input examples the most intuitive is a \emph{cluster}. Very simply, a cluster is a set of examples that are grouped together, often as a consequence of those examples sharing some similarities. The $k$-means algorithm is one method of finding clusters in input examples. It is important to note that $k$-means requires as input the number of clusters ($k$) and the method of selecting this number is not always obvious. While there are methods of estimating a `good' $k$, some of which we will discuss later in Section \ref{sec:find-k}, this might not always be feasible and, in such instances, one might use algorithms which do not require selecting a value of $k$. You will study some of these other algorithms, such as DBScan, in subsequent chapters of this book. Although clustering provides us with methods of grouping input examples, it does not provide information on the relationship between these resulting groups. For those cases where we might require such relations, one might use algorithms that can extract what is called connectivity information such as  ``Hierarchical Clustering'', yet another unsupervised learning algorithm that is also detailed in subsequent chapters.
@@ -256,9 +259,17 @@ Since both points are closer to A, they will both be assigned to the cluster cen
 
 \item  The cluster assignment step requires the calculation of distances between $k$ centroids and $n$ input examples, and so has an overall complexity of $\mathcal{O}(kn)$. The move centroid step requires that we perform a total of $n$ additions (across different clusters) resulting in a complexity of $\mathcal{O}(n)$. Therefore, the complexity of each iteration is $\mathcal{O}(kn)$. Since we run the algorithm for a fixed number of iterations, this is also the complexity of the algorithm itself.
 
-\item Before you take a look at the solution, you are strongly encouraged to attempt the exercise yourself. The solution is available on Google Colaboratory at: { \footnotesize
-\url{https://colab.research.google.com/drive/1QNoSZpySciaBmik4eMKf3IaqTiRadWH0?usp=sharing}. 
-} The notebook also contains a step-by-step run through of the $k$-means algorithm which should be very helpful in understanding it. Feel free to make a copy of the notebook and play around with it. 
+\item Before you take a look at the solution, you are strongly encouraged to attempt the exercise yourself. The solution is available on Google Colaboratory at: 
+\begin{itemize} 
+\item {\footnotesize\url{https://colab.research.google.com/drive/1QNoSZpySciaBmik4eMKf3IaqTiRadWH0?usp=sharing}}
+\end{itemize}
+
+ or 
+\begin{itemize}
+ \item {\footnotesize \supplementurlkm}. 
+\end{itemize}
+
+The notebook also contains a step-by-step run through of the $k$-means algorithm which should be very helpful in understanding it. Feel free to make a copy of the notebook and play around with it. 
 
 \end{enumerate}
 

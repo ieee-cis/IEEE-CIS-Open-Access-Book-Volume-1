@@ -4,6 +4,8 @@
 \institute{Universit\'e Libre de Bruxelles}
 \maketitle
 
+\urldef\supplementurlsa\url{https://github.com/ieee-cis/IEEE-CIS-Open-Access-Book-Volume-1/tree/main/Part%202%20-%20Search-Based%20Optimization/Simulated%20Annealing/SupplementaryMaterial}
+
 \newcommand{\initialtemperature}{\textsc{Initial Temperature}\xspace}
 \newcommand{\stoppingcriterion}{\textsc{Stopping Criterion}\xspace}
 \newcommand{\explorationcriterion}{\textsc{Neighbourhood Exploration}\xspace}
@@ -801,7 +803,7 @@ as such.
 We propose an open-ended exercise to become acquainted not only with 
 Simulated Annealing, but also with a component-based perspective
 on stochastic local search algorithms, and its automatic optimization.
-You can take inspiration from the Supplementary Material of this chapter, but you can also start with a new clean implementation.
+You can take inspiration from the Supplementary Material of this chapter\footnote{\supplementurlsa}, but you can also start with a new clean implementation.
 
 \begin{enumerate}
     \item Choose a SA for the QAP to implement. You can start from the works we
@@ -819,13 +821,13 @@ You can take inspiration from the Supplementary Material of this chapter, but yo
     a stochastic algorithm, so remember to
     make it possible to specify a random seed too.
     \item Run some tests on the instances we provide in the Supplementary
-    Material. Use different random seeds and record the results
+    Material\footnote{\supplementurlsa}. Use different random seeds and record the results
     you observe.
     \item Play with the numerical parameters, trying to find
     a parameter combination that performs consistently better than
     the original parameter values.
     \item Use irace and the templates
-    provided in the Supplementary Material to automatically tune
+    provided in the Supplementary Material\footnote{\supplementurlsa} to automatically tune
     the numerical parameters \cite{LopDubPerStuBir2016irace}. 
     Re-run the tests, and observe the difference of results.
     \item If you feel brave, implement alternative components, such as
