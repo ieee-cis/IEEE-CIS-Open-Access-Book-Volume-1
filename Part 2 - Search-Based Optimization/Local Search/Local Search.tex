@@ -16,8 +16,7 @@ address a variety of practical problems.
 Local search techniques belong to the larger class of the so-called
 \emph{selective} methods that are based on the exploration of the
 search space composed by complete solutions. This is opposed to
-\emph{constructive} methods that build the solution in a step-by-step
-manner by iteratively adding a new piece to the partial solution constructed
+\emph{constructive} methods that start from an empty solution and build the complete one in a step-by-step manner by iteratively adding a new piece to the partial solution constructed
 that far.  
 
 In addition, local search techniques are non-exact, as they
@@ -27,9 +26,9 @@ indeed optimal, unless it has been established
 with exact techniques that it is not possible to reach a value lower than that (i.e., it is a proven \emph{lower bound}).
 
 Local search is based on the simple idea of \emph{navigating} the
-search space by iteratively stepping from one state to one of its
-\emph{neighbors}. The neighborhood of a state is the set of states
-that can be obtained by applying a ``local change'' to it. The
+search space by iteratively stepping from one solution to one of its
+\emph{neighbors}. The neighborhood of a solution is the set of states
+that can be obtained by applying a ``local change'' to it, which consists in modifying the value assigned to a small number of variables representing the solution. The
 definition of the neighborhood relation is dependent on the specific
 problem under consideration, although there are some common
 patterns that can be applied to search spaces with
@@ -37,7 +36,7 @@ similar structure.  The mechanism upon which the neighbor is selected
 at each step is one of the main design choices that varies
 among different local search techniques. In any case, this selection
 mechanism relies upon the definition of the \emph{cost function} $F$,
-which assesses the quality of each neighbor state, and it is also
+which assesses the quality of each neighbor, and it is also
 problem dependent.
 
 % NEW PARAGRAPH
@@ -84,7 +83,7 @@ associate to it a search space $S$, with the following properties:
 
 If the previous requirements are met, we have a \emph{valid
   representation} of the problem. We refer to an element $s\in S$ as a
-\emph{state}.
+\emph{state}. A state correspond to a solutions of the problem, but not all solutions are necessarily represented by some state in the search space.
 
 % Q: is n-queens already defined?
 Consider for example the classical $n$-queens problem, which consists
@@ -278,13 +277,14 @@ computationally expensive~\cite{KoCL11}.
 
 An essential component of any local search procedure is the selection of
 the initial solution. Typical choices are a random
-generation or the use of a greedy constructive heuristic. It is also possible to use any
+generation or the use of a greedy constructive heuristic. 
+Greedy constructive heuristics add a new element of the solution at the time, taking what seems the best option available at the moment, without worrying whether it will bring the overall optimal solution. It is also possible to use any
 other search method to obtain the initial solution.
 
 For example, for the \textbf{Permutation} space for the $n$-queens, the
 random state can be obtained by creating the identity permutation
-$[1,2,\dots,n]$ and then shuffling it by using the Fischer
-and Yates algorithm \cite{FiYa38}.
+$[1,2,\dots,n]$ and then applying some shuffling procedure.
+%it by using the Fischer and Yates algorithm \cite{FiYa38}.
 
 
 In order to decide whether to use just a random initial state or spend
@@ -565,14 +565,13 @@ finer grain weighting could be useful for dealing with problems with
 strong asymmetries, i.e., problems in which the number of constraints
 involved can be different by a large factor from variable to variable.
 
-An analogous mechanism is based on the idea of adding to the cost
-function some additional components which are specifically designed to
-escape from local minima. Those extra components are chosen among the
-attributes of the elements of the search space in such a way that they
-get a high value on the local minimum under
-consideration (see, e.g., \cite{VoTA10}).
-
-
+% REMOVED (too difficult to understand for a beginner)
+% An analogous mechanism is based on the idea of adding to the cost
+% function some additional components which are specifically designed to
+% escape from local minima. Those extra components are chosen among the
+% attributes of the elements of the search space in such a way that they
+% get a high value on the local minimum under
+% consideration (see, e.g., \cite{VoTA10}).
 
 \subsection{Complex Neighborhoods}
 
