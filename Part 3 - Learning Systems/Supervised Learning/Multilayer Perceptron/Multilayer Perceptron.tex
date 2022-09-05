@@ -1,11 +1,10 @@
 \title{Multilayer Perceptron}
 \label{chp:multilayer-perceptron}
 \author{Lucas Costa \and Márcio Guerreiro \and Erickson Puchta \and Yara de Souza Tadano \and Thiago Antonini Alves \and  Maurício Kaster \and Hugo Valadares Siqueira}
-\institute{UTFPR - Universidade Tecnológica Federal do Paranã}
+\institute{UTFPR - Universidade Tecnológica Federal do Paraná}
 \maketitle
 
-Artificial Neural Networks (ANNs) are artificial intelligence systems inspired by higher organisms' nervous system behavior. They are based on processing units called artificial neurons, capable of calculating mathematical functions \cite{haykin}. Through these neurons and their connections, ANNs can learn to process information to produce the expected output \cite{Castro2006FundamentalsON}. ANNs can be seen as general tools for solving different problems. Thus, they are often applied in tasks such as pattern classification, data mining, regression/approximation of functions, and information processing, being useful in several areas of knowledge \cite{haykin}.
-
+Artificial Neural Networks (ANNs) are computationally intelligent systems inspired by higher organisms' nervous system behavior. They are based on processing units called artificial neurons, capable of calculating mathematical functions \cite{haykin}. Through these neurons and their connections, ANNs can learn to process information to produce the expected output \cite{Castro2006FundamentalsON}. ANNs can be seen as general tools for solving different problems. Thus, they are often applied in tasks such as pattern classification, data mining, regression/approximation of functions, and information processing, being useful in several areas of knowledge \cite{haykin}.
 This chapter will explain the MultiLayer Perceptron (MLP), the best-known ANN architecture.  For that, the concept of artificial neuron, the primary processing structure of an MLP, will first be introduced.
 
 
@@ -15,14 +14,13 @@ This chapter will explain the MultiLayer Perceptron (MLP), the best-known ANN ar
 
 The artificial neuron is inspired by the biological neuron. In biological systems, neural impulses are received through dendrites and processed in the cell body. Depending on the result of the integration of the received signals, if they are higher than a critical threshold, the neuron may or may not produce a new impulse (action potential), which will, in turn, be transmitted to other neurons connected to its axon terminals \cite{Castro2006FundamentalsON}. The axon union with dendrites is called a synapse, which works as a valve controlling the flow of information (impulses) between neurons. The synapse is variable, hence, with the ability to adapt and learn.
 
-Figure \ref{fig:neuronio} shows the generic artificial neuron scheme used in ANNs. This device receives a set of $\textbf{x} = [ x_1 , x_2 ,..., x_i]$ inputs, which may come either from other neurons or from the network input.  It then processes this information, and responds with a $\hat{y}_j$ signal, being $j$ the current neuron. This response, which is a transformation of the received inputs, is either propagated to other neurons or given as the output of the ANN.
+Figure \ref{fig:neuronio} shows the generic artificial neuron scheme used in ANNs. This device receives a set of $\textbf{x} = [ x_1 , x_2 ,..., x_i]$ inputs, which may come either from other neurons or from the network input.  It then processes this information, and responds with a $\hat{y}_j$ signal, where $j$ the current neuron. This response, which is a transformation of the received inputs, is either propagated to other neurons or given as the output of the ANN.
 
 \begin{figure}[h!]
-	\caption{Scheme of an artificial neuron built with $u_i$ inputs and $y$ outputs.}
-	\vspace{0.2cm}
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{"Part 3 - Learning Systems/Supervised Learning/Multilayer Perceptron/figures/neuronioArtificial_v2@4x.png"}
 	\end{center}
+	\caption{Scheme of an artificial neuron built with $u_i$ inputs and $y$ outputs.}
 	\label{fig:neuronio}
 \end{figure}
 
@@ -119,9 +117,8 @@ Figure \ref{fig:mlp} shows one of the possibilities for building an MLP, with on
 
 \begin{figure}[h!]
     \centering
-    \caption{Example of MLP.}
-    \vspace{0.2cm}
     \includegraphics[width=1\textwidth]{"Part 3 - Learning Systems/Supervised Learning/Multilayer Perceptron/figures/MLP_v2@4x.png"}
+    \caption{Example of MLP.}
     \label{fig:mlp}
 \end{figure}
 
