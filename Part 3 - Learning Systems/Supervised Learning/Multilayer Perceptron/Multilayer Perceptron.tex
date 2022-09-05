@@ -14,7 +14,7 @@ This chapter will explain the MultiLayer Perceptron (MLP), the best-known ANN ar
 
 The artificial neuron is inspired by the biological neuron. In biological systems, neural impulses are received through dendrites and processed in the cell body. Depending on the result of the integration of the received signals, if they are higher than a critical threshold, the neuron may or may not produce a new impulse (action potential), which will, in turn, be transmitted to other neurons connected to its axon terminals \cite{Castro2006FundamentalsON}. The axon union with dendrites is called a synapse, which works as a valve controlling the flow of information (impulses) between neurons. The synapse is variable, hence, with the ability to adapt and learn.
 
-Figure \ref{fig:neuronio} shows the generic artificial neuron scheme used in ANNs. This device receives a set of $\textbf{x} = [ x_1 , x_2 ,..., x_i]$ inputs, which may come either from other neurons or from the network input.  It then processes this information, and responds with a $\hat{y}_j$ signal, where $j$ the current neuron. This response, which is a transformation of the received inputs, is either propagated to other neurons or given as the output of the ANN.
+Figure \ref{fig:neuronio} shows the generic artificial neuron scheme used in ANNs. This device receives a set of $\textbf{x} = [ x_1 , x_2 ,..., x_I]$ inputs, which may come either from other neurons or correspond to the input variables of the problem. When they correspond to the input variables of the problem, $I=d$ is the dimensionality of the problem. It then processes this information, and responds with a $\hat{y}_j$ signal, where $j$ the current neuron. This response, which is a transformation of the received inputs, is either propagated to other neurons or given as the output of the ANN.
 
 \begin{figure}[h!]
 	\begin{center}
@@ -24,7 +24,7 @@ Figure \ref{fig:neuronio} shows the generic artificial neuron scheme used in ANN
 	\label{fig:neuronio}
 \end{figure}
 
-The processing performed by neuron $j$ consists in weighting the input signals $x_i , i=1, 2,..., I$ and a fixed value bias signal $+1$ by the weights $w_{ji}$ of this neuron. Then, the sum of the weighted input signals passes through an activation function $f(\cdot)$, generating the output $\hat{y}_j$. The activation function $f(\cdot)$ is explained in Section \ref{ssec:ativacao}. The mathematical representation of this model is given by Equation \ref{eq:neuronio}, where the index $i=0$ represents the bias:
+The processing performed by neuron $j$ consists in weighting the input signals $x_i , i=1, 2,..., I$ and a fixed value bias signal $x_0=+1$ by the weights $w_{ji}$ of this neuron. Then, the sum of the weighted input signals $u_j$ (a.k.a. activation value) passes through an activation function $f(\cdot)$, generating the output $\hat{y}_j$. The activation function $f(\cdot)$ is explained in Section \ref{ssec:ativacao}. The mathematical representation of this model is given by Equation \ref{eq:neuronio}:
 
 
 \begin{equation}
@@ -36,7 +36,7 @@ The processing performed by neuron $j$ consists in weighting the input signals $
 \subsection{Activation Functions}
 \label{ssec:ativacao}
 
-An activation function $f(\cdot)$ defines the output of a given neuron, respecting the integration (activation) value $x$. Several functions have already been used or developed, which allow the production of results with actual values, not only binary outputs, as in the case of Perceptron \cite{haykin}. 
+An activation function $f(\cdot)$ defines the output of a given neuron, given the activation value $u$. Several functions have already been used or developed. This section gives some examples of such functions.
 
 The linear activation function is a simple function that can be described by equation \ref{eq:funcaoAtivacaoLinear}: 
 
@@ -46,17 +46,17 @@ The linear activation function is a simple function that can be described by equ
 \end{equation}
 where $\alpha$ is a real number.
 
-Another standard function is the signal, also known as \textit{Heaviside} \cite{haykin}, which can respond in a binary $\{0, 1\}$ or bipolar $\{-1, 1\}$ way, the first being the one used in the McCulloch and Pitts neuron \cite{McCulloch1990}, as shown in Equation \ref{eq:funcaoAtivacaoMCP}:
+Another standard function is the signal, also known as \textit{Heaviside} \cite{haykin}, which can respond in a binary $\{0, 1\}$ or bipolar $\{-1, 1\}$ way. The former is the one used in the McCulloch and Pitts neuron \cite{McCulloch1990}, as shown in Equation \ref{eq:funcaoAtivacaoMCP}:
 
 \begin{equation}
 	\label{eq:funcaoAtivacaoMCP}
 	f(u) = \left\{\begin{matrix}
-		0, & u < 0    \\
-		1, & u \geq 0 \: .
+		0, & u \leq 0    \\
+		1, & u > 0 \: .
 	\end{matrix}\right.
 \end{equation}
 
-A group of functions most commonly used in the hidden layers of an MLP are the sigmoid functions \cite{haykin, Castro2006FundamentalsON}. Their plot has the peculiar shape of an ``S". They presents a balance between linear and nonlinear behavior, which can be obtained from several functions, such as the logistic function and the hyperbolic tangent \cite{Jeffrey2008}. The logistic function can be defined by Equation \ref{eq:funcaoAtivacaoLogistica}:
+A group of functions most commonly used in the hidden layers of an MLP are the sigmoid functions \cite{haykin, Castro2006FundamentalsON}. Their plot has the peculiar shape of an ``S". They represent a balance between linear and nonlinear behavior, which can be obtained from several functions, such as the logistic function and the hyperbolic tangent \cite{Jeffrey2008}. The logistic function is defined by Equation \ref{eq:funcaoAtivacaoLogistica}:
 
 \begin{equation}
 	\label{eq:funcaoAtivacaoLogistica}
@@ -70,17 +70,17 @@ The hyperbolic tangent is defined by Equation \ref{eq:funcaoAtivacaotanh}:
 	f(u) = \frac{e^u - e^{-u}}{e^u + e^{u}}\:.
 \end{equation}
 
-The wide use of S-Shaped functions is also due to some essential features \cite{Menon1996}:
+The wide use of S-Shaped functions is also due to some key features \cite{Menon1996}:
 
 \begin{itemize}
-    \item This function is continuous and differentiable at all points, allowing adjustment with popular derivative-based learning algorithms such as gradient descent;
-    \item It has output saturation, which ends up preventing the output signal of each neuron from diverging;
-    \item It is possible to use them to create different mappings since these functions have an almost linear character in the region around the origin. At the same time, close to saturation, they are strongly nonlinear.
+    \item This kind of function is continuous and differentiable at all points, allowing learning with popular derivative-based learning algorithms such as gradient descent;
+    \item They have output saturation, which can prevent the output signal of each neuron from diverging;
+    \item It is possible to use them to create different mappings since these functions have an almost linear character in the region around the origin, while tt the same time, close to saturation, they are strongly nonlinear.
 \end{itemize}
 
 Recently, with the advancement of ANNs studies and, more specifically, \textit{deep learning} methods, new activation functions have been developed to solve vanishing gradients or flat surfaces \cite{Fahlman1988}, which are problems that learning algorithms such as gradient descent may face and that may prevent them from being able to successfully learn the weights of the neurons.
 
-One new activation function, the Rectified Linear Unit or ReLU \cite{Maas2013}, can be expressed by Equation \ref{eq:relu}.
+One new activation function, the Rectified Linear Unit or ReLU \cite{Maas2013}, can be expressed by Equation \ref{eq:relu}:
 \begin{equation}
 	\label{eq:relu}
 	f(u) = \left\{\begin{matrix}
@@ -102,18 +102,18 @@ Another newly developed function is the Exponential Linear Unit or ELU \cite{Cle
 	\end{matrix}\right.
 \end{equation}
 
-The definition for $u$ lower than zero allows solutions with negative values.
+The definition for $u$ lower than zero allows problems with negative values.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{MLP Architecture}
 \label{sec:mlp}
 
-One of the best-known ANN architectures is the MultiLayer Perceptron (MLP), which structurally generalizes the artificial neuron called Rosenblatt perceptron \cite{Rosenblatt1958}. As demonstrated by \cite{Cybenko1989}, this ANN has universal approximation capability: an MLP can approximate any continuous, bounded, differentiable, nonlinear function with defined inputs in a compact space with arbitrary precision. This is possible by the additive composition of base functions, which, for MLP, are ridge functions. However, this theorem does not specify the amount of artificial neurons required, nor does it define any method for adjusting the value of the weights so that the optimal configuration of the network is guaranteed.
+One of the best-known ANN architectures is the MultiLayer Perceptron (MLP), which structurally generalizes the artificial neuron called Rosenblatt perceptron \cite{Rosenblatt1958} -- an artificial neuron that uses the Heaviside activation function. As demonstrated by \cite{Cybenko1989}, this ANN has universal approximation capability: an MLP can approximate any continuous, bounded, differentiable, nonlinear function with defined inputs in a compact space with arbitrary precision. This is possible by the additive composition of base functions, which, for MLP, are ridge functions. However, this theorem does not specify the amount of artificial neurons required, nor does it define any method for adjusting the value of the weights so that the optimal configuration of the network is guaranteed.
 
-MLPs organize neurons in several layers chained together, where each layer is the arrangement of parallel neurons. Neurons in a given layer do not communicate with each other, and only send their output signals forward, which is known as a \textit{feedforward} structure. The first layer is the input layer, whose neurons receive as inputs the input variables of the problem. Neurons in subsequent layers receive as inputs the outputs of the neurons from the previous layer. The last layer is the output layer, whose neurons produce the values of the output variables of the problem. Any layer between the input and the output layers is referred to as a hidden layer. One or more hidden layers can be used.  The hidden layers are responsible for mapping the input signal in a nonlinear way in another space, according to the demand of the problem. As the combination of linear functions is also a linear function, the activation functions of the hidden nodes is usually not linear.
+MLPs organize neurons in several layers chained together, where each layer is the arrangement of parallel neurons. Neurons in a given layer do not communicate with each other, and only send their output signals forward, which is known as a \textit{feedforward} structure. The first layer is the input layer, whose neurons receive as inputs the input variables of the problem. Neurons in subsequent layers receive as inputs the outputs of the neurons from the previous layer. The last layer is the output layer, whose neurons produce the values of the output variables of the problem. Any layer between the input and the output layers is referred to as a hidden layer. One or more hidden layers can be used.  The hidden layers are responsible for mapping the input signal in a nonlinear way into another space, according to the demand of the problem. As the combination of linear functions is also a linear function, the activation functions of the hidden nodes is usually not a linear function.
 
 
-Figure \ref{fig:mlp} shows one of the possibilities for building an MLP, with one hidden layer and one output.
+Figure \ref{fig:mlp} shows an example of possible MLP structure, with one hidden layer and one output.
 
 \begin{figure}[h!]
     \centering
@@ -128,7 +128,7 @@ Figure \ref{fig:mlp} shows one of the possibilities for building an MLP, with on
 
 Several training algorithms are aimed at adjusting the weights of an MLP. This chapter will focus on the traditional gradient descent method with the famous backpropagation algorithm \cite{rumelhart1986learning}.
 
-The training process of an MLP is typically supervised, relying on a training set containing labelled training examples with the values of the input variables and the corresponding desired values of the output variables. When using backpropagation, training consists of two steps: forward and backward. In the forward step, the network weights do not change; they are fixed, and the input data (from the training set) is propagated from the first to the last layer to obtain the network output. Then, an error signal is produced by comparing the obtained output with the desired one. After that, the gradient vector of the error function is calculated. Based on it, the backward step applies the gradient descent optimization method from the last to the first layer, adjusting the weights of the neurons in the opposite direction of the gradient, i.e., the ``steepest descent'' direction that most decreases the error function \cite{haykin}. The forward and backward propagation of the whole training set are applied iteratively until some sopping criterion is reached \cite{Castro2006FundamentalsON}. Each iteration through the whole training set is typically referred to as an epoch. The most used error function for this task is the Mean Squared Error (MSE).  In Section \ref{ssec:Pseudocodigo}, this procedure is presented in a mathematical format. 
+The training process of an MLP is typically supervised, relying on a training set containing labelled training examples with the values of the input variables and the corresponding desired values of the output variables. When using backpropagation, training consists of two steps: forward and backward. In the forward step, the network weights do not change; they are fixed, and the input data (from the training set) is propagated from the first to the last layer to obtain the network output. Then, an error signal is produced by comparing the obtained output with the desired one. After that, the gradient vector of the error function is calculated. Based on it, the backward step applies the gradient descent optimization method from the last to the first layer, such that the weights of the neurons are adjusted in the opposite direction of the gradient, i.e., in the ``steepest descent'' direction that most decreases the error function \cite{haykin}. The forward and backward propagation of the whole training set are applied iteratively until some sopping criterion is reached \cite{Castro2006FundamentalsON}. Each iteration through the whole training set is typically referred to as an epoch. The most used error function for this task is the Mean Squared Error (MSE).  In Section \ref{ssec:Pseudocodigo}, this procedure is presented in a mathematical format. 
 
 It is worth noting that this procedure is nothing more than an optimization algorithm being applied to an unconstrained nonlinear optimization problem. Even though this chapter describes the use of gradient descent to optimize the weights, any unconstrained nonlinear optimization method of 1st or 2nd orders could be used, such as the gradient and Levenberg-Marquardt methods. Note that such a premise is not based on biological inspiration.
 
@@ -136,26 +136,29 @@ There are different learning methods to handle the adjustment of network weights
 
 \begin{itemize}
 	\item Batch learning: weight adjustments occur after all training examples are presented to the network, at the end of each epoch during the training;
-	\item Online learning: at each training example, the weights are updated, turning the search for a solution in the multidimensional weight space into a stochastic search since the examples are presented in random order;
-	\item Mini-batch learning: an intermediate process between learning in Batch learning and Online learning, performing weight updates after fixed size batches of examples from the training set are presented.
+	\item Online learning: weight adjustments occur after the presentation of each training example, turning the search for optimal weights into a stochastic search since the examples are presented in random order;
+	\item Mini-batch learning: this an intermediate process between batch and online learning, where weight updates are performed after fixed size batches of examples from the training set are presented.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Backpropagation}
 \label{ssec:Pseudocodigo}
 
-The first phase in applying backpropagation is the propagation of the input signal passing through the input and hidden layers until reaching the output layer (forward step). For the first forward step to happen, the network has its weights initialized randomly. If there is some previous knowledge about the mapping process being worked on, it is possible to initialize the weights with pre-fixed values. Below, we followed the definitions of Simon Haykin \cite{haykin}.
+This section follows the definitions of Simon Haykin \cite{haykin} to formalize the backpropagation algorithm. The online learning version is presented.
 
-Consider as training example ($\mathbf{x}(n), \mathbf{y}(n)$) for iteration $n$, where $\mathbf{x}(n)$ are the input variables fed to the ANN input layer, and $\mathbf{y}(n)$ is the desired output. From the input to the output layer, the input values propagation is done by calculating the $u_j^{(l)}(n)$  induced by neuron $j$ in layer $l$ (Equation \ref{eq:backprop1}):
+Before starting the learning process, the weights of the MLP are typically initialized randomly. If there is some previous knowledge about the mapping process being worked on, it is possible to initialize the weights with pre-fixed values.  
+
+The first step in applying backpropagation is the propagation of the input signal passing through the input and hidden layers until reaching the output layer (forward step). 
+Consider a given training example ($\mathbf{x}(n), \mathbf{y}(n)$) being introduced in a given epoch, where $\mathbf{x}(n)$ are the input variables fed to the ANN input layer, and $\mathbf{y}(n)$ is the desired output. From the input to the output layer, the input values propagation is done by calculating the $u_j^{(l)}(n)$  induced by neuron $j$ in layer $l$ (Equation \ref{eq:backprop1}):
 
 
 \begin{equation}
 \label{eq:backprop1}
     u_j^{(l)}(n) = \sum_i w_{ji}^{(l)}(n) \hat{y}_i^{(l-1)}(n),
 \end{equation}
-for $\hat{y}_i^{(l-1)}(n)$ equal to the output signal of the neuron $j$ of the previous layer $l-1$, and $w_{ji}^{(l)}(n)$ being the weight of the neuron $j$ in layer $l$ that is powered by neuron $i$ in layer $l-1$.
+where $\hat{y}_i^{(l-1)}(n)$ is an input corresponding to the output signal of the neuron $j$ of the previous layer $l-1$ (or the bias value +1 when $i=0$), and $w_{ji}^{(l)}(n)$ is the weight of the neuron $j$ in layer $l$ that is connected to neuron $i$ in layer $l-1$.
 
-When $i=0$, or $\hat{y}_0^{(l-1)}(n) = +1$, this is the sign of the bias applied to the neuron $j$ of the layer $l$. The output of neuron $j$ from layer $l$ can be defined by Equation \ref{eq:backprop2}:
+The output of neuron $j$ from layer $l$ can be defined by Equation \ref{eq:backprop2}:
 
 \begin{equation}
 \label{eq:backprop2}
