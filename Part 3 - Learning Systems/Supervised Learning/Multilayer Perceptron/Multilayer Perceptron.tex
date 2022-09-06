@@ -144,55 +144,55 @@ There are different learning methods to handle the adjustment of network weights
 \subsection{Backpropagation}
 \label{ssec:Pseudocodigo}
 
-This section follows the definitions of Simon Haykin \cite{haykin} to formalize the backpropagation algorithm. The online learning version is presented.
+This section follows the definitions of Simon Haykin \cite{haykin} to formalize the backpropagation algorithm. The online learning version of Backpropagation is presented.
 
-Before starting the learning process, the weights of the MLP are typically initialized randomly. If there is some previous knowledge about the mapping process being worked on, it is possible to initialize the weights with pre-fixed values.  
+Before starting the learning process, the weights of the MLP are typically initialized uniformly at random in the interval $[-1,+1]$. If there is some previous knowledge about the mapping process being worked on, it is possible to initialize the weights with pre-fixed values.  
 
-The first step in applying backpropagation is the propagation of the input signal passing through the input and hidden layers until reaching the output layer (forward step). 
-Consider a given training example ($\mathbf{x}(n), \mathbf{y}(n)$) being introduced in a given epoch, where $\mathbf{x}(n)$ are the input variables fed to the ANN input layer, and $\mathbf{y}(n)$ is the desired output. From the input to the output layer, the input values propagation is done by calculating the $u_j^{(l)}(n)$  induced by neuron $j$ in layer $l$ (Equation \ref{eq:backprop1}):
+The first step in applying Backpropagation is the propagation of the input signal passing through the input and hidden layers until reaching the output layer (forward step). 
+Consider a given training example ($\mathbf{x}(n), \mathbf{y}(n)$) being introduced in a given iteration $n$, where $\mathbf{x}(n)$ are the input variables fed to the ANN input layer, and $\mathbf{y}(n)$ is the desired output. From the input to the output layer, the input values propagation is done by calculating the $u_j^{(l)}(n)$  induced by neuron $j$ in layer $l$ (Equation \ref{eq:backprop1}):
 
 
 \begin{equation}
 \label{eq:backprop1}
     u_j^{(l)}(n) = \sum_i w_{ji}^{(l)}(n) \hat{y}_i^{(l-1)}(n),
 \end{equation}
-where $\hat{y}_i^{(l-1)}(n)$ is an input corresponding to the output signal of the neuron $j$ of the previous layer $l-1$ (or the bias value +1 when $i=0$), and $w_{ji}^{(l)}(n)$ is the weight of the neuron $j$ in layer $l$ that is connected to neuron $i$ in layer $l-1$.
+where $\hat{y}_i^{(l-1)}(n)$ is an input of neuron $j$ corresponding to the output signal of the neuron $j$ of the previous layer $l-1$ (or the bias value +1 when $i=0$), and $w_{ji}^{(l)}(n)$ is the weight of the neuron $j$ in layer $l$ that is connected to neuron $i$ in layer $l-1$.
 
 The output of neuron $j$ from layer $l$ can be defined by Equation \ref{eq:backprop2}:
 
 \begin{equation}
 \label{eq:backprop2}
-    \hat{y}_j^{(l)} = f_j (u_j (n) ),
+    \hat{y}_j^{(l)}(n) = f_j (u_j (n) ),
 \end{equation}
 
 If the neuron $j$ is in the first hidden layer ($l = 1$), then Equation \ref{eq:backprop3} is used:
 
 \begin{equation}
     \label{eq:backprop3}
-    \hat{y}_j^{(0)} = x_j (n),
+    \hat{y}_j^{(0)}(n) = x_j (n),
 \end{equation}
 where $x_j(n)$ is the $j$th element of the input vector $\mathbf{x}(n)$. 
 
-However, if the neuron $j$ is in the output layer ($l = L$) for $L$ equals the total number of layers of the network, then Equation \ref{eq:backprop4} is used:
+%However, if the neuron $j$ is in the output layer ($l = L$), where $L$ equals the total number of layers of the network, then Equation \ref{eq:backprop4} is used:
+%
+%\begin{equation}
+%    \label{eq:backprop4}
+%    \hat{y}_j^{(L)} = o_j (n).
+%\end{equation}
 
-\begin{equation}
-    \label{eq:backprop4}
-    \hat{y}_j^{(L)} = o_j (n).
-\end{equation}
-
-Afterward, the error for each neuron in the output layer is calculated. It starts the second phase of the backpropagation (backward): the propagation of the error and adjustment of the weights. This adjustment can be seen as an optimization problem that minimizes a cost function based on an approximation error metric. The next step is to compute the error signal according to Equation \ref{eq:backprop5}:
+The second step of the backpropagation (backward) is then performed to propagate the error backward through the MLP, using it to adjust the weights based on gradient descent. The error for each neuron in the output layer is calculated according to Equation \ref{eq:backprop5}: 
 
 \begin{equation}
     \label{eq:backprop5}
-    e_j (n) = y_j(n) - o_j (n),
+    e_j (n) = \hat{y}^{(L)}_j(n) - y_j (n),
 \end{equation}
-with $y_j (n)$ being the $j$th element of the desired response vector $\mathbf{y}(n)$.
+where $y_j (n)$ is the $j$th output of the desired output vector $\mathbf{y}(n)$.
 
-Afterward, the local gradients $\delta$ of the network are calculated. The local gradient of the output layer $L$ is obtained by Equation \ref{eq:backprop6}:
+Afterwards, the local gradients $\delta$ of the network are calculated. The local gradient of the output layer $L$ is obtained by Equation \ref{eq:backprop6}:
 
 \begin{equation}
     \label{eq:backprop6}
-    \delta_j^{(L)} (n) = e_j^{(L)}(n) {f}'_j (u_j^{(L)}(n)),
+    \delta_j^{(L)} (n) = e_j(n) {f}'_j (u_j^{(L)}(n)),
 \end{equation}
 and those of the other layers are following Equation \ref{eq:backprop7}:
 
@@ -200,7 +200,7 @@ and those of the other layers are following Equation \ref{eq:backprop7}:
     \label{eq:backprop7}
     \delta_j^{(l)} (n) = {f}'_j (u_j^{(l)}(n)) \sum_k \delta_k^{(l+1)} (n) w_{kj}^{(l+1)}(n),
 \end{equation}
-for the $k$-th neuron directly behind the $j$-th neuron, where ${f}'_j(\cdot)$ is the derivative of the objective function concerning the argument.
+where ${f}'_j(\cdot)$ is the derivative of the activation with respect to the activation value.
 
 Finally, the adjustment of the weights of the layer $l$ takes place according to the generalized delta rule of Equation \ref{eq:backprop8}:
 
@@ -209,15 +209,15 @@ Finally, the adjustment of the weights of the layer $l$ takes place according to
     w_{ji}^{(l)} (n+1) = w_{ji}^{(l)}(n) + \eta \delta_j^{(l)}(n) \hat{y}_i^{(l-1)} (n).
 \end{equation}
 
-One way to improve the weight adjustment process and avoid instabilities is to modify Equation \ref{eq:backprop8} by adding a term from \textit{momentum}, changing Equation \ref{eq:backprop8} for Equation \ref{eq:backprop9}:
+One way to improve the weight adjustment process and avoid instabilities is to modify Equation \ref{eq:backprop8} by adding a term from \textit{momentum}, changing Equation \ref{eq:backprop8} by Equation \ref{eq:backprop9}:
 
 \begin{equation}
 \label{eq:backprop9}
     w_{ji}^{(l)} (n+1) = w_{ji}^{(l)}(n) + \alpha[\Delta w_{ji}^{(l)}(n-1)] + \eta \delta_j^{(l)}(n) \hat{y}_i^{(l-1)} (n),
 \end{equation}
-where $\alpha$ is a generally positive constant and $\Delta w_{ji}^{(l)}(n) = w_{ji}^{(l)}(n) - w_{ji}^{(l)}(n-1)$.
+where $\alpha$ is a generally positive constant and $\Delta w_{ji}^{(l)}(n) = w_{ji}^{(l)}(n) - w_{ji}^{(l)}(n-1)$. The momentum term can reduce instability in the weights by enabling the previous change in the weight to influence the current change.
 
-Then, the process must be repeated, presenting training data again until some stopping criterion is reached. Knowing this, you can summarize the Backpropagation with the descending gradient described in Algorithm \ref{alg:backprop}.
+The forward and backward steps are repeated, presenting all training data again until some stopping criterion is reached. Backpropagation with gradient descent can be summarized in Algorithm \ref{alg:backprop}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -232,25 +232,35 @@ Then, the process must be repeated, presenting training data again until some st
         \STATE Initialize $\mathbf{w}(1)$
         \STATE n $\leftarrow 1$
 
-        \WHILE{$n <$ max\_it}
+        \WHILE{number of epochs $<$ max\_it}
+		\STATE Shuffle the order of the training data in $\mathbf{x}$, $\mathbf{y}$
+		\FOR{each example $n$ in $\mathbf{x}$, $\mathbf{y}$}
 
             \FOR{$l$ from $1$ to $L$}
                 
                 \FOR{$j$ from $1$ to $J$}
                     \FOR{$i$ from $1$ to $I$}
-                        \STATE $u_j^{(l)}(n) \leftarrow u_j^{(l)}(n) + w_{ji}^{(l)}(n) \hat{y}_i^{(l-1)}(n)$ \COMMENT{Equation \ref{eq:backprop1}}
+                        %\STATE $u_j^{(l)}(n) \leftarrow u_j^{(l)}(n) + w_{ji}^{(l)}(n) \hat{y}_i^{(l-1)}(n)$ \COMMENT{Equation \ref{eq:backprop1}}
+                        \STATE $u_j^{(l)}(n) = \sum_i w_{ji}^{(l)}(n) \hat{y}_i^{(l-1)}(n)$ \COMMENT{Equation \ref{eq:backprop1}}
                     \ENDFOR
 
-                    \STATE $e_j (n) \leftarrow y_j(n) - o_j (n)$ \COMMENT{Equation \ref{eq:backprop5}}
+					
                 \ENDFOR
             
             \ENDFOR
+            
+
+            \FOR{$j$ from $1$ to $J$}
+                    \STATE $e_j (n) \leftarrow \hat{y}_j(n)^{(L)} - y_j (n)$ \COMMENT{Equation \ref{eq:backprop5}}
+            \ENDFOR
+
 
             \FOR{$l$ from $L$ down to $1$}
                 \FOR{$j$ from $1$ to $J$}
                     \IF{$ l = L $}
-                        \STATE $ \delta_j^{(L)} (n) \leftarrow e_j^{(L)}(n) {f}'_j (u_j^{(L)}(n)) $ \COMMENT{Equation \ref{eq:backprop6}}
+                        \STATE $ \delta_j^{(L)} (n) \leftarrow e_j(n) {f}'_j (u_j^{(L)}(n)) $ \COMMENT{Equation \ref{eq:backprop6}}
                     \ELSE
+                    	  \STATE $\delta_j^{(l)} (n) \leftarrow 0$
                         \FOR{$k$ from $1$ to $K$}
                             \STATE $ \delta_j^{(l)} (n) \leftarrow \delta_j^{(l)} (n) + {f}'_j (u_j^{(l)}(n)) \delta_k^{(l+1)} (n) w_{kj}^{(l+1)}(n) $ \COMMENT{Equation \ref{eq:backprop7}}
                         \ENDFOR
@@ -263,15 +273,15 @@ Then, the process must be repeated, presenting training data again until some st
 
             \ENDFOR
 
-            \STATE $n \leftarrow n + 1 $
-
+            %\STATE $n \leftarrow n + 1 $
+		\ENDFOR
         \ENDWHILE
     \end{algorithmic}
 \end{algorithm}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The algorithm receives the learning rate $\eta$, the momentum constant $\alpha$, the training data, and a "max\_it" variable, which is the stopping criterion of the algorithm. The training stops when it reaches the defined number of iterations, the training stops, and the net weights are returned. Another common stopping criterion would be to calculate the error at the end of each iteration and check if it is at an acceptable level: if so, the training is stopped. Finally, note that it is necessary to define the number of artificial neurons in the hidden layer a priori.
+The algorithm receives the learning rate $\eta$, the momentum constant $\alpha$, the training data, and a ``max\_it" variable, which is the stopping criterion of the algorithm. The training stops when it reaches the defined number of iterations. The MLP's weights are then returned. Another common stopping criterion would be to calculate the error at the end of each iteration and check if it is at an acceptable level: if so, the training is stopped. Finally, note that it is necessary to define the number of artificial neurons in the hidden layer a priori.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Pratical Aspects of the Backpropagation Application}
@@ -283,40 +293,38 @@ Then, the network's response quality needs to be evaluated during the learning p
 
 The above process is known as cross-validation holdout. Variations can be found in the literature, such as K-fold and leave-one-out \cite{haykin, Castro2006FundamentalsON}. Furthermore, varying the number of neurons (topology) in the hidden layers and comparing the error achieved in the validation set is a strategy to define the number of neurons \cite{James2013}.
 
-However, using only the final output value of the ANN is often meaningless without a confidence interval \cite{Kohavi1995}. Therefore, a test set whose data were separated from the entire training process is used to assess the final performance of the model. The test set error is expected to be a percentage higher than the training error, although it needs to be an acceptable value. It is a way to measure overfitting even after cross-validating, which is desirable. Therefore, a test set is only used to assess the final generalization of a model and compare the performance of different architectures or topologies \cite{Ripley2005}.
+A test set whose data were separated from the entire training and validation process is used to assess the final performance of the model. The test set error is expected to be a percentage higher than the training error, although it needs to be an acceptable value. It is a way to measure overfitting even after cross-validating, which is desirable. 
 
-Note that the three sets must be meaningful, containing patterns from all database subsets. There is no rule for dividing the samples, but the literature presents 70\% for training, 15\% for validation, and 15\% for test. Another possibility is 50\%, 25\%, and 25\%, respectively \cite{haykin}.
+Note that the three sets must be meaningful, containing examples that cover all subspaces that were covered in the original data set. There is no rule for dividing the samples, but the literature frequently uses 70\% for training, 15\% for validation, and 15\% for test. Another possibility is 50\%, 25\%, and 25\%, respectively \cite{haykin}.
 
-It is known that the error-based cost function is multimodal (having multiple minima) for real problems and training algorithms are essentially local optimizers. As mentioned, generating the network weights randomly and respecting a uniform distribution in the interval $[-1,+1]$ is the most common. In this way, initializing the weights leads to outputs with different numerical values. The dispersion in a network's training and validation set should reach similar values, but it is unlikely they will be equal. Because of this, it is necessary that, for a real problem, the network be executed several times, ideally 30 times, so that the dispersion of results can be evaluated \cite{demvsar2006statistical}. 
+It is known that the error-based cost function is multimodal (having multiple minima) for real problems and training algorithms are essentially local optimizers. As mentioned, generating the network weights randomly, respecting a uniform distribution in the interval $[-1,+1]$, is the most common way to initialise the neural network. In this way, initializing the weights to different values leads to different weights being learned. As different learned weights can lead to different training and validation errors, the procedure used to evaluate an ANN approach usually runs it several times (typically at least 30 times), so that the dispersion of results can be evaluated \cite{demvsar2006statistical}. 
 
-Finally, it is essential to mention the input data of the network must be in the range of the nonlinearity of the activation function. For example, the data must be normalized over the interval $[0,+1]$ when using the sigmoid function. Similarly, if a hyperbolic tangent option is used, the desired range is $[-1,+1]$. If we deal with a nonlinear mapping or prediction problem, the normalization needs to be reversed, changing the final results to the original data magnitude.
+Finally, normalizing the data so that they are in the range of the nonlinearity of the activation function is recommended. For example, the data should be normalized over the interval $[0,+1]$ when using the sigmoid function. Similarly, if a hyperbolic tangent option is used, the desired range is $[-1,+1]$. If we deal with a nonlinear mapping or prediction problem, the normalization needs to be reversed, changing the final results to the original data magnitude.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Exercises}
 \label{ssec:exercises}
 
-\paragraph{\textbf{Exercise 1:}} Considering the AND, OR, and XOR logic gates, the truth table is shown in Table \ref{tab:verdade}.
+\begin{enumerate}
+\item The truth table for the AND, OR, and XOR logic gates is shown below:
 
-\begin{table}[h!]
-\caption{The truth table for AND, OR, and XOR logic gates.}
-\label{tab:verdade}
 \begin{center}
 \begin{tabular}{cc|ccc}
 \hline
 \multicolumn{2}{c|}{Inputs} & \multicolumn{3}{c}{Outputs}                                  \\ \hline
-$u_1$         & $u_2$        & $y_{\textrm{AND}}$ & $y_{\textrm{OR}}$ & $y_{\textrm{XOR}}$ \\ \hline
+$x_1$         & $x_2$        & $y_{\textrm{AND}}$ & $y_{\textrm{OR}}$ & $y_{\textrm{XOR}}$ \\ \hline
 0             & 0            & 0                  & 0                 & 0                  \\
 1             & 0            & 0                  & 1                 & 1                  \\
 0             & 1            & 0                  & 1                 & 1                  \\
 1             & 1            & 1                  & 1                 & 0                 \\ \hline
 \end{tabular}
 \end{center}
-\end{table}
 
-Note that, for each gate, one could consider a system with desired inputs and outputs. Implement an MLP with a hidden layer and perform your training using the descending gradient algorithm with backpropagation, using a total of 500 iterations ($n = 500$) and $\eta = 0.001$ for each logical gate in Table \ref{tab:verdade}. Check if MLP can achieve MSE $ = 0$ and the reasons for these results.
+
+For each gate, one could consider a system with desired inputs and outputs. Implement an MLP with a hidden layer and perform your training using the descending gradient algorithm with backpropagation, using a total of 500 iterations ($n = 500$) and $\eta = 0.001$ for each logical gate. Check if MLP can achieve MSE $ = 0$ and the reasons for these results.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{\textbf{Exercise 2:}} Haberman's Survival Data Set contains cases from a study conducted at the University of Chicago Billings Hospital between 1958 and 1970 on the survival of patients undergoing surgery to treat breast cancer. The attributes are:
+\item  Haberman's Survival Data Set contains cases from a study conducted at the University of Chicago Billings Hospital between 1958 and 1970 on the survival of patients undergoing surgery to treat breast cancer. The attributes are:
 \begin{enumerate}
     \item Age of the patient when the procedure was performed;
 	\item Year the process took place;
@@ -325,6 +333,7 @@ Note that, for each gate, one could consider a system with desired inputs and ou
 \end{enumerate}
 
 This database is one of several available ones from the UCI Machine Learning Repository \cite{Dua:2019}. Using this database from the Repository, implement an MLP as in the previous exercise. Use the first three attributes as input data for training and the last one as the desired response (surviving or not). Conduct your workout by checking and discussing your performance. Run the algorithm ten times, average the final validation MSE result for each round, and analyze if the variance is too large. Perform the procedure again, varying $n$ iteration values and $\eta$ learning rate, and check for deterioration or improvement. Present the final test error.
+\end{enumerate}
 
 \bibliographystyle{unsrt}
 \bibliography{bibliography}
