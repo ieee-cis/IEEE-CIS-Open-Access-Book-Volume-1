@@ -24,7 +24,7 @@ Figure \ref{fig:neuronio} shows the generic artificial neuron scheme used in ANN
 	\label{fig:neuronio}
 \end{figure}
 
-The processing performed by neuron $j$ consists in weighting the input signals $x_i , i=1, 2,..., I$ and a fixed value bias signal $x_0=+1$ by the weights $w_{ji}$ of this neuron. Then, the sum of the weighted input signals $u_j$ (a.k.a. activation value) passes through an activation function $f(\cdot)$, generating the output $\hat{y}_j$. The activation function $f(\cdot)$ is explained in Section \ref{ssec:ativacao}. The mathematical representation of this model is given by Equation \ref{eq:neuronio}:
+The processing performed by neuron $j$ consists in weighting the input signals $x_i , i=1, 2,..., I$ and a fixed value bias signal $x_0=+1$ by the weights $w_{ji}$ of this neuron. Then, the sum of the weighted input signals $u_j$ (a.k.a. activation value) passes through an activation function $f(\cdot)$, generating the output $\hat{y}_j$. The mathematical representation of this model is given by Equation \ref{eq:neuronio}:
 
 
 \begin{equation}
@@ -33,7 +33,7 @@ The processing performed by neuron $j$ consists in weighting the input signals $
 \end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Activation Functions}
+%\subsection{Activation Functions}
 \label{ssec:ativacao}
 
 An activation function $f(\cdot)$ defines the output of a given neuron, given the activation value $u$. Several functions have already been used or developed. This section gives some examples of such functions.
@@ -110,10 +110,8 @@ The definition for $u$ lower than zero allows problems with negative values.
 
 One of the best-known ANN architectures is the MultiLayer Perceptron (MLP), which structurally generalizes the artificial neuron called Rosenblatt perceptron \cite{Rosenblatt1958} -- an artificial neuron that uses the Heaviside activation function. As demonstrated by \cite{Cybenko1989}, this ANN has universal approximation capability: an MLP can approximate any continuous, bounded, differentiable, nonlinear function with defined inputs in a compact space with arbitrary precision. This is possible by the additive composition of base functions, which, for MLP, are ridge functions. However, this theorem does not specify the amount of artificial neurons required, nor does it define any method for adjusting the value of the weights so that the optimal configuration of the network is guaranteed.
 
-MLPs organize neurons in several layers chained together, where each layer is the arrangement of parallel neurons. Neurons in a given layer do not communicate with each other, and only send their output signals forward, which is known as a \textit{feedforward} structure. The first layer is the input layer, whose neurons receive as inputs the input variables of the problem. Neurons in subsequent layers receive as inputs the outputs of the neurons from the previous layer. The last layer is the output layer, whose neurons produce the values of the output variables of the problem. Any layer between the input and the output layers is referred to as a hidden layer. One or more hidden layers can be used.  The hidden layers are responsible for mapping the input signal in a nonlinear way into another space, according to the demand of the problem. As the combination of linear functions is also a linear function, the activation functions of the hidden nodes is usually not a linear function.
+MLPs organize neurons in several layers chained together, where each layer is the arrangement of parallel neurons. Neurons in a given layer do not communicate with each other, and only send their output signals forward, which is known as a \textit{feedforward} structure. MLPs contain an input layer, one or more hidden layers and an output layer. Figure \ref{fig:mlp} shows an example of possible MLP structure with one hidden layer for a problem with $d$-dimensional input variables and one output variable. As the neurons are organised in layers, we use superscript numbers in our notation to identify their layer. The first layer ($l=0$) is the input layer, whose neurons receive as inputs the input variables of the problem. Each neuron in this layer is a special neuron that simply feeds the value of a given input feature to the nodes in the hidden layer, i.e., $\hat{y}^{(l=0)}_j = x_j$, where $j$. Neurons in the hidden layers ($0<l<L$) and output layer ($l=L$) are standard artificial neurons that receive as inputs the outputs of the neurons from the previous layer. The last layer is the output layer, whose neurons produce the values of the output variables of the problem. One or more hidden layers can be used.  The hidden layers are responsible for mapping the input signal in a nonlinear way into another space, according to the demand of the problem. As the combination of linear functions is also a linear function, the activation functions of the hidden nodes is usually not a linear function.
 
-
-Figure \ref{fig:mlp} shows an example of possible MLP structure, with one hidden layer and one output.
 
 \begin{figure}[h!]
     \centering
@@ -121,6 +119,10 @@ Figure \ref{fig:mlp} shows an example of possible MLP structure, with one hidden
     \caption{Example of MLP.}
     \label{fig:mlp}
 \end{figure}
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Training}
@@ -156,20 +158,14 @@ Consider a given training example ($\mathbf{x}(n), \mathbf{y}(n)$) being introdu
 \label{eq:backprop1}
     u_j^{(l)}(n) = \sum_i w_{ji}^{(l)}(n) \hat{y}_i^{(l-1)}(n),
 \end{equation}
-where $\hat{y}_i^{(l-1)}(n)$ is an input of neuron $j$ of layer $l$ corresponding to:
-\begin{itemize}
-\item the input feature $x_i$ of the problem being solved, if this is the first hidden layer,
-\item the output signal of neuron $i$ of the previous layer $l-1$, if this is not the first hidden layer, 
-\item the bias value +1 if $i=0$). 
-\end{itemize}
-The value $w_{ji}^{(l)}(n)$ is the weight of the neuron $j$ in layer $l$ that is connected to neuron $i$ in layer $l-1$.
-
+where the value $w_{ji}^{(l)}(n)$ is the weight connecting neuron $j$ of layer $l$ to neuron $i$ from layer $l-1$, and
+$\hat{y}_i^{(l-1)}(n)$ is an input of neuron $j$ of layer $l$ corresponding to the output signal of neuron $i$ of the previous layer $l-1$ (or the bias value +1, if $i=0$).
 
 The output of neuron $j$ from layer $l$ can be defined by Equation \ref{eq:backprop2}:
 
 \begin{equation}
 \label{eq:backprop2}
-    \hat{y}_j^{(l)}(n) = f_j (u_j (n) ),
+    \hat{y}_j^{(l)}(n) = f_j (u_j^{(l)} (n) ),
 \end{equation}
 
 If the neuron $j$ is in the first hidden layer ($l = 1$), then Equation \ref{eq:backprop3} is used:
@@ -216,7 +212,7 @@ Finally, the adjustment of the weights of the layer $l$ takes place according to
     w_{ji}^{(l)} (n+1) = w_{ji}^{(l)}(n) + \eta \delta_j^{(l)}(n) \hat{y}_i^{(l-1)} (n).
 \end{equation}
 
-One way to improve the weight adjustment process and avoid instabilities is to modify Equation \ref{eq:backprop8} by adding a term from \textit{momentum}, changing Equation \ref{eq:backprop8} by Equation \ref{eq:backprop9}:
+One way to improve the weight adjustment process and avoid instabilities is to modify Equation \ref{eq:backprop8} by adding a term called \textit{momentum}, changing Equation \ref{eq:backprop8} to Equation \ref{eq:backprop9}:
 
 \begin{equation}
 \label{eq:backprop9}
@@ -231,22 +227,23 @@ The forward and backward steps are repeated, presenting all training data again 
 \begin{algorithm}[h!]
     \caption{Backpropagation. \label{alg:backprop}}
     
-    Parameters: max\_it, $\eta$, $\alpha$, $\mathbf{x}$, $\mathbf{y}$
+    Parameters: max\_it, $\eta$, $\alpha$, $\mathcal{T}$
     
     Output: $\mathbf{w}$
     
     \begin{algorithmic}[1] 
         \STATE Initialize $\mathbf{w}(1)$
         \STATE n $\leftarrow 1$
+        \STATE epoch $\leftarrow 1$
 
-        \WHILE{number of epochs $<$ max\_it}
-		\STATE Shuffle the order of the training data in $\mathbf{x}$, $\mathbf{y}$
-		\FOR{each example $n$ in $\mathbf{x}$, $\mathbf{y}$}
-
+        \WHILE{epoch $<$ max\_it}
+		\STATE Shuffle the order of the training data in $\mathcal{T}$
+		\FOR{each example in $\mathcal{T}$}
+			\STATE Refer to this example as $\mathbf{x}(n),\mathbf{y}(n)$ 
             \FOR{$l$ from $1$ to $L$}
                 
-                \FOR{$j$ from $1$ to $J$}
-                    \FOR{$i$ from $1$ to $I$}
+                \FOR{each neuron $j$ in layer $l$}
+                    \FOR{each input $i$ of neuron $j$}
                         %\STATE $u_j^{(l)}(n) \leftarrow u_j^{(l)}(n) + w_{ji}^{(l)}(n) \hat{y}_i^{(l-1)}(n)$ \COMMENT{Equation \ref{eq:backprop1}}
                         \STATE $u_j^{(l)}(n) = \sum_i w_{ji}^{(l)}(n) \hat{y}_i^{(l-1)}(n)$ \COMMENT{Equation \ref{eq:backprop1}}
                     \ENDFOR
@@ -257,38 +254,39 @@ The forward and backward steps are repeated, presenting all training data again 
             \ENDFOR
             
 
-            \FOR{$j$ from $1$ to $J$}
+            \FOR{each neuron $j$ of layer $L$}
                     \STATE $e_j (n) \leftarrow \hat{y}_j(n)^{(L)} - y_j (n)$ \COMMENT{Equation \ref{eq:backprop5}}
             \ENDFOR
 
 
             \FOR{$l$ from $L$ down to $1$}
-                \FOR{$j$ from $1$ to $J$}
+                \FOR{each neuron $j$ in layer $l$}
                     \IF{$ l = L $}
                         \STATE $ \delta_j^{(L)} (n) \leftarrow e_j(n) {f}'_j (u_j^{(L)}(n)) $ \COMMENT{Equation \ref{eq:backprop6}}
                     \ELSE
                     	  \STATE $\delta_j^{(l)} (n) \leftarrow 0$
-                        \FOR{$k$ from $1$ to $K$}
+                        \FOR{each neuron $k$ in layer $l+1$}
                             \STATE $ \delta_j^{(l)} (n) \leftarrow \delta_j^{(l)} (n) + {f}'_j (u_j^{(l)}(n)) \delta_k^{(l+1)} (n) w_{kj}^{(l+1)}(n) $ \COMMENT{Equation \ref{eq:backprop7}}
                         \ENDFOR
                     \ENDIF
 
-                    \FOR{$i$ from $1$ to $I$}
+                    \FOR{each input $i$ of neuron $j$}
                         \STATE $w_{ji}^{(l)} (n+1) = w_{ji}^{(l)}(n) + \alpha[\Delta w_{ji}^{(l)}(n-1)] + \eta \delta_j^{(l)}(n) \hat{y}_i^{(l-1)} (n)$ \COMMENT{Equation \ref{eq:backprop9}}
                     \ENDFOR
                 \ENDFOR
 
             \ENDFOR
 
-            %\STATE $n \leftarrow n + 1 $
+            \STATE $n \leftarrow n + 1 $
 		\ENDFOR
+            \STATE epoch $\leftarrow$ epoch + 1
         \ENDWHILE
     \end{algorithmic}
 \end{algorithm}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The algorithm receives the learning rate $\eta$, the momentum constant $\alpha$, the training data, and a ``max\_it" variable, which is the stopping criterion of the algorithm. The training stops when it reaches the defined number of iterations. The MLP's weights are then returned. Another common stopping criterion would be to calculate the error at the end of each iteration and check if it is at an acceptable level: if so, the training is stopped. Finally, note that it is necessary to define the number of artificial neurons in the hidden layer a priori.
+The algorithm receives the learning rate $\eta$, the momentum constant $\alpha$, the training data stored in the set $\mathcal{T}$, and a ``max\_it" variable, which is the stopping criterion of the algorithm. The training stops when it reaches the defined number of iterations. The MLP's weights are then returned. Another common stopping criterion would be to calculate the error at the end of each iteration and check if it is at an acceptable level: if so, the training is stopped. Finally, note that it is necessary to define the number of artificial neurons in the hidden layer a priori.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Pratical Aspects of the Backpropagation Application}
