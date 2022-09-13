@@ -323,6 +323,17 @@ Clustering documents is one of the most important text mining research areas \ci
 
 Speech recognition is an area that can vastly be benefited by self organizing maps, particularly by dynamic SOMs \cite{sp1}\cite{sp2}\cite{sp3}. For example, customer services of big companies rely on automatic speech recognition to actuate on call centers in order to understand \textit{yes} or \textit{no} questions and diminish the need of human interaction. In addition, a number of electronic devices also use voice recognition tasks to translate voice commands to machine entries. These type of applications can employ Self Organizing Maps for the end of the application, e.g., for classify a voice signal as \textit{yes} or \textit{no}, or as an intermediary procedure, e.g., for pre-processing voice signals in categories. 
 
+\section{Strengths and Weaknesses of SOM networks}
+
+One the main advantages of SOM networks it's that it can easily represent similarities in the data without the need of a complex fine tuning of the classifier's parameters (i.e., finding the output neurons' topology and the learning rate is not a complex task). The simplicity of the algorithm may be also seen as an advantage since knowing how the method behaves provides the practitioner with ability to customize it to domain specific problems. 
+
+Among the disadvantages of SOM networks it is the necessity of a large amount of data to operate. Sufficient data is a necessary condition for most of the unsupervised learning algorithms to perform well, nevertheless, for SOM networks, depending on the training parameters and as the number of training epochs increase a small cluster may be forgotten in the case of a class imbalanced problem, for example. Another issue is the fact that it may converge to a map containing two similar clusters distant from each other according to the number of trained epochs and learning rate values. In addition, it may not perform well for categorical data as well. Still, a large number of SOM variations are available to address the original SOM's issues. 
+
+\section{Summary}
+
+The Self Organizing Map ANN, also called Kohonen map, is a simple, yet, effective clustering algorithm. Different from other neural networks SOM networks use competitive learning instead of error correction for training purposes. In comparison to other clustering algorithms, it does not require much \textit{apriori} knowledge of the data, such as the number of clusters or the cluster's density, to operate. 
+
+Given the arrangement presented in the topological map it is intuitive the use of SOM networks, in addition to clustering, also for dimensionality reduction in the data. Therefore, many of the applications of SOM networks involve data representation. This chapter has shown some popular SOM applications, however, as the number of SOM variants grow, the number of problems tackled by this family of algorithms multiplies.  
 
 \section{Exercises}
 
