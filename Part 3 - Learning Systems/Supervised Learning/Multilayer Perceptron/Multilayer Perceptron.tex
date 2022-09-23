@@ -110,7 +110,9 @@ The definition for $u$ lower than zero allows problems with negative values.
 
 One of the best-known ANN architectures is the MultiLayer Perceptron (MLP), which structurally generalizes the artificial neuron called Rosenblatt perceptron \cite{Rosenblatt1958} -- an artificial neuron that uses the Heaviside activation function. As demonstrated by \cite{Cybenko1989}, this ANN has universal approximation capability: an MLP can approximate any continuous, bounded, differentiable, nonlinear function with defined inputs in a compact space with arbitrary precision. This is possible by the additive composition of base functions, which, for MLP, are ridge functions. However, this theorem does not specify the amount of artificial neurons required, nor does it define any method for adjusting the value of the weights so that the optimal configuration of the network is guaranteed.
 
-MLPs organize neurons in several layers chained together, where each layer is the arrangement of parallel neurons. Neurons in a given layer do not communicate with each other, and only send their output signals forward, which is known as a \textit{feedforward} structure. MLPs contain an input layer, one or more hidden layers and an output layer. Figure \ref{fig:mlp} shows an example of possible MLP structure with one hidden layer for a problem with $d$-dimensional input variables and one output variable. As the neurons are organised in layers, we use superscript numbers in our notation to identify their layer. The first layer ($l=0$) is the input layer, whose neurons receive as inputs the input variables of the problem. Each neuron in this layer is a special neuron that simply feeds the value of a given input feature to the nodes in the hidden layer, i.e., $\hat{y}^{(l=0)}_j = x_j$, where $j$. Neurons in the hidden layers ($0<l<L$) and output layer ($l=L$) are standard artificial neurons that receive as inputs the outputs of the neurons from the previous layer. The last layer is the output layer, whose neurons produce the values of the output variables of the problem. One or more hidden layers can be used.  The hidden layers are responsible for mapping the input signal in a nonlinear way into another space, according to the demand of the problem. As the combination of linear functions is also a linear function, the activation functions of the hidden nodes is usually not a linear function.
+MLPs organize neurons in several layers chained together, where each layer is the arrangement of parallel neurons. Neurons in a given layer do not communicate with each other, and only send their output signals forward, which is known as a \textit{feedforward} structure. MLPs contain an input layer, one or more hidden layers and an output layer. Figure \ref{fig:mlp} shows an example of possible MLP structure with one hidden layer for a problem with $d$-dimensional input variables and one output variable. As the neurons are organised in layers, we use superscript numbers in our notation to identify their layer. The first layer ($l=0$) is the input layer, whose neurons receive as inputs the input variables of the problem. Each neuron in this layer is a special neuron that simply feeds the value of a given input feature to the nodes in the hidden layer, i.e., $\hat{y}^{(l=0)}_j = x_j$, where $j$. Neurons in the hidden layers ($0<l<L$) and output layer ($l=L$) are standard artificial neurons that receive as inputs the outputs of the neurons from the previous layer. The last layer is the output layer, whose neurons produce the values of the output variables of the problem. 
+
+One or more hidden layers can be used.  The hidden layers are responsible for mapping the input signal in a nonlinear way into another space, according to the demand of the problem. As the combination of linear functions is also a linear function, the activation functions of the hidden nodes is usually not a linear function. When dealing with regression or binary classification problems, a single output node is typically used. When dealing with multi-class classification problems, one output node is used to correspond to each class. After the training process of the MLP is complete, predictions are given by mapping the numeric values given by the output nodes into classes when dealing with classification problems. In particular, sigmoid logistic activations are typically used for binary classification problems. If the output value is larger than 0.5, a given class is predicted. If the output value is smaller than or equal to 0.5, the other class is predicted.  
 
 
 \begin{figure}[h!]
@@ -311,22 +313,22 @@ Finally, normalizing the data so that they are in the range of the nonlinearity 
 \label{ssec:exercises}
 
 \begin{enumerate}
-\item The truth table for the AND, OR, and XOR logic gates is shown below:
+\item The truth table for the OR logic gate is shown below:
 
 \begin{center}
-\begin{tabular}{cc|ccc}
+\begin{tabular}{cc|c}
 \hline
-\multicolumn{2}{c|}{Inputs} & \multicolumn{3}{c}{Outputs}                                  \\ \hline
-$x_1$         & $x_2$        & $y_{\textrm{AND}}$ & $y_{\textrm{OR}}$ & $y_{\textrm{XOR}}$ \\ \hline
-0             & 0            & 0                  & 0                 & 0                  \\
-1             & 0            & 0                  & 1                 & 1                  \\
-0             & 1            & 0                  & 1                 & 1                  \\
-1             & 1            & 1                  & 1                 & 0                 \\ \hline
+\multicolumn{2}{c|}{Inputs} & \multicolumn{1}{c}{Outputs}                                  \\ \hline
+$x_1$         & $x_2$        & $y_{\textrm{OR}}$  \\ \hline
+0             & 0            & 0                   \\
+1             & 0            & 1                   \\
+0             & 1            & 1                  \\
+1             & 1            & 1                  \\ \hline
 \end{tabular}
 \end{center}
 
 
-For each gate, one could consider a system with desired inputs and outputs. Implement an MLP with a hidden layer and perform your training using the descending gradient algorithm with backpropagation, using a total of 500 iterations ($n = 500$) and $\eta = 0.001$ for each logical gate. Check if MLP can achieve MSE $ = 0$ and the reasons for these results.
+For each gate, one could consider a system with desired inputs and outputs. Assume that the inputs are numeric, but treat the output values 0 and 1 as categorical values. Manually create an MLP, including the values of its weights, that is able to perform the OR operation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item  Haberman's Survival Data Set contains cases from a study conducted at the University of Chicago Billings Hospital between 1958 and 1970 on the survival of patients undergoing surgery to treat breast cancer. The attributes are:
@@ -337,7 +339,16 @@ For each gate, one could consider a system with desired inputs and outputs. Impl
 	\item Survivor status, where 1 means the patient survived for five years or more, and 2 represents the patient died before completing five years of surgery.
 \end{enumerate}
 
-This database is one of several available ones from the UCI Machine Learning Repository \cite{Dua:2019}. Using this database from the Repository, implement an MLP as in the previous exercise. Use the first three attributes as input data for training and the last one as the desired response (surviving or not). Conduct your workout by checking and discussing your performance. Run the algorithm ten times, average the final validation MSE result for each round, and analyze if the variance is too large. Perform the procedure again, varying $n$ iteration values and $\eta$ learning rate, and check for deterioration or improvement. Present the final test error.
+This database is one of several available ones from the UCI Machine Learning Repository \cite{Dua:2019}. Use the first three attributes as input data for training and the last one as the desired output (surviving or not). Train an MLP and discuss its performance. Vary the number of epochs, hidden nodes, learning rate and momentum, and discuss the impact of that on the results. You may use any existing software to run the MLP. For instance, you may try WEKA: \url{https://www.cs.waikato.ac.nz/ml/weka/}.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exercise Answers}
+
+\begin{enumerate}
+\item There are many possible answers to this question. One could use an MLP with a single hidden neuron using a sigmoid logistic activation function, with weight of 2 for each of the inputs and weight of -1 for the bias. Interestingly, as this problem is very simple, the hidden node would suffice for providing predictions, without the need for any output node. However, as an MLP should have both a hidden and output layer, we could have a single output neuron using a linear activation function with a weight of 0 for the bias, a weight of 1 for the output of the hidden node, and $\alpha=1$. Such neuron would simply map the output of the hidden node to the output of the MLP.
+
+\item This is a very open question. Please try it out to see how well different configurations of the MLP can perform!
 \end{enumerate}
 
 \bibliographystyle{unsrt}
