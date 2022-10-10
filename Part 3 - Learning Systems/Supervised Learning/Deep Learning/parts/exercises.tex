@@ -1,8 +1,10 @@
 \newpage
 \section{Exercises}
 \newcounter{qcounter}
-\begin{list}{
-\textbf{Question \arabic{qcounter}:}~}{\usecounter{qcounter}}
+%\begin{list}{
+%\textbf{Question \arabic{qcounter}:}~}{\usecounter{qcounter}}
+
+\begin{enumerate}
 
 \iffalse
 \item \noindent The perceptron model was one of the first neural network algorithms. One of the limitations that made its application difficult was the restriction of not operating on non-linearly separable problems. This limitation was mainly known when used to simulate logical gates. Computationally assemble the perceptron model to simulate the three types of logic gates (AND, OR, XOR) and comment on the results considering the limitations of the perceptron.
@@ -180,4 +182,5 @@ $G_y = \left[\begin{smallmatrix}
 
 
 \item As explained in the Transfer Learning section \ref{transferlearning}, Convolutional Neural Networks with large and complex architectures can take a long time and consume large amounts of processing and memory in their training. Using pre-trained networks can help us, as we can use them directly or train them from that point on. Like in the previous exercise, use pre-trained models from some library, but this time using a dataset with a larger number of classes (for example, the cifar100 dataset\footnote{\url{https://www.tensorflow.org/datasets/catalog/cifar100}} that contains 100 classes). Also check the difference in performance of each model, taking into account its complexity and the number of classes.
-\end{list}
+%\end{list}
+\end{enumerate}
