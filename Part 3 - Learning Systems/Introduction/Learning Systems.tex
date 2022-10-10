@@ -9,63 +9,53 @@
         Gilson Junior Soares\\
         Jose Lohame Capinga\\
         Marcella Scoczynski Ribeiro Martins}
-\authorrunning{Supervised and Unsupervised Learning}
+%\authorrunning{Supervised and Unsupervised Learning}
 
 %\begin{document}
 \maketitle
 
-\section{Artificial Intelligence and Machine Learning}
+Early Artificial Intelligence (AI) studies tried and solved many problems that were considered difficult for humans but relatively easy for computers \cite{goodfellow2016}. These were problems that could be formally described using mathematical rules. 
+Over time, we began to realize that the difficulty did not necessarily reside in these problems, but in those that are easily, even instinctively and intuitively carried out by humans, such as recognizing familiar faces, understanding languages, etc. The point is that human beings, on a daily basis, receive and process huge amounts of information and trying to make computers perform these activities only with pre-defined rules described by us was not viable. Many researchers started to develop techniques where the computer itself, through algorithms, learns to abstract these rules and information on its own by learning from data. This subfield of AI is called Machine Learning. This part of the book is going to introduce several machine learning algorithms.
 
-In this part of the book we will provide an introduction to Artificial Intelligence and Machine Learning concepts;
-In general, the term Artificial Intelligence (AI) refers to an area that has many strands and topics of study, where most are focused on making computers perform complex tasks, which were previously performed exclusively by humans.
+%Today, as we hear a lot about AI or machine learning, we tend to think this is a recent area, but it has actually existed for many years. For example, one the the popular machine learning techniques uses a model inspired by biological brains, containing neurons and connections known as Neural Networks. However,  the idea of making computers mimic the brain's working scheme dates back to 1943, when Warren McCulloch and Walter Pitts suggested the idea in his article “A logical calculus of the ideas immanent in nervous activity” \cite{mcculloch1943}. There are also many other types of machine learning techniques that are not necessarily inspired by the biological brain. In recent years, we have seen an ever-increasing range of applications for machine learning techniques, partly due to the ever increasing amounts of data from various domains available for computers to learn from. 
 
-Early AI studies tried and solved many problems that were considered difficult for humans but relatively easy for computers \cite{goodfellow2016}. These were problems that could be formally described using mathematical rules. As an example, we have the game of chess that, in 1997, champion Garry Kasparov lost to IBM Deep Blue (Figure \ref{fig:figure100}).
+Two main categories of machine learning algorithms are \textit{supervised} and \textit{unsupervised} learning algorithms. In supervised learning, algorithms have access to data in the form of input-output pairs. The task is to use such data to learn how to predict the outputs given the inputs. Such function should work well not only for predicting the outputs of previously available data, but also for predicting the outputs of previously unseen inputs. In other words, supervised learning algorithms aim to learn functions able to \textit{generalize} to unseen data. We can formalize supervised learning as follows:
 
-\begin{figure}
-    \centering
-    %\includegraphics[scale=0.1]{images/figure100.jpg}
-    \includegraphics[scale=0.1]{"Part 3 - Learning Systems/Introduction/figure100.jpg"}
-    \caption{IBM Deep Blue \cite{img:deepblue}.}
-    \label{fig:figure100}
-\end{figure}
-\newpage
+Consider a set of examples 
 
-Over time, we began to realize that the difficulty did not reside in these problems, but in those that are easily, even instinctively and intuitively carried out by humans, such as recognizing familiar faces, understanding languages, etc. The point is that human beings, on a daily basis, receive and process huge amounts of information, so trying to make computers perform these activities only with rules described by us was not viable. Many, researchers started to develop techniques where the computer itself, through algorithms, learn to abstract these rules and information alone from raw databases, this is called Machine Learning.
+\[\mathcal{T} = \{(\mathbf{x}^{(1)},\mathbf{y}^{(1)}),(\mathbf{x}^{(2)},\mathbf{y}^{(2)}),\cdots,(\mathbf{x}^{(N)},\mathbf{y}^{(N)})\},\]
 
-Within the Machine Learning, we have a set of techniques and research areas and one of which uses a model based on biological brains, containing neurons and connections known as Neural Networks, often applied to several applications. In Figure  \ref{fig:figure101} we have a representation of neurons in the human cerebral cortex, where we can see the connections formed by them, which look like the neural network model in Figure \ref{fig:figure102}.
+\noindent where $(\mathbf{x}^{(i)},\mathbf{y}^{(i)}) \in \mathcal{X} \times \mathcal{Y}$  are examples drawn i.i.d. (independently and identically distributed) from a fixed albeit unknown joint probability distribution $p(\mathbf{x},\mathbf{y})$, $(x_1^{(i)},x_2^{(i)},\cdots,x_d^{(i)})^T$ is the vector of input variables of example $i$, $d$ is the dimensionality of the inputs of the problem, $\mathbf{y}^{(i)} = (y_1^{(i)}, y_2^{(i)}, \cdots, y_{d'}^{(i)})^T$ is the output variable of example $i$, $d'$ is the dimensionality of the outputs of the problem, and the symbol $T$ indicates the transpose of a vector. Many problems have a single output variable (i.e.,  $d'=1$), in which case we express $\mathbf{y}^{(i)}$ directly as a scalar $y^{(i)}$. When $\mathcal{Y}$ is the set of real values, the problem is called a regression problem. When it is a set of categories, it is called a classification problem. 
 
-\begin{figure}
-    \centering
-%    \includegraphics[scale=0.30]{images/figure101.png}
-    \includegraphics[scale=0.30]{"Part 3 - Learning Systems/Introduction/figure101.png"}
-    \caption{Representation of the connection of neurons in the cerebral cortex \cite{cajal}.}
-    \label{fig:figure101}
-\end{figure}
+Supervised learning aims at using $\mathcal{T}$ to learn a function $f: \mathcal{X} \rightarrow \mathcal{Y}$ (a.k.a., a model or hypothesis) able to predict the output values $\mathbf{y} \in \mathcal{Y}$ corresponding to any input $\mathbf{x} \in \mathcal{X}$. As the data set $\mathcal{T}$ is used to learn this function, it is referred to as the \textit{training set}. Similarly, the examples in this set are referred to as \textit{training examples}. Typically, the learning of $f$ assumes that new (previously unseen) data also follows the joint probability distribution $p(\mathbf{x},\mathbf{y})$, though some advanced techniques also exist to deal with situations where this may not be the case. When the learned function $f$ is able to predict the outputs of unseen examples very well, it is said that this function \textit{generalizes} well to unseen data. 
 
-Today, as we hear a lot about AI's, we tend to think this is a recent technique, but the idea of making computers mimic the brain's working scheme dates back to 1943, when Warren McCulloch and Walter Pitts suggested the idea in his article “A logical calculus of the ideas immanent in nervous activity” \cite{mcculloch1943}.
+When dealing with real world problems, it is usually inevitable that the learned function $f(\mathbf{x})$ will make some mistakes, i.e., it will not be able to always correctly predict the output values  $\mathbf{y} \in \mathcal{Y}$ corresponding to any input $\mathbf{x} \in \mathcal{X}$. Quite often, when the learning process attempts to create a function $f$ able to perfectly predict the outputs of the examples in the training set $\mathcal{T}$, this model becomes unable to generalize well to unseen examples. This is because the training set $\mathcal{T}$ frequently contains examples with \textit{noise}. These are examples that contain some atypical values for their input or output variables as a result of possible errors in the data collection. When a learning algorithm attempts to predict the outputs of all training examples perfectly, it may end up incorporating such noise, resulting in poor predictions on unseen data. When this happens, it is said that $f$ is overfitting the training examples. Machine learning algorithms thus typically use strategies to avoid overfitting, so that the learned functions $f$ can make the fewest possible mistakes on unseen data.  
 
-As can be seen in Figure \ref{fig:figure102}, neural networks are formed by layers, where the data enters through the Input layer, is processed in the Hidden layers and we have the output data in the Output layer. Each of these layers is formed by a number of neurons (in Figure \ref{fig:figure102} represented by circles) and their connections are represented by arrows.
+It is worth noting that, sometimes, the input variables of all training examples are placed in a matrix $\mathbf{X}$ referred to as the design matrix:
 
-\begin{figure}
-    \centering
-    %\includegraphics[scale=0.8]{images/figure102.png}
-    \includegraphics[scale=0.8]{"Part 3 - Learning Systems/Introduction/figure102.png"}
-    \caption{Artificial neural network.}
-    \label{fig:figure102}
-\end{figure}
+\begin{align}
+    \mathbf{X} &= \begin{pmatrix}
+           x^{(1)}_{1} & x^{(1)}_{2} & \cdots & x^{(1)}_{d} \\
+           x^{(2)}_{1} & x^{(2)}_{2} & \cdots & x^{(2)}_{d} \\
+           \vdots & \vdots & \ddots & \vdots \\
+		   x^{(N)}_{1} & x^{(N)}_{2} & \cdots & x^{(N)}_{d} \\
+         \end{pmatrix}
+  \end{align}
 
-In recent years, we have seen an ever-increasing range of applications for AI techniques. Our objective in this text is to introduce, mainly, the use of artificial neural networks in the area of computer vision, which is identified as one of the sub-areas of Artificial Intelligence as it seeks to reproduce some of the human capabilities from autonomous systems. The main interest of computer vision is to make computers perform functions similar to human vision, being able to receive visual data and with them perform recognition, classification and analysis. Analogous to the learning process of human beings, it is identified that the improvement in the performance of computer vision is strongly linked with the evolution of machine learning.
+Correspondingly, the output variables corresponding to each training example can be placed in an output matrix. When the dimensionality of the outputs of the problem is $d'=1$, a vector containing the outputs of all training examples can be used instead:
 
-\section{Supervised and Insupervised learning}
+\begin{align}
+    \mathbf{y} &= \begin{pmatrix}
+           x^{(1)} \\
+           x^{(2)} \\
+           \vdots \\
+		   x^{(N)} \\
+         \end{pmatrix}
+  \end{align}
 
-Within machine learning algorithms, there is a feature that separates them into different types, based on their way of learning: supervised and unsupervised learning algorithms.
+In unsupervised learning, however, the problem has no output, that is, all examples come only with the input data. Therefore, one of the main tasks assigned to these types of algorithms is clustering, where the algorithm learns to find patterns in the input data to separate them into groups called clusters. 
 
-In supervised learning, algorithms previously have input-output pairs, that is, for each input we have prior knowledge of its output \cite{russell2016}, and from that, our algorithm must learn to generalize the entries well. We can formalize this as follows \cite{russell2016}:
-
-Given a training set $\mathcal{T}$ of $\mathcal{N}$ pairs $(\mathbf{x}^{(1)},y^1),(\mathbf{x}^{(2)},y^2),\dots,(\mathbf{x}^{(N)},y^{(N)})$ where $\mathbf{x}^{(i)}$ are the input variables and $y^{(i)}=f(\mathbf{x}_{(i)})$ is the output variable, our algorithm must find the function $h$, known as a hypothesis, that best approximates $f$. To find out if our hypothesis approximates $f$ well, after having trained the algorithm, we use a set of tests - which contain different examples from the training set - and evaluate how well the algorithm generalizes (gives correct answers) to the new inputs.
-
-In unsupervised learning, however, there is no response to the outputs of the algorithm, that is, it only receives input data. Therefore, one of the main tasks assigned to these types of algorithms is clustering, where the algorithm learns to find patterns in the input data and separate them into groups.
-
+Part III-(A) of this book will explain supervised learning algorithms, whereas Part III-(B) will explain unsupervised learning algorithms.
 
 \bibliographystyle{unsrt}
 \bibliography{bibliography}
