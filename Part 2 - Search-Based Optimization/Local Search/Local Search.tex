@@ -35,7 +35,7 @@ patterns that can be applied to search spaces with
 similar structure.  The mechanism upon which the neighbor is selected
 at each step is one of the main design choices that varies
 among different local search techniques. In any case, this selection
-mechanism relies upon the definition of the \emph{cost function} $F$,
+mechanism relies upon the definition of the \emph{cost function} $f$,
 which assesses the quality of each neighbor, and it is also
 problem dependent.
 
@@ -126,7 +126,7 @@ state for both search spaces. These states are depicted in Figures~\ref{fig:nque
 \end{figure}
 
 In the \textbf{Assignment} space, horizontal and diagonal attacks have
-to be taken care by the cost function $F$. In the \textbf{Permutation}
+to be taken care by the cost function $f$. In the \textbf{Permutation}
 space, instead, since the search space is restricted so that two variables
 cannot have the same value, also horizontal attacks are prevented by construction. In
 this case, the only possible constraint violations come from the
@@ -222,24 +222,24 @@ by applying the move would have a quadratic computational cost.
 \subsection{Cost Function}
 
 The selection of the move to be performed at each step is based on the
-\emph{cost function} $F$ that associates to each element $s\in S$ a
-value $F(s)$ that assesses the quality of the solution. For the sake
-of simplicity, we assume that the value of $F$ is integer-valued and
-non-negative, or in other words, that the co-domain of $F$ is the set
+\emph{cost function} $f$ that associates to each element $s\in S$ a
+value $f(s)$ that assesses the quality of the solution. For the sake
+of simplicity, we assume that the value of $f$ is integer-valued and
+non-negative, or in other words, that the co-domain of $f$ is the set
 of natural numbers $\mathbb{N}$.
 
-When applied to search problems, the function $F$ normally counts the
+When applied to search problems, the function $f$ normally counts the
 number of constraint violations, which is also known as 
 \emph{distance to feasibility}. For example, in the $n$-queens
 problem, the customary cost function counts the number of attacking
 pairs of queens. For the state $s_1 = [4,6,1,6,8,4,2,1]$ 
 represented in Figure~\ref{fig:nqueens-assignment},
-we have $F(s_1) = 6$, as there are 6 pairs of queens attacking each
+we have $f(s_1) = 6$, as there are 6 pairs of queens attacking each
 other $\{(x_1,x_5), (x_1,x_6), (x_2,x_4), (x_3,x_8),  (x_4,x_6),  (x_7,x_8)\}$ 
 connected in the figures with red dotted lines.\footnote{Note that we count also the so-called \emph{X-ray} attacks, i.e. the ones between non consecutive queens in a row (or diagonal) of more than two of them, which by the chess rules would not attack each other.}
 
 In the case of an optimization problem (which, without loss of
-generality, is assumed to be a minimization one), $F$ typically merges
+generality, is assumed to be a minimization one), $f$ typically merges
 together the distance to feasibility and the objective function $f$ of
 the problem.  Therefore, the cost function is typically defined as a
 weighted sum, with the highest weight assigned to the distance to
@@ -325,7 +325,7 @@ which is also dependent on the specific technique under consideration.
 As a general rule, moves that improve (i.e., decrease) the cost function are
 accepted, but also worsening moves (i.e., increasing ones) could be accepted in specific
 situations, so as to let the search move away from a \emph{local minimum}.
-A local minimum is a state $s$ such that $F(s) \leq F(s')$ for all $s'
+A local minimum is a state $s$ such that $f(s) \leq f(s')$ for all $s'
 \in \mathcal{N}(s)$. When this condition holds also with a strict inequality $<$, 
 we call the state a \emph{strict} local minimum. Escaping from local minima is the key issue of all local search techniques.
 
@@ -360,17 +360,17 @@ Algorithm~\ref{alg:local-search-pseudocode}.
 \begin{algorithm}[ht!]
     %\renewcommand{\baselinestretch}{0.8}
     \caption{LocalSearch} \label{alg:local-search-pseudocode}   
-    Parameters: SearchSpace $\mathcal{S}$, Neighborhood $\mathcal{N}$, CostFunction $F$\\   
+    Parameters: SearchSpace $\mathcal{S}$, Neighborhood $\mathcal{N}$, CostFunction $f$\\   
     Output: $s_{best}$
     \begin{algorithmic}[1]
             \STATE $s \gets InitialState(\mathcal{S})$
             \STATE $s_{best} \gets s$
             \WHILE{\NOT{$StopCriterion$}}
                 \STATE $m \gets SelectMove(s,\mathcal{N})$
-                \STATE $\Delta F \gets F(s \oplus m) - F(s)$
-                \IF{$AcceptMove(m,\Delta F)$}
+                \STATE $\Delta f \gets f(s \oplus m) - f(s)$
+                \IF{$AcceptMove(m,\Delta f)$}
                     \STATE $s \gets s \oplus m$
-            \IF{$F(s) < F(s_{best})$}
+            \IF{$f(s) < f(s_{best})$}
                 \STATE  $s_{best} \gets s$ \\
             \ENDIF
                 \ENDIF
@@ -399,7 +399,7 @@ The most well-known form of Iterative Descent is the so-called
 \emph{Steepest Descent} (SD) technique. At each iteration, SD selects,
 from the whole neighborhood $\mathcal{N}(s)$ of the current state
 $s$, the element $s' = s \oplus m$ which has the best value of the
-cost function $F$.  The SD procedure accepts the move $m$ only if it
+cost function $f$.  The SD procedure accepts the move $m$ only if it
 an improving move, i.e., it decreases the value of the cost function. 
 Consequently, it naturally stops as soon as it reaches a
 local minimum. Therefore, assuming (as customary for combinatorial optimization) that the search space is finite and thus at least one local minimum exists, we don't need to define any other specific stop criterion.
