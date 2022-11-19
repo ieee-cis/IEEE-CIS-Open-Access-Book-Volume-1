@@ -1,22 +1,8 @@
-\title{Evaluation of Unsupervised Learning Models}
+\title{Clustering Evaluation}
 \label{chp:evaluation-unsupervised-learning}
-\author{}
+\author{Valmir Macario}
 \institute{}
 \maketitle
-
-\documentclass[ruled,graybox]{svmult}
-\input{commands}
-\usepackage{graphicx,color}
-\usepackage{amsmath, amssymb}
-%\usepackage[ruled]{algorithm}
-\usepackage{algorithmic}
-\usepackage{url}
-\usepackage{verbatim}
-\setcounter{secnumdepth}{3}
-
-\title{Clustering Evaluation}
-\author{Valmir Macario}
-
  
 %\chapter{Optimization}
 The evaluation of unsupervised algorithms, such as clustering methods, is aimed at validating the data structures (in the feature space) found by these algorithms. If the purpose is to validate newly developed algorithms, i.e., comparing them with others in the state of the art, it can be useful to compare the obtained results against previously known structures, and, then, assessing the capacity of these algorithms to find a structure close to the one already known \cite{carvalho2011inteligencia}. However, in some cases a previously known structure may not be available. So it is necessary to validate whether the found structure met the expected criteria for optimal clustering structures. Some aspects that are inherent of an optimal scheme are the two proposed criteria for clustering evaluation and selection \cite{Berry1996}:
@@ -72,9 +58,9 @@ Let $\mathcal{T} = \{\mathbf{x}^{(1)}, \mathbf{x}^{(2)},\ldots, \mathbf{x}^{(i)}
 
 \subsection{Intracluster Variance}
 
-The intracluster variance is given by Equation~\eqref{eq_vi}, where $\mathbf{c}^{(k)}$ is the centroid of the cluster $C_k$ \cite{handl2005computational}. This measure assesses the quality of the clusters based on the compression among them. The output values are in the range $[0,\infty]$ so that the smaller the value of $var$, the better the partition. 
+The intracluster variance is given by Equation~\eqref{eq_pi}, where $\mathbf{c}^{(k)}$ is the centroid of the cluster $C_k$ \cite{handl2005computational}. This measure assesses the quality of the clusters based on the compression among them. The output values are in the range $[0,\infty]$ so that the smaller the value of $var$, the better the partition. 
 \begin{equation}
-\label{eq_vi}
+\label{eq_pi}
     var(\pi)=\sqrt{\frac{1}{n} \sum_{\mathbf{c}^{(k)} \in \pi^e} \sum_{\mathbf{x}^{(i)} \in C_k} d(\mathbf{x}^{(i)},\mathbf{c}^{(k)})}
 \end{equation}
 
@@ -182,7 +168,7 @@ These metrics can also be defined for prototype-based clustering techniques, whe
 There are some difficulties when using these measures, like the $SSE$ that presents lower values for data that actually have clusters than for random, unstructured data. Another difficulty is the dependence of these indexes on the values used for data characteristics, such as number of objects, number of dimensions, number of clusters and scattering \cite{jain1988algorithms}. To alleviate some of these limitations, the relative indexes presented in Section \ref{sec:relative_criterian} also can be used as internal criteria. Besides the relative indexes, you can use some others indexes, like the Gap Statitical \cite{tibshirani2001estimating} and Clest proceeding \cite{dudoit2002prediction} to compute internal criteria. 
 
 
-\begin{comment}
+\iffalse
 In addition to them, we can use the Gap criterion that will be explained in the next section.
 \subsection{Estatística Gap}
 O índice Gap \cite{Tibshirani2001b} calculado pela Equação \ref{eq_gap1}, possui um valor chamado de Esperança $W_k$ calculado pela Equação \ref{eq_gap2} utilizado pra o cálculo da dispersão da distribuição intracluster em relação a essa esperança. A variável $D$ calculado pela Equação \ref{eq_gap3} representa a disperção intracluster. 
@@ -251,7 +237,7 @@ Para calcular a estatística Gap, estima-se $E_n=log(W_k)$ pela média de $B$ c�
 \end{algorithm}
 %%%%%%%%%%%%%%%%%%%%%%%% ALGORITHM
 O cálculo da estatística Gap assime que já clusters uniformes separados. Quando existem subclusters menores dentro de clusters maiores bem separados, a estatística Gap pode exibir um comportamento não monotônicos. Assim, importante examinar a curva Gap inteira, em vez de simplesmente buscar o seu maximo. 
-\end{comment}
+\fi
 
 \section{External Index}
 \label{sec_external_index}
@@ -274,7 +260,7 @@ From these four situations, we can easily obtain:
 \item The total number of pairs of examples: $M = TP + FP + FN + TN = \frac{n(n-1)}{2}$
 \end{itemize}
 
-These values can then be used to compute a number of external indexes, such as Hubbert, Jaccard, Rand and Corrected Rand \citep{jain1988algorithms} that will be described in next subsections.
+These values can then be used to compute a number of external indexes, such as Hubbert, Jaccard, Rand and Corrected Rand \cite{jain1988algorithms} that will be described in next subsections.
  
 \subsection{Rand Index}
 
@@ -318,7 +304,7 @@ The Normalized Hubert Index measures the linear correspondence between two parti
 
 \subsection{Corrected Rand Index}
 
-A common characteristic for most of external indexes is their high sensitivity to the number of classes in partitions or to the spatial distribution of examples in clusters. For example, some indexes tend to output higher values for partitions with more classes (Hubbert and Rand), others for partitions with fewer classes (Jaccard) \citep{Dubes1987}. The Corrected Rand Index (CR) has its outputs corrected according to correct answers in the comparisons of the partitions, so it does not have any of these undesirable characteristics \citep{Milligan1986}. This index can be obtained from the contingency table and built from the two partitions shown in Table \ref{tab_contigencia}. The $CR$ can be defined by Equation \ref{eq_CR}:
+A common characteristic for most of external indexes is their high sensitivity to the number of classes in partitions or to the spatial distribution of examples in clusters. For example, some indexes tend to output higher values for partitions with more classes (Hubbert and Rand), others for partitions with fewer classes (Jaccard) \cite{Dubes1987}. The Corrected Rand Index (CR) has its outputs corrected according to correct answers in the comparisons of the partitions, so it does not have any of these undesirable characteristics \cite{Milligan1986}. This index can be obtained from the contingency table and built from the two partitions shown in Table \ref{tab_contigencia}. The $CR$ can be defined by Equation \ref{eq_CR}:
 
 \begin{table}[h]
 \begin{center}
@@ -345,7 +331,7 @@ CR=
 \noindent
 where $\binom{n}{2}=\frac{n(n-1)}{2}$ and $n_{hk}$ is the number of examples belonging to the same cluster for both partitions $\pi^e_k$ and $\pi^r_h$. The term $n_{\cdot k}$ depicts the number of examples in cluster $C_k$ and $n_{h\cdot}$ is the number of examples at class $Q_h$, and $n$ is the total number of examples.
 
-This index varies in the range [-1, 1], where 1 indicates perfect cohesion between the partitions and -1 indicates that there is no cohesion between the partitions. Milligan and Cooper's work \citep{Milligan1986} indicates that values below 0.05 are randomly generated partitions.
+This index varies in the range [-1, 1], where 1 indicates perfect cohesion between the partitions and -1 indicates that there is no cohesion between the partitions. Milligan and Cooper's work \cite{Milligan1986} indicates that values below 0.05 are randomly generated partitions.
 
 \subsection{Information Variation Index}
 
@@ -366,9 +352,9 @@ VI(\pi^e,\pi^r)=EN(\pi^e)+EN(\pi^r)-2I(\pi^r,\pi^r)
 \end{equation}
 
 \subsection{Normalized Mutual Information Index}
-The external mutual information index ($I$) originates from the principles of information theory and the notion of entropy \citep{Cover2006}. When entropy is applied to the clustering process, it is a metric that measures the uncertainty that an element $\mathbf{x}^{(i)}$ will be associated with a certain cluster $C_k$. For the case that an element is associated with a cluster by chance, the entropy will be 0. The notion of entropy can be extended to mutual information, which measures how much we can, on average, reduce the uncertainty about the random choice that an element $\mathbf{x}^{(i)}$ is associated with a $C_k$ cluster, taking into account that its cluster is known from another previous clustering. The mutual information is calculated using the Equation \eqref{eq_mutual}.
+The external mutual information index ($I$) originates from the principles of information theory and the notion of entropy \cite{Cover2006}. When entropy is applied to the clustering process, it is a metric that measures the uncertainty that an element $\mathbf{x}^{(i)}$ will be associated with a certain cluster $C_k$. For the case that an element is associated with a cluster by chance, the entropy will be 0. The notion of entropy can be extended to mutual information, which measures how much we can, on average, reduce the uncertainty about the random choice that an element $\mathbf{x}^{(i)}$ is associated with a $C_k$ cluster, taking into account that its cluster is known from another previous clustering. The mutual information is calculated using the Equation \eqref{eq_mutual}.
 
-The mutual information $I$ is a metric about the space of all clusters. However, it is not limited by a constant value, which makes it difficult to interpret. In the work by Strehl and Ghosh \citep{Strehl2002}, a normalization by geometric mean was proposed. To this end, they determine the cluster that has the maximum average of the normalized mutual information of all the clusters under consideration, where the normalized mutual information (NMI) between two clusters is defined as follows by the Equation \ref{eq_NMI_1}.
+The mutual information $I$ is a metric about the space of all clusters. However, it is not limited by a constant value, which makes it difficult to interpret. In the work by Strehl and Ghosh \cite{Strehl2002}, a normalization by geometric mean was proposed. To this end, they determine the cluster that has the maximum average of the normalized mutual information of all the clusters under consideration, where the normalized mutual information (NMI) between two clusters is defined as follows by the Equation \ref{eq_NMI_1}.
 \begin{eqnarray}
 \label{eq_NMI_1}
 NMI(\pi^e,\pi^r)=\frac{I(\pi^r,\pi^e)}{\sqrt{EN(\pi^r)EN(\pi^e)}}
@@ -388,7 +374,7 @@ where $I(\pi^r,\pi^e)$ is the mutual information between $\pi^r$ and $\pi^e$. $E
 %where $n_{hk}$, $n_{\cdot k}$ eand$n_{h\cdot}$ are %as described. NMI has its values between the %interval [0,1].
 
 \subsection{Accuracy Rate}
-The accuracy (ACC) looks for a decision rule that minimizes the probability of error \citep{Breiman1984}. The maximum value of a ACC indicates the best performance of the clustering algorithm.
+The accuracy (ACC) looks for a decision rule that minimizes the probability of error \cite{Breiman1984}. The maximum value of a ACC indicates the best performance of the clustering algorithm.
 
 \begin{eqnarray}
 \label{eq_ERC}
@@ -432,9 +418,9 @@ as well as several recent approaches that consider aspects such as stability of 
 \end{enumerate}
 
 
-\begin{comment}
+\iffalse
 All the external indexes above can also be used in fuzzy clustering algorithms by transforming the fuzzy partition in a hard partition. Let $F=(F_1,\ldots,F_K)$ of $X$ in $K$ fuzzy clusters represented by $\textbf{U}=(\textbf{u}_1,\ldots,\textbf{u}_n)$, with $\textbf{u}_{ik} = (u_{i1},\ldots,u_{iK}) \, (i=1,\ldots,n)$. So, a hard partition $C = (C_1, \ldots,C_K)$ will be fetched from that fuzzy partition by defining a partition $C_k (k = 1,\ldots,K)$ with $C_k = \{x_i : u_{ik} \ge u_{il} \, \forall l \in \{1,\ldots,K\}\}$.
-\end{comment}
+\fi
 %FAlta sessão final
 
 
