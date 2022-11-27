@@ -44,7 +44,7 @@ The relative criteria evaluate the partitions $\pi$ according to a scheme of a s
 
 \subsection{Mathematical Notation}
 
-Let $\mathcal{T} = \{\mathbf{x}^{(1)}, \mathbf{x}^{(2)},\ldots, \mathbf{x}^{(i)}, \ldots, \mathbf{x}^{(n)}\}$ be the dataset which consists of $n$ observed examples of the form $\mathbf{x}^{(i)} = \{x^{(i)}_1 ,x^{(i)}_{2},\ldots,x^{(i)}_{p}\}$ where $p$ stands as the number of features of the problem. Be $\pi^e=\{\mathbf{c}^{(1)}, \mathbf{c}^{(2)}, \ldots, \mathbf{c}^{(k)}\}$ (e.g., the set of resulting clusters' representations) the clustering algorithm partition result, and $\pi^r=\{C_1, C_2, \ldots, C_k\}$ the ground truth on the clustering structure (i.e., $C_i$ comprises all examples in the cluster $i$). The cluster representation, that can be a centroid (i.e., the mean of the examples in a cluster) or a medoid (i.e., the example in $\mathcal{T}$ nearest to the centroid) of cluster $k$ is $\mathbf{c}^{(k)}$. In addition, it is also necessary to define a similarity or dissimilarity measure between two examples $\mathbf{x}^{(i)}$ and $\mathbf{x}^{(j)}$, i.e., $d(\mathbf{x}^{(i)},\mathbf{x}^{(j)})$. Typically the similarity measure used for most methods is the Euclidean distance (Equation \ref{eq:euclid_dist}): 
+Let $\mathcal{T} = \{\mathbf{x}^{(1)}, \mathbf{x}^{(2)},\ldots, \mathbf{x}^{(i)}, \ldots, \mathbf{x}^{(n)}\}$ be the dataset which consists of $n$ observed examples of the form $\mathbf{x}^{(i)} = \{x^{(i)}_1 ,x^{(i)}_{2},\ldots,x^{(i)}_{p}\}$ where $p$ stands as the number of features of the problem. Be $\pi^e=\{\mathbf{c}^{(1)}, \mathbf{c}^{(2)}, \ldots, \mathbf{c}^{(k)}\}$ (e.g., the set of resulting clusters' representations) the clustering algorithm partition result, and $\pi^r=\{C_1, C_2, \ldots, C_k\}$ the ground truth on the clustering structure (i.e., $C_i$ comprises all examples in the cluster $i$). The cluster representation, that can be a centroid (i.e., the mean of the examples in a cluster) or a medoid (i.e., the example in $\mathcal{T}$ nearest to the centroid) of cluster $k$ is $\mathbf{c}^{(k)}$. In addition, it is also necessary to define a similarity or dissimilarity measure between two examples $\mathbf{x}^{(i)}$ and $\mathbf{x}^{(j)}$, i.e., $d(\mathbf{x}^{(i)},\mathbf{x}^{(j)})$. Typically the similarity measure used for most methods is the Euclidean distance (Equation \ref{eq:euclid_dist2}): 
 
 % \begin{equation}
 % \label{eq_euclidean}
@@ -53,7 +53,7 @@ Let $\mathcal{T} = \{\mathbf{x}^{(1)}, \mathbf{x}^{(2)},\ldots, \mathbf{x}^{(i)}
 
 \begin{equation}
     d(\textbf{x}^{(i)},\textbf{x}^{(j)}) = \sqrt{(x^{(i)}_{1} - x^{(j)}_{1})^{2} + (x^{(i)}_{2} - x^{(j)}_{2})^{2} + \cdots + (x^{(i)}_p - x^{(j)}_{p})^{2}}
-    \label{eq:euclid_dist}
+    \label{eq:euclid_dist2}
 \end{equation}
 
 \subsection{Intracluster Variance}
