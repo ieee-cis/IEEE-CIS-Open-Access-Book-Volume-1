@@ -84,6 +84,7 @@ The vast majority of the works define the SOM topology as containing only the in
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.35]{"Part 3 - Learning Systems/Unsupervised Learning/Self-Organizing Maps/figs/arquitetura.pdf"}
+\vspace{-3cm}
 \caption{Partial example of SOM architecture. The connections between the input layer and the output neuron 1 are highlighted in red.}
 \label{fig:architecuture}
 \end{figure}
@@ -288,16 +289,7 @@ Dimensionality reduction is a natural application of Self Organizing Maps given 
 
 \subsection{Surface Reconstruction}
 
-Reconstructing the surface of an object based on a set of examples structured or not is a common problem in many fields such as medicine \cite{Satava}, Arts \cite{974519} and manufacturing \cite{Bernardini}. The idea is to reproduce the original shape based on a partial set of examples, i.e., these examples may not be able to represent missing parts of the shape. SOMs can generate a map that is close to the original shape given a training set provided with the spatial coordinates of the points \cite{4371248}. Commonly, reconstruction process of methods based on self organizing maps use randomly sampled 3d points as training data for the learning algorithm where the mesh vertices correspond to the output nodes of the map \cite{4371248}.
-
-\begin{figure}[!h]
-\centering
-\includegraphics[scale=0.35]{"Part 3 - Learning Systems/Unsupervised Learning/Self-Organizing Maps/figs/reconstruction.pdf"}
-\caption{Examples of images reconstructed from 3d points. From left to right: cow, Max Planck, teapot and stanford-bunny. \\Source: https://github.com/alecjacobson/common-3d-test-models.}
-\label{fig:reconstruction}
-\end{figure}
-
-Some examples of works that use SOMs or its variations for surface reconstruction are: \cite{Yu99surfacereconstruction}, \cite{1380023} and \cite{4371248}
+Reconstructing the surface of an object based on a set of examples structured or not is a common problem in many fields such as medicine \cite{Satava}, Arts \cite{974519} and manufacturing \cite{Bernardini}. The idea is to reproduce the original shape based on a partial set of examples, i.e., these examples may not be able to represent missing parts of the shape. SOMs can generate a map that is close to the original shape given a training set provided with the spatial coordinates of the points \cite{4371248}. Commonly, reconstruction process of methods based on self organizing maps use randomly sampled 3d points as training data for the learning algorithm where the mesh vertices correspond to the output nodes of the map \cite{4371248}. Some examples of images reconstructed from 3d points can be found at: \url{https://github.com/alecjacobson/common-3d-test-models}. Some examples of works that use SOMs or its variations for surface reconstruction are: \cite{Yu99surfacereconstruction}, \cite{1380023} and \cite{4371248}
 
 \subsection{Image Segmentation}
 
@@ -307,7 +299,7 @@ Image segmentation consists in identifying the boundaries (lines, curves, etc.) 
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=0.55]{ "Part 3 - Learning Systems/Unsupervised Learning/Self-Organizing Maps/figs/imageSeg.pdf"}
-\caption{Segmentation for object identification in a traffic image.\\ Source: https://ai.googleblog.com/2021/04/max-deeplab-dual-path-transformers-for.html. }
+\caption{Segmentation for object identification in a traffic image. Source: Cityscapes Dataset \cite{Cordts2016Cityscapes} \url{https://www.cityscapes-dataset.com/}.}
 \label{fig:imgSeg}
 \end{figure}
 
