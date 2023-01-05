@@ -1,39 +1,45 @@
 \newpage
-\section{Answers to exercises}
+\section{Exercise Answers}
 %\newcounter{qcounter}
-\begin{list}{
-\textbf{Answer \arabic{qcounter}:}~}{\usecounter{qcounter}}
+%\begin{list}{
+%\textbf{Answer \arabic{qcounter}:}~}{\usecounter{qcounter}}
 
+\begin{enumerate}
 \item \noindent 
+
+Padding will result in the following new input matrix:
 $\left[\begin{smallmatrix}
-7 & 11 & 0\\
-17 & 16 & 7\\
-4 & 7 & 0
-\end{smallmatrix}\right]$. Using padding $=$ 0 and stride $=$ 1.
+0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 2 & 0 & 0\\
+0 & 3 & 0 & 0 & 0\\
+0 & 4 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0
+\end{smallmatrix}\right]$.
+
+The output matrix will then be:
+
+$\left[\begin{smallmatrix}
+1 & 11 & 0\\
+13 & 16 & 3\\
+10 & 1 & 0
+\end{smallmatrix}\right]$. 
+
+%$\left[\begin{smallmatrix}
+%7 & 11 & 0\\
+%17 & 16 & 7\\
+%4 & 7 & 0
+%\end{smallmatrix}\right]$. 
 
 
 
 
 \item \noindent
 
-A possible solution:
-
 \begin{table}[]
     \centering
     \begin{tabular}{ccc}
-        Input matrix & Prewitt result & Sobel result  \\
-        $\left[\begin{smallmatrix}
-        1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
-        1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
-        1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
-        1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
-        1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
-        1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
-        1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
-        1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
-        1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
-        1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
-        \end{smallmatrix}\right]$ & $\left[\begin{smallmatrix}
+        Prewitt result & Sobel result  \\
+$\left[\begin{smallmatrix}
         0 & 0 & 3 & 3 & 0 & 0 & 0 & 0\\
         0 & 0 & 3 & 3 & 0 & 0 & 0 & 0\\
         0 & 0 & 3 & 3 & 0 & 0 & 0 & 0\\
@@ -57,7 +63,6 @@ A possible solution:
     \label{tab:my_label}
 \end{table}
 
-Using padding no padding (valid padding) and stride $=$ 1.
 
 \item \noindent
 
@@ -70,4 +75,5 @@ Using stride $=$ 2:
 $\left[\begin{smallmatrix}
 16 & 9\\
 \end{smallmatrix}\right]$.
-\end{list}
+%\end{list}
+\end{enumerate}
