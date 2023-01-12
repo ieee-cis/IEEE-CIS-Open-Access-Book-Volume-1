@@ -119,12 +119,13 @@ To learn a little about the different architectures of CNNs networks and notice 
 
 The AlexNet network was developed by Alex Krizhevsky, Ilya Sutskever, and Geoffrey Hinton \cite{geron2019}. This network is very similar to LeNet, but has more layers. Because it is a deeper network, requiring more memory, the original network had to be physically distributed between two 3GB GPUs  \cite{krizhevsky2012}. In this way, the network was drawn as in Figure \ref{fig:alexnet}, with a dual data stream structure so that each GPU would receive half of the model.
 
-\begin{figure}[h]
+\begin{sidewaysfigure}[p]
     \centering
+    \vspace{10cm}
     \includegraphics[scale=0.4]{"Part 3 - Learning Systems/Supervised Learning/Deep Learning/images/figure128.png"}
     \caption{ AlexNet network architecture - represented as the combination of two identical networks, as originally the training would occur with the distribution of data between two GPU's \cite{krizhevsky2012}.}
     \label{fig:alexnet}
-\end{figure}
+\end{sidewaysfigure}
 
 As depicted in Figure \ref{fig:lenetalexnet}, AlexNet has 5 convolution layers, with the first three followed by pooling layers. The most aparent difference between the AlexNet and LeNet architectures are the three additional convolution layers in the AlexNet network, which are followed one after the other with no layer pooling between them. As the input images are bigger than the MNIST dataset approached in the example LeNet network, the input convolution filters are bigger ($11\times 11$) and stride $\text{str} = 4$ is used. In the second convolution layer, the filters have size $5\times 5$, and in the other convolution layers filters $3\times 3$ are used.
 
