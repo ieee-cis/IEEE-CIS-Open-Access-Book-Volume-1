@@ -48,14 +48,14 @@
 
 \section{Transfer learning} \label{transferlearning}
 Training a neural network from scratch is a complex task, as it requires an enormous amount of data and computational power \cite{elgendy2020}. In many cases we may not have enough of either, but that doesn't stop us from creating our models. For this we have a technique known as transference learning, which basically consists of benefiting from already trained models to solve new problems. In this case we assume that there is a relationship between the old and new problems, such that knowledge learnt from the old problem may help learning the new problem. 
-We are able to use this technique for computer vision problems because even models trained for different computer vision problems end up learning to identify similar features of the image in the earlier layers, and then learning greater details in the deeper layers. We can see this in Figure \ref{fig:figure139}, where we have the representation of four different networks, the first aimed at working with the image of people, the second with cars, the third with elephants and the last with chairs. Even though these are completely different objects, the networks learn, in the initial layers, to detect edges and corners, which are characteristics shared by all items.
+We are able to use this technique for computer vision problems because even models trained for different computer vision problems end up learning to identify similar features of the image in the earlier layers, and then learning greater details in the deeper layers. %We can see this in Figure \ref{fig:figure139}, where we have the representation of four different networks, the first aimed at working with the image of people, the second with cars, the third with elephants and the last with chairs. Even though these are completely different objects, the networks learn, in the initial layers, to detect edges and corners, which are characteristics shared by all items.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{"Part 3 - Learning Systems/Supervised Learning/Deep Learning/images/figure139.png"}
-    \caption{Different CNN's and their feature maps in different layers - In the first column we have the features learned by a network specialized in working with human faces, in the second column with cars, in the third with elephants and in the fourth with chairs \cite{elgendy2020}.}
-    \label{fig:figure139}
-\end{figure}
+%\begin{figure}
+%    \centering
+%    \includegraphics[width=\textwidth]{"Part 3 - Learning Systems/Supervised Learning/Deep Learning/images/figure139.png"}
+%    \caption{Different CNN's and their feature maps in different layers - In the first column we have the features learned by a network specialized in working with human faces, in the second column with cars, in the third with elephants and in the fourth with chairs \cite{elgendy2020}.}
+%    \label{fig:figure139}
+%\end{figure}
 
 Transfer learning in the context of deep learning typically reuses some components of existing neural networks that have already been trained on previous problems using very large datasets, inserting such components into a new neural network that is being built for a new problem. A detailed explanation of how to perform transfer learning is out of the scope of this book chapter, but we refer the interested reader to \cite{elgendy2020} for further information on that.
 
