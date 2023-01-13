@@ -1,3 +1,5 @@
+% Leandro Minku: commented out line 1975, which was causing the references to appear twice in the ToC:
+%       %\addcontentsline{toc}{section}{\refname}%
 % SVMULT DOCUMENT CLASS -- version 5.5 (23-Nov-18)
 % Springer Verlag global LaTeX2e support for multi authored books
 %%
@@ -1970,7 +1972,7 @@ to\z@{\kern0.55\wd0\vrule\@height0.45\ht0\hss}\box0}}}}
 \ifx\chpbibl\undefined
   \def\bibsection{\section*{\refname}\ifx\sectionmark\@gobble\else
       \markright{\refname}\fi
-      \addcontentsline{toc}{section}{\refname}%
+      %\addcontentsline{toc}{section}{\refname}%
       \mtaddtocont{\protect\contentsline{mtchap}{\refname}{\thepage}\hyperhrefextend}%
       \csname biblst@rthook\endcsname\par}
 \else
