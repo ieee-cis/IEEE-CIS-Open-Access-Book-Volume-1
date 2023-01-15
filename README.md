@@ -1,7 +1,7 @@
 # IEEE-CIS-Open-Access-Book-Volume-1
 [![DOI](https://zenodo.org/badge/482079313.svg)](https://zenodo.org/badge/latestdoi/482079313)
 
-Open access book with an introduction to Computational Intelligence.
+Open access book with an introduction to Computational Intelligence. The pdf of the book can be found in the file main.pdf.
 
 
 The first edition covers Search-Based Optimization and Learning Systems. The second edition is planned to also cover Fuzzy Systems.
