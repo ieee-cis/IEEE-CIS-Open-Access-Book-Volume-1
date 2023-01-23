@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:200,200,400,600,700,800');
+
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family:'Nunito';
+  font-size: 13pt;
+  font-weight: 200;
+  color:#505050;
+}
+a {
+  color: #5050ff;
+}
+a:link {
+  color: #5050ff;
+}
+a:visited {
+  color: #0000aa;
+}
+
+.pagename {
+  font-size: 26px;
+  font-weight: 800;
+  padding:10pt;
+  float:left;
+  text-align:center;
+}
+.pagename span {
+  color: #6563ff;
+}
+
+.about {
+  background-color:#100f3a;
+  float:left;
+  width:25%;
+  padding:15px;
+  margin-top:7px;
+  margin-right:1%;
+  text-align:left;
+  color:white;
+  overflow-y:scroll;
+  height:100vh;
+}
+
+.main {
+  float:left;
+  width:74%;
+  padding-left:2%;
+  padding-right:1%;
+  margin-top:1%;
+  overflow-y:scroll;
+  height:80vh;
+}
+
+@media only screen and (max-width:620px) {
+  /* For mobile phones: */
+  .menu, .main, .about, .pagename, .menuholder {
+    width:100%;
+    height:auto;
+    overflow-y:visible;
+  }
+}
