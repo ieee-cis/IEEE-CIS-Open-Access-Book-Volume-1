@@ -1,5 +1,5 @@
 # IEEE-CIS-Open-Access-Book-Volume-1
-[![DOI](https://zenodo.org/badge/482079313.svg)](https://zenodo.org/badge/latestdoi/482079313)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7537827.svg)](https://doi.org/10.5281/zenodo.7537827)
 
 Open access book with an introduction to Computational Intelligence. The pdf of the book can be found in the file main.pdf.
 
